@@ -13,7 +13,6 @@ public class Restaurante {
 
     // Construtor
     public Restaurante(String nomeRestaurante, UUID idRestaurante, Vendor proprietario, String endereco, String cep, List<Produto> cardapio) {
-
         this.idRestaurante = idRestaurante;
         this.proprietario = proprietario;
         this.endereco = endereco;
@@ -99,13 +98,12 @@ public class Restaurante {
     }
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("%s\n").append(nomeRestaurante);
-        sb.append("%s\n").append(idRestaurante);
-        sb.append("Endereço= %s ").append(endereco).append('\'');
-        sb.append(", %s \n").append(cep).append('\'');
-        sb.append("Propietário:%s\n").append(proprietario);
-        sb.append("Cardápio do restaurante %s :").append(nomeRestaurante).append(cardapio);
-        sb.append('}');
+        sb.append("Nome do Restaurante: ").append(nomeRestaurante).append("\n");
+        sb.append("ID: ").append(idRestaurante).append("\n");
+        sb.append("Endereço: ").append(endereco).append("\n");
+        sb.append("CEP: ").append(cep).append("\n");
+        sb.append("Propietário: ").append(proprietario).append("\n");
+        sb.append("Cardápio do restaurante ").append(nomeRestaurante).append(": ").append(cardapio);
         return sb.toString();
     }
 }
