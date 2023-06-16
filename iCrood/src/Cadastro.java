@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Cadastro(){
     private List<Client> clientes = new ArrayList<>;
 
@@ -23,6 +24,8 @@ public class Cadastro(){
     email = scan.nextLine;
     }
     public void cadastrar(){
-        Client
+     
     }
 }
+
+
