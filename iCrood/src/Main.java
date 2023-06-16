@@ -1,7 +1,8 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 
 public class Main {
@@ -20,14 +21,12 @@ public class Main {
         Cadastro.cadastrarCliente();
 
         System.out.println("Cadastrar Vendor: ");
-        Cadastro.cadastrarvendor();
+        Cadastro.cadastrarVendor();
+
         // Iteração para criar clientes
-        for(int i = 0; i < cadastro.getClientesTamanho(); i++){
-        Cadastro.cadastrarCliente();
 
-
-        System.out.println(Arrays.toString(cadastro.getClientes().toArray(new Client[0])));
-        }
+        cadastro.imprimirClientes();
+        cadastro.imprimirVendors();
     }
 
     public static int calcularIdade(LocalDate dataNascimento) {

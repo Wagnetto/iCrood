@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cd1530e-f8af-4506-8f8f-a9c530d54f19" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/iCrood.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iCrood.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iCrood/src/Cadastro.java" beforeDir="false" afterPath="$PROJECT_DIR$/iCrood/src/Cadastro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iCrood/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/iCrood/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iCrood/src/Restaurante.java" beforeDir="false" afterPath="$PROJECT_DIR$/iCrood/src/Restaurante.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +101,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/helio/OneDrive/Documentos/GitHub/iCrood",
+    "last_opened_file_path": "C:/Users/helio/Downloads/iCrood-main",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",

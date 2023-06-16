@@ -8,18 +8,15 @@ import java.util.UUID;
 
 
 public class Cadastro {
-    private static List<Client> clientes;
-    private static List<Vendor> vendors;
+    private static List<Client> clientes = new ArrayList<>();
+    private static List<Vendor> vendors = new ArrayList<>();
+    private static List<Restaurante> restaurantes = new ArrayList<>();
 
-    public static void cadastrarvendor() {
-
-    }
 
     // Getters
     public List<Client> getClientes() {
         return clientes;
     }
-
     public int getClientesTamanho(){
         return clientes.size();
     }
@@ -49,7 +46,6 @@ public class Cadastro {
         email = scan.nextLine();
 
         clientes.add(new Client(nome, cpf, formatarDataRecebida(dataNascimento), endereco, numeroTelefone, email, 0, false, UUID.randomUUID(), null));
-
     }
     public static void cadastrarVendor(){
         Scanner scan = new Scanner(System.in);
@@ -68,10 +64,7 @@ public class Cadastro {
         System.out.println("Entre seu E-mail: ");
         emailVendor = scan.nextLine();
 
-
-
-        vendors.add(new Vendor(nomeVendor, cpfVendor, formatarDataRecebida(dataNascimentoVendor), enderecoVendor, numeroTelefoneVendor, emailVendor, 0, true, UUID.randomUUID(), new List<Restaurante>() , ""));
-
+        vendors.add(new Vendor(nomeVendor, cpfVendor, formatarDataRecebida(dataNascimentoVendor), enderecoVendor, numeroTelefoneVendor, emailVendor, 0, true, UUID.randomUUID(), new ArrayList<Restaurante>()));
     }
 
     public static LocalDate formatarDataRecebida(String dataRecebida) {
@@ -93,6 +86,18 @@ public class Cadastro {
     public void cadastrarVendor(String nomeCliente, String cpfCliente, String nascimentoCliente, String enderecoCliente, String numeroTelefoneCliente, String emailCliente){
         vendors.add(new Vendor(nomeCliente, cpfCliente, formatarDataRecebida(nascimentoCliente), enderecoCliente, numeroTelefoneCliente, emailCliente, 0, true, UUID.randomUUID(), new ArrayList<>()));
 
+    }
+
+    public void imprimirClientes() {
+        for (Client cliente : clientes) {
+            System.out.println(cliente.toStringUser());
+        }
+    }
+
+    public void imprimirVendors() {
+        for (Vendor vendor : vendors) {
+            System.out.println(vendor.toStringUser());
+        }
     }
 }
 
