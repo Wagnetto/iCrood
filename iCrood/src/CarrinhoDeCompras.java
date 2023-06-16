@@ -5,9 +5,6 @@ public class  CarrinhoDeCompras {
     //Atributos
     private List<Produto> itens;
 
-    //TODO
-    // criar atrib TOTAL
-
     //Métodos
     public CarrinhoDeCompras() {
         this.itens = new ArrayList<>();
