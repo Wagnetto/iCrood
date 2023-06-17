@@ -43,9 +43,8 @@ public class Cadastro {
         numeroTelefone = scan.nextLine();
         System.out.println("Entre seu E-mail: ");
         email = scan.nextLine();
-        //TODO MARCANDO COM TODO o que comentei.
-        //o fiz pois Lista não deve estar no construtor, evita usarmos o null.
-        //clientes.add(new Client(nome, cpf, formatarDataRecebida(dataNascimento), endereco, numeroTelefone, email, 0, false, UUID.randomUUID(), null));
+
+        clientes.add(new Client(nome, cpf, formatarDataRecebida(dataNascimento), endereco, numeroTelefone, email, 0, UUID.randomUUID()));
     }
     public static void cadastrarVendor(){
         Scanner scan = new Scanner(System.in);
@@ -64,62 +63,31 @@ public class Cadastro {
         System.out.println("Entre seu E-mail: ");
         emailVendor = scan.nextLine();
 
-        // TODO arrumar date time no constructor
-        // vendors.add(new Vendor(nomeVendor, cpfVendor, dataNascimentoVendor, enderecoVendor, numeroTelefoneVendor, emailVendor, 0, true, UUID.randomUUID(), new ArrayList<Restaurante>()));
+        vendors.add(new Vendor(nomeVendor, cpfVendor, formatarDataRecebida(dataNascimentoVendor), enderecoVendor, numeroTelefoneVendor, emailVendor, 0, UUID.randomUUID(), new ArrayList<Restaurante>()));
     }
 
-    // TODO decidir qual será usada
-//public class Cadastro{
-//    private List<Vendor> vendorsList = new ArrayList<>();
-//    private List<Client> clientesList = new ArrayList<>();
-//    private List<Restaurante> restaurantesList = new ArrayList<>();
+    public static void cadastrarRestaurante(){
+        Scanner scan = new Scanner(System.in);
+        String nomeRestaurante = "", endereco = "", cep = "";
+
+        System.out.println("Entre o nome de seu restaurante: ");
+        nomeRestaurante = scan.nextLine();
+        System.out.println("Entre o CEP de seu restaurante: ");
+        cep = scan.nextLine();
+        System.out.println("Entre seu endereço: ");
+        endereco = scan.nextLine();
+
+        // TODO deixar proprietario como null ou retirar do constructor também?
+        // TODO e como setar o restaurante ao dono? há o metodo adicionarRestaurante em Vendor, mas como perguntar ao dono?
+        // posso pedir para o usuario entrar o nome do seu restaurante e com essa string identificar se é um restaurante ou nao
+        restaurantes.add(new Restaurante(nomeRestaurante,UUID.randomUUID(), null, endereco, cep, new ArrayList<>()));
+    }
+    public static LocalDate formatarDataRecebida(String dataRecebida) {
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(dataRecebida, formatador);
+    }
 //
-//    public void cadastrarVendor() {
-//        Scanner scan = new Scanner(System.in);
-//        String nomeVendor = "", cpfVendor = "", dataNascimentoVendor = "", enderecoVendor = "", numeroTelefoneVendor = "", emailVendor = "";
-//
-//        System.out.println("Entre seu Nome: ");
-//        nomeVendor = scan.nextLine();
-//        System.out.println("Entre seu CPF: ");
-//        cpfVendor = scan.nextLine();
-//        System.out.println("Entre sua Data de Nascimento: ");
-//        dataNascimentoVendor = scan.nextLine();
-//        System.out.println("Entre seu endereço: ");
-//        enderecoVendor = scan.nextLine();
-//        System.out.println("Entre seu Numero de Telefone: ");
-//        numeroTelefoneVendor = scan.nextLine();
-//        System.out.println("Entre seu E-mail: ");
-//        emailVendor = scan.nextLine();
-//
-//        Vendor carlos = new Vendor(nomeVendor, cpfVendor, formatarDataRecebida(dataNascimentoVendor), enderecoVendor, numeroTelefoneVendor, emailVendor, 0, true, UUID.randomUUID(), new ArrayList<>());
-//    }
-//
-//    public void cadastrarCliente(){
-//        Scanner scan = new Scanner(System.in);
-//        String nomeCliente = "", cpfCliente = "", dataNascimentoCliente = "", enderecoCliente = "", numeroTelefoneCliente = "", emailCliente = "";
-//
-//        System.out.println("Entre seu Nome: ");
-//        nomeCliente = scan.nextLine();
-//        System.out.println("Entre seu CPF: ");
-//        cpfCliente = scan.nextLine();
-//        System.out.println("Entre sua Data de Nascimento: ");
-//        dataNascimentoCliente = scan.nextLine();
-//        System.out.println("Entre seu endereço: ");
-//        enderecoCliente = scan.nextLine();
-//        System.out.println("Entre seu Numero de Telefone: ");
-//        numeroTelefoneCliente = scan.nextLine();
-//        System.out.println("Entre seu E-mail: ");
-//        emailCliente = scan.nextLine();
-//
-//        Client pedro = new Client(nomeCliente, cpfCliente, formatarDataRecebida(dataNascimentoCliente), enderecoCliente, numeroTelefoneCliente, emailCliente, 0, false, UUID.randomUUID());
-//    }
-//
-//    public static LocalDate formatarDataRecebida(String dataRecebida) {
-//        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//
-//        return LocalDate.parse(dataRecebida, formatador);
-//
-//    }
+//    TODO decidir se iremos usar esse método de calcular idade
 //    public static int calcularIdade(LocalDate dataNascimento) {
 //        // Cria uma data com o horário atual e armazena em dataAtual
 //        LocalDate dataAtual = LocalDate.now();
@@ -131,25 +99,22 @@ public class Cadastro {
 //        return periodoIdade.getYears();
 //    }
 //
-//    public void cadastrarVendor(String nomeCliente, String cpfCliente, String nascimentoCliente, String enderecoCliente, String numeroTelefoneCliente, String emailCliente){
-//        vendors.add(new Vendor(nomeCliente, cpfCliente, formatarDataRecebida(nascimentoCliente), enderecoCliente, numeroTelefoneCliente, emailCliente, 0, true, UUID.randomUUID(), new ArrayList<>()));
-//
-//    }
-////TODO TIVE QUE COMENTAR
-//    // o método toString está possivelmente vinculado à gambiarra do null
-////    public void imprimirClientes() {
-////        for (Client cliente : clientes) {
-////            System.out.println(cliente.toStringUser());
-////        }
-////    }
-//
-//    public void imprimirVendors() {
-//        for (Vendor vendor : vendors) {
-//            System.out.println(vendor.toStringUser());
-//        }
+
+// TODO tentar fazer esse método exibir todos os cliente e todos vendor independentemente do tamanho da lista
+    public void imprimirClientes() {
+        for (Client cliente : Cadastro.clientes) {
+            cliente.toString();
+        }
+    }
+
+    //
+    public void imprimirVendors() {
+        for (Vendor vendor : vendors) {
+            vendor.toString();
+        }
 //
 //    }
 //}
-}
+}}
 
 

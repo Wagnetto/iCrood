@@ -1,12 +1,10 @@
-
-
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
-
 
 public class Main {
     public static void main(String[] args) {
@@ -15,57 +13,59 @@ public class Main {
         LocalDate hoje = LocalDate.now();
 
         UUID id = UUID.randomUUID();
-        Client fulanin = new Client("Carlos", "12345678901", hoje, "Casa do caralho", "99996969", "chuchu@gmail.com", 300, true, id);
 
+        Client fulanin = new Client("Carlos", "12345678901", hoje, "Casa do caralho", "99996969", "chuchu@gmail.com", 300, id);
+        Vendor fulaninVendor = new Vendor("FulaninVendor", "123123-123", hoje,"endereço do fulano Vendor", "123vendo123", "vendorEmail", 0, UUID.randomUUID(), new ArrayList<>());
 
-        System.out.println(fulanin.toString());
+        fulaninVendor.toString();
+//        System.out.println(fulanin.toString());
         //TODO FIM DA ZONA DE TESTES
 
         Scanner scan = new Scanner(System.in);
 
-
+//      Ja criar classe cadastro logo quando iniciar o programa
+        Cadastro cadastro = new Cadastro();
+        int entrada;
 
         System.out.println("█ █▀▀ █▀█ █▀█ █▀█ █▀▄\n" +
                            "█ █▄▄ █▀▄ █▄█ █▄█ █▄▀");
         System.out.println("=====================");
-
-        // Cria cadastro
-        Cadastro cadastro = new Cadastro();
-
-        System.out.println("Cadastrar Cliente ");
-        Cadastro.cadastrarCliente();
-
-        System.out.println("Cadastrar Vendor: ");
-        Cadastro.cadastrarVendor();
-
-        // Iteração para criar clientes
-//        cadastro.imprimirClientes();
-// cadastro.imprimirVendors();
-
         System.out.println("Bem-vindo!"
                 +"Ja possui um cadastro?\n"
                 +"1. Sim          2. Não");
+        entrada = scan.nextInt();
+//      limpa scanner para não conflitar
+        scan.nextLine();
 
+//      Caminho caso já tenha uma conta
+        if(entrada == 1){
+            entrada = scan.nextInt();
 
+            // código
 
+        }
+//      Caminho para Cadastrar Cliente ou Vendor
+        else if (entrada == 2){
+            System.out.println("Quer se cadastrar como Dono de Restaurante ou Cliente?\n"
+                    +"1. Dono          2. Cliente");
+            entrada = scan.nextInt();
 
-        Restaurante restaurante1 = new Restaurante("FAgondi",UUID.randomUUID(), null, enderecoUser, "12345-34", null);
+            if (entrada == 1){
+                System.out.println("Cadastrar Vendor: ");
+                Cadastro.cadastrarVendor();
+
+                // TODO após cadastrar vendor, pedir para cadastrar Restaurante?
+
+            } else if(entrada == 2){
+                System.out.println("Cadastrar Cliente: ");
+                Cadastro.cadastrarCliente();
+            } else {
+                System.out.println("Entrada inválida, terminando programa...");
+            }
+        }
+
+        cadastro.imprimirClientes();
+        Restaurante restaurante1 = new Restaurante("FAgondi",UUID.randomUUID(), null, "", "12345-34", null);
 
     }
-
-    public static int calcularIdade(LocalDate dataNascimento) {
-        // Cria uma data com o horário atual e armazena em dataAtual
-        LocalDate dataAtual = LocalDate.now();
-
-        // Pega o periodo entre dataNascimento e dataAtual e armazena em periodoIdade
-        Period periodoIdade = Period.between(dataNascimento, dataAtual);
-
-        // Retorna o periodo só que apenas os anos (caso contrario retornaria o mes e o dia também)
-        return periodoIdade.getYears();
-    }
-
-
-
-
-
 }

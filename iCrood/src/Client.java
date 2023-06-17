@@ -12,8 +12,8 @@ public class Client extends User {
     //TODO UUID não deve fazer parte de construtor inserido manualmente
     //TODO RETIREI lista de compras no do construtor do cliente: , List<Produto> compras
     // Construtor
-    public Client(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira, boolean role, UUID idCliente) {
-        super(nome, cpf, dataNascimento, endereco, numeroTelefone, email, saldoCarteira, role);
+    public Client(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira, UUID idCliente) {
+        super(nome, cpf, dataNascimento, endereco, numeroTelefone, email, saldoCarteira);
         this.idCliente = idCliente;
         this.compras = compras;
     }

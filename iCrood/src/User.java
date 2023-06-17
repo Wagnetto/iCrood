@@ -12,10 +12,8 @@ public abstract class User {
     protected String numeroTelefone;
     protected String email;
     protected double saldoCarteira;
-    protected boolean role; // False- client , True- Owner
-    //TODO : RETIRAR DO CONSTRUTOR INFOS COMO ROLE
-    // Construtor
-    public User(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira, boolean role) {
+
+    public User(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
@@ -23,7 +21,6 @@ public abstract class User {
         this.numeroTelefone = numeroTelefone;
         this.email = email;
         this.saldoCarteira = saldoCarteira;
-        this.role = role;
     }
 
     // Getters e Setters
@@ -83,14 +80,6 @@ public abstract class User {
         this.saldoCarteira = saldoCarteira;
     }
 
-    public boolean isRole() {
-        return role;
-    }
-
-    public void setRole(boolean role) {
-        this.role = role;
-    }
-
     // Métodos
     public int CalcularIdade(LocalDate dataNascimento) {
         // Cria uma data com o horário atual e armazena em dataAtual
@@ -118,10 +107,6 @@ public abstract class User {
 
     public double DescontarSaldo(double valorDescontado) {
         return getSaldoCarteira() - valorDescontado;
-    }
-
-    public void PedeDataNascimento() {
-        System.out.println("Entre sua data de nascimento dd/mm/aa ");
     }
 
 }

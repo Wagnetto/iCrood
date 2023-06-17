@@ -8,8 +8,8 @@ public class Vendor extends User {
     private List<Restaurante> estabelecimentos;
 
     // Construtor
-    public Vendor(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira, boolean role, UUID idVendor, List<Restaurante> estabelecimentos) {
-        super(nome, cpf, dataNascimento, endereco, numeroTelefone, email, saldoCarteira, role);
+    public Vendor(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira, UUID idVendor, List<Restaurante> estabelecimentos) {
+        super(nome, cpf, dataNascimento, endereco, numeroTelefone, email, saldoCarteira);
         this.idVendor = idVendor;
         this.estabelecimentos = estabelecimentos;
     }
@@ -35,7 +35,6 @@ public class Vendor extends User {
                 ", numeroTelefone='" + numeroTelefone + '\'' +
                 ", email='" + email + '\'' +
                 ", saldoCarteira=" + saldoCarteira +
-                ", role=" + role +
                 '}';
     }
 }
