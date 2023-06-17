@@ -13,7 +13,7 @@ public abstract class User {
     protected String email;
     protected double saldoCarteira;
     protected boolean role; // False- client , True- Owner
-
+    //TODO : RETIRAR DO CONSTRUTOR INFOS COMO ROLE
     // Construtor
     public User(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira, boolean role) {
         this.nome = nome;

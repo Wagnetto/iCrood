@@ -1,12 +1,26 @@
+
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 
 public class Main {
     public static void main(String[] args) {
+
+        //TODO : ZONA DE TESTES
+        LocalDate hoje = LocalDate.now();
+
+        UUID id = UUID.randomUUID();
+        Client fulanin = new Client("Carlos", "12345678901", hoje, "Casa do caralho", "99996969", "chuchu@gmail.com", 300, true, id);
+
+
+        System.out.println(fulanin.toString());
+        //TODO FIM DA ZONA DE TESTES
+
         Scanner scan = new Scanner(System.in);
 
 
@@ -24,9 +38,10 @@ public class Main {
         Cadastro.cadastrarVendor();
 
         // Iteração para criar clientes
-
-        cadastro.imprimirClientes();
+//        cadastro.imprimirClientes();
         cadastro.imprimirVendors();
+
+
     }
 
     public static int calcularIdade(LocalDate dataNascimento) {
@@ -39,4 +54,9 @@ public class Main {
         // Retorna o periodo só que apenas os anos (caso contrario retornaria o mes e o dia também)
         return periodoIdade.getYears();
     }
+
+
+
+
+
 }

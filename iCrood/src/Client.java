@@ -5,14 +5,58 @@ import java.util.UUID;
 public class Client extends User {
     // Atributos
     private CarrinhoDeCompras carrinho;
+
     private UUID idCliente;
     private List<Produto> compras;
 
+    //TODO UUID não deve fazer parte de construtor inserido manualmente
+    //TODO RETIREI lista de compras no do construtor do cliente: , List<Produto> compras
     // Construtor
-    public Client(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira, boolean role, UUID idCliente, List<Produto> compras) {
+    public Client(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira, boolean role, UUID idCliente) {
         super(nome, cpf, dataNascimento, endereco, numeroTelefone, email, saldoCarteira, role);
         this.idCliente = idCliente;
         this.compras = compras;
+    }
+
+    //getters herdados de User
+    public String getNome(){
+        return super.getNome();
+    }
+
+    public String getCpf(){
+        return super.getCpf();
+    }
+
+    public LocalDate getDataNascimento(){
+        return super.getDataNascimento();
+    }
+
+    public String getEndereco(){
+        return super.getEndereco();
+    }
+
+    public String getNumeroTelefone() {
+        return super.getNumeroTelefone();
+    }
+
+    public String getEmail() {
+        return super.getEmail();
+    }
+
+    public double getSaldoCarteira() {
+        return super.getSaldoCarteira();
+    }
+
+    public CarrinhoDeCompras getCarrinho() {
+        return carrinho;
+    }
+
+    public UUID getIdCliente() {
+        return idCliente;
+    }
+
+    public List<Produto> getCompras() {
+        return compras;
     }
 
 
@@ -35,18 +79,24 @@ public class Client extends User {
         setSaldoCarteira(novoSaldo);
         System.out.println("Produto removido do carrinho com sucesso!");
     }
-    public String toStringUser() {
-        return "Client{" +
-                "compras=" + compras +
-                ", id=" + idCliente +
-                ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", endereco='" + endereco + '\'' +
-                ", numeroTelefone='" + numeroTelefone + '\'' +
-                ", email='" + email + '\'' +
-                ", saldoCarteira=" + saldoCarteira +
-                ", role=" + role +
-                '}';
+    @Override
+    public String toString() {
+        StringBuilder cliente = new StringBuilder();
+        cliente.append("\nCliente:\n");
+        cliente.append("Nome: ");
+        cliente.append(this.getNome());
+        cliente.append("\nCPF: ");
+        cliente.append(this.getCpf());
+        cliente.append("\nData de Nascimento: ");
+        cliente.append(this.getDataNascimento());
+        cliente.append("\nEndereço: ");
+        cliente.append(this.getEndereco());
+        cliente.append("\nTelefone: ");
+        cliente.append(this.getNumeroTelefone());
+        cliente.append("\nE-mail: ");
+        cliente.append(this.getEmail());
+        cliente.append("\nSaldo: ");
+        cliente.append(this.getSaldoCarteira());
+        return cliente.toString();
     }
 }

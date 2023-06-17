@@ -44,8 +44,9 @@ public class Cadastro {
         numeroTelefone = scan.nextLine();
         System.out.println("Entre seu E-mail: ");
         email = scan.nextLine();
-
-        clientes.add(new Client(nome, cpf, formatarDataRecebida(dataNascimento), endereco, numeroTelefone, email, 0, false, UUID.randomUUID(), null));
+        //TODO MARCANDO COM TODO o que comentei.
+        //o fiz pois Lista não deve estar no construtor, evita usarmos o null.
+        //clientes.add(new Client(nome, cpf, formatarDataRecebida(dataNascimento), endereco, numeroTelefone, email, 0, false, UUID.randomUUID(), null));
     }
     public static void cadastrarVendor(){
         Scanner scan = new Scanner(System.in);
@@ -87,12 +88,13 @@ public class Cadastro {
         vendors.add(new Vendor(nomeCliente, cpfCliente, formatarDataRecebida(nascimentoCliente), enderecoCliente, numeroTelefoneCliente, emailCliente, 0, true, UUID.randomUUID(), new ArrayList<>()));
 
     }
-
-    public void imprimirClientes() {
-        for (Client cliente : clientes) {
-            System.out.println(cliente.toStringUser());
-        }
-    }
+//TODO TIVE QUE COMENTAR
+    // o método toString está possivelmente vinculado à gambiarra do null
+//    public void imprimirClientes() {
+//        for (Client cliente : clientes) {
+//            System.out.println(cliente.toStringUser());
+//        }
+//    }
 
     public void imprimirVendors() {
         for (Vendor vendor : vendors) {
