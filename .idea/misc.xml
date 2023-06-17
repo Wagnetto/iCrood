@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< Updated upstream
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8.0_201" project-jdk-type="JavaSDK">
     <output url="file://$USER_HOME$/IdeaProjects/iCrood/src" />
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" project-jdk-name="1.8.0_201" project-jdk-type="JavaSDK">
+    <output url="file://$USER_HOME$/IdeaProjects/iCrood/src/production/iCrood/production/iCrood" />
+>>>>>>> Stashed changes
   </component>
 </project>

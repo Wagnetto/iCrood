@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cd1530e-f8af-4506-8f8f-a9c530d54f19" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iCrood/src/Cadastro.java" beforeDir="false" afterPath="$PROJECT_DIR$/iCrood/src/Cadastro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iCrood/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/iCrood/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iCrood/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/iCrood/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iCrood/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/iCrood/src/User.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/iCrood.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iCrood.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iCrood/src/Cadastro.java" beforeDir="false" afterPath="$PROJECT_DIR$/iCrood/src/Cadastro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iCrood/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/iCrood/src/Main.java" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,10 +110,15 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+<<<<<<< Updated upstream
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "/home/thatsme/Projects/IdeaProjects/iCrood",
     "project.structure.last.edited": "Project",
+=======
+    "last_opened_file_path": "C:/Users/helio/Documentos/GitHub/iCrood/iCrood",
+    "project.structure.last.edited": "Modules",
+>>>>>>> Stashed changes
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel"

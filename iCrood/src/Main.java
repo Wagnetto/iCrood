@@ -24,6 +24,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
 
 
+
         System.out.println("█ █▀▀ █▀█ █▀█ █▀█ █▀▄\n" +
                            "█ █▄▄ █▀▄ █▄█ █▄█ █▄▀");
         System.out.println("=====================");
@@ -39,8 +40,16 @@ public class Main {
 
         // Iteração para criar clientes
 //        cadastro.imprimirClientes();
-        cadastro.imprimirVendors();
+// cadastro.imprimirVendors();
 
+        System.out.println("Bem-vindo!"
+                +"Ja possui um cadastro?\n"
+                +"1. Sim          2. Não");
+
+
+
+
+        Restaurante restaurante1 = new Restaurante("FAgondi",UUID.randomUUID(), null, enderecoUser, "12345-34", null);
 
     }
 
