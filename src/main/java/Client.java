@@ -9,7 +9,7 @@ public class Client extends User {
     private int idCliente;
     private List<Produto> compras;
 
-    //TODO UUID não deve fazer parte de construtor inserido manualmente
+
     //TODO RETIREI lista de compras no do construtor do cliente: , List<Produto> compras
     // Construtor
     public Client(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira, int idCliente) {
@@ -98,6 +98,8 @@ public class Client extends User {
         cliente.append(this.getEmail());
         cliente.append("\nSaldo: ");
         cliente.append(this.getSaldoCarteira());
+        cliente.append("\nSeu código de identificação é: ");
+        cliente.append(this.getIdCliente());
         //todo incluir print do ID
         return cliente.toString();
     }

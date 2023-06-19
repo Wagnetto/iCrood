@@ -7,6 +7,7 @@ public class Cadastro {
     private static List<Client> clientes = new ArrayList<>();
     private static List<Vendor> vendors = new ArrayList<>();
     private static List<Restaurante> restaurantes = new ArrayList<>();
+    Scanner input = new Scanner(System.in);
 
 
     // Getters
@@ -24,6 +25,23 @@ public class Cadastro {
     }
 
     // Métodos
+
+    public void exibeTelaInicial(){
+        System.out.println("█ █▀▀ █▀█ █▀█ █▀█ █▀▄\n" +
+                "█ █▄▄ █▀▄ █▄█ █▄█ █▄▀");
+        System.out.println("=====================");
+        jaTemCadastro();
+    }
+
+    public boolean jaTemCadastro(){
+        System.out.println("Bem-vindo!"
+                +"Ja possui um cadastro?\n"
+                +"1. Sim          2. Não");
+        if(input.nextInt() == 1){
+            return true;
+        }
+        return false;
+    }
     public static void cadastrarCliente(){
         Scanner scan = new Scanner(System.in);
         String nome = "", cpf = "", dataNascimento = "", endereco = "", numeroTelefone = "", email = "";
@@ -41,14 +59,17 @@ public class Cadastro {
         System.out.println("Entre seu E-mail: ");
         email = scan.nextLine();
 
-        //TODO
-        // 1.Seu ID é: tal
-        // atribui ID como inteiro
+
+        // atribui random ID como inteiro, para passar ao construtor
         Random id = new Random();
         int idCliente = id.nextInt(999) + 201;
+        //instancia já com o Id
+        clientes.add(new Client(nome, cpf, formatarDataRecebida(dataNascimento), endereco, numeroTelefone, email, 0, idCliente));
+        //TODO
+        // 1.Imprimir: toString que inclua "Seu ID é: tal
         // 2. Atribui Role
 
-        clientes.add(new Client(nome, cpf, formatarDataRecebida(dataNascimento), endereco, numeroTelefone, email, 0, idCliente));
+
 
         Cadastro.buscarClientePorId(idCliente);
     }
