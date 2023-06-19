@@ -43,24 +43,33 @@ public class Vendor extends User {
 
     @Override
     public String toString() {
-        StringBuilder Vendor = new StringBuilder();
-        Vendor.append("\nVendor:\n");
-        Vendor.append("Nome: ");
-        Vendor.append(this.getNome());
-        Vendor.append("\nCPF: ");
-        Vendor.append(this.getCpf());
-        Vendor.append("\nData de Nascimento: ");
-        Vendor.append(this.getDataNascimento());
-        Vendor.append("\nEndereço: ");
-        Vendor.append(this.getEndereco());
-        Vendor.append("\nTelefone: ");
-        Vendor.append(this.getNumeroTelefone());
-        Vendor.append("\nE-mail: ");
-        Vendor.append(this.getEmail());
-        Vendor.append("\nSaldo: ");
-        Vendor.append(this.getSaldoCarteira());
-        // TODO incluir restaurantes e atributos relacionados
-        //todo incluir print do ID
-        return Vendor.toString();
+        StringBuilder vendorInfo = new StringBuilder();
+        vendorInfo.append("\nVendor:\n");
+        vendorInfo.append("Nome: ");
+        vendorInfo.append(this.getNome());
+        vendorInfo.append("\nCPF: ");
+        vendorInfo.append(this.getCpf());
+        vendorInfo.append("\nData de Nascimento: ");
+        vendorInfo.append(this.getDataNascimento());
+        vendorInfo.append("\nEndereço: ");
+        vendorInfo.append(this.getEndereco());
+        vendorInfo.append("\nTelefone: ");
+        vendorInfo.append(this.getNumeroTelefone());
+        vendorInfo.append("\nE-mail: ");
+        vendorInfo.append(this.getEmail());
+        vendorInfo.append("\nSaldo: ");
+        vendorInfo.append(this.getSaldoCarteira());
+        vendorInfo.append("\nRestaurantes Relacionados:\n");
+
+        for (Restaurante restaurante : estabelecimentos) {
+            vendorInfo.append(restaurante.toString());
+            vendorInfo.append("\n");
+        }
+
+        vendorInfo.append("ID de Vendor: ");
+        vendorInfo.append(getIdVendor());
+
+        return vendorInfo.toString();
     }
+
 }

@@ -23,15 +23,15 @@ public class  CarrinhoDeCompras {
         return itens;
     }//Getter da classe
 
-    public double calcularTotal() {
-        double total = 0.0;
-        for (Produto produto : itens) {
-            total += produto.getValor();
+    public static double calcularPrecoTotal(List<Produto> produtos) {
+        double precoTotal = 0.0;
+
+        for (Produto produto : produtos) {
+            precoTotal += produto.getValor();
         }
-        return total;
+
+        return precoTotal;
     }
-    //TODO
-    // Total do valor a ser pago de acordo com os produtos presentes no carrinho
 
     @Override
     public String toString() {
