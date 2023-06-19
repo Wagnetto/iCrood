@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -30,7 +29,6 @@ public class Cadastro {
         System.out.println("█ █▀▀ █▀█ █▀█ █▀█ █▀▄\n" +
                 "█ █▄▄ █▀▄ █▄█ █▄█ █▄▀");
         System.out.println("=====================");
-        jaTemCadastro();
     }
 
     public boolean jaTemCadastro(){
@@ -44,8 +42,12 @@ public class Cadastro {
     }
     public static void cadastrarCliente(){
         Scanner scan = new Scanner(System.in);
+        Random id = new Random();
+
+        // Guarda todos atributos que serão usados
         String nome = "", cpf = "", dataNascimento = "", endereco = "", numeroTelefone = "", email = "";
 
+        // armazena eles nas variaveis
         System.out.println("Entre seu Nome: ");
         nome = scan.nextLine();
         System.out.println("Entre seu CPF: ");
@@ -61,23 +63,24 @@ public class Cadastro {
 
 
         // atribui random ID como inteiro, para passar ao construtor
-        Random id = new Random();
         int idCliente = id.nextInt(999) + 201;
-        //instancia já com o Id
+
+        // Atribui os dados instanciando um Cliente e adicionando esse cliente à lista de clientes
         clientes.add(new Client(nome, cpf, formatarDataRecebida(dataNascimento), endereco, numeroTelefone, email, 0, idCliente));
-        //TODO
-        // 1.Imprimir: toString que inclua "Seu ID é: tal
-        // 2. Atribui Role
 
+        // Printa mensagem e mostra ID
+        System.out.println("Conta criada com sucesso! Seu ID é: "+idCliente);
 
-
-        Cadastro.buscarClientePorId(idCliente);
+        Cadastro.buscarClientePorId(idCliente); // TODO por que busca cliente por id aqui?
     }
     public static void cadastrarVendor(){
         Scanner scan = new Scanner(System.in);
         Random random = new Random();
+
+        // Guarda todos atributos que serão usados
         String nomeVendor = "", cpfVendor = "", dataNascimentoVendor = "", enderecoVendor = "", numeroTelefoneVendor = "", emailVendor = "";
 
+        // Armazena eles nas variaveis
         System.out.println("Entre seu Nome: ");
         nomeVendor = scan.nextLine();
         System.out.println("Entre seu CPF: ");
@@ -91,95 +94,113 @@ public class Cadastro {
         System.out.println("Entre seu E-mail: ");
         emailVendor = scan.nextLine();
 
+        // atribui random ID como inteiro, para passar ao construtor
         int idVendor = random.nextInt(200)+1;
 
+        // Atribui os dados instanciando um Vendor e adicionando esse Vendor à lista de vendors
         vendors.add(new Vendor(nomeVendor, cpfVendor, formatarDataRecebida(dataNascimentoVendor), enderecoVendor, numeroTelefoneVendor, emailVendor, 0, idVendor, new ArrayList<Restaurante>()));
 
-        Cadastro.buscarVendorPorId(idVendor);
+        Cadastro.buscarVendorPorId(idVendor); // TODO por que buscar Vendor por ID aqui?
     }
 
     public static void cadastrarRestaurante(){
         Random random = new Random();
         Scanner scan = new Scanner(System.in);
+
+        // Guarda todos atributos que serão usados
         String nomeRestaurante = "", endereco = "", cep = "";
 
-        System.out.println("Entre o nome de seu restaurante: ");
+        System.out.println("\nEntre o nome de seu restaurante: ");
         nomeRestaurante = scan.nextLine();
         System.out.println("Entre o CEP de seu restaurante: ");
         cep = scan.nextLine();
         System.out.println("Entre seu endereço: ");
         endereco = scan.nextLine();
 
+        // atribui random ID como inteiro, para passar ao construtor
         int idRestaurante = random.nextInt(1500) + 1000;
-        // TODO verificar se ID acima de 1000 para 1500 são os números corretos para cadastrar restaurantes
-        // TODO deixar proprietario como null ou retirar do constructor também?
-        // TODO e como setar o restaurante ao dono? há o metodo adicionarRestaurante em Vendor, mas como perguntar ao dono?
-        // posso pedir para o usuario entrar o nome do seu restaurante e com essa string identificar se é um restaurante ou nao
-        restaurantes.add(new Restaurante(nomeRestaurante,idRestaurante, null, endereco, cep, new ArrayList<>()));
+
+        // Atribui os dados instanciando um Restaurante e adicionando esse Restaurante à lista de restaurantes
+        restaurantes.add(new Restaurante(nomeRestaurante,idRestaurante, endereco, cep, new ArrayList<>()));
 
         Cadastro.buscarRestaurantePorId(idRestaurante);
     }
-    public static void buscarClientePorId(int idCliente) {
+
+    public Restaurante buscarUltimoRestauranteCriado() {
+        if (!restaurantes.isEmpty()) {
+            // Percorre a lista de restaurantes em ordem reversa
+            for (int i = restaurantes.size() - 1; i >= 0; i--) {
+                Restaurante restaurante = restaurantes.get(i);
+                if (restaurante != null) {
+                    return restaurante; // Retorna o primeiro restaurante encontrado
+                }
+            }
+        }
+        return null; // Caso a lista esteja vazia ou não haja restaurante válido
+    }
+
+    public Vendor buscarUltimoVendorCriado() {
+        if (!vendors.isEmpty()) {
+            // Varre a lista de vendors em ordem reversa
+            for (int i = vendors.size() - 1; i >= 0; i--) {
+                Vendor vendor = vendors.get(i);
+                if (vendor != null) {
+                    return vendor; // Retorna o primeiro vendor encontrado
+                }
+            }
+        }
+        return null; // Caso a lista esteja vazia ou não haja vendor válido
+    }
+
+    public Client buscarUltimoClienteCriado() {
+        if (!clientes.isEmpty()) {
+            // Percorre a lista de Cliente em ordem reversa
+            for (int i = clientes.size() - 1; i >= 0; i--) {
+                Client client = clientes.get(i);
+                if (client != null) {
+                    return client; // Retorna o primeiro Cliente encontrado
+                }
+            }
+        }
+        return null; // Caso a lista esteja vazia ou não haja restaurante válido
+    }
+
+    public static boolean buscarClientePorId(int idCliente) {
         for (Client cliente : clientes) {
             if (cliente.getIdCliente() == idCliente) {
                 System.out.println(cliente.toString());
-                return; // Encerra o loop assim que encontrar o cliente
+                return true; // Encerra o loop assim que encontrar o cliente
             }
         }
         System.out.println("Cliente não encontrado.");
+        return false;
     }
 
-    public static void buscarVendorPorId(int idVendor) {
+    public static boolean buscarVendorPorId(int idVendor) {
         for (Vendor vendor : vendors) {
             if (vendor.getIdVendor() == idVendor) {
                 System.out.println(vendor.toString());
-                return; // Encerra o loop assim que encontrar o cliente
+                return true; // Encerra o loop assim que encontrar o cliente
             }
         }
         System.out.println("Vendor não encontrado.");
+        return false;
     }
 
-    public static void buscarRestaurantePorId(int idRestaurante) {
+    public static boolean buscarRestaurantePorId(int idRestaurante) {
         for (Restaurante restaurante : restaurantes) {
             if (restaurante.getIdRestaurante() == idRestaurante) {
                 System.out.println(restaurante.toString());
-                return; // Encerra o loop assim que encontrar o cliente
+                return true;
             }
         }
         System.out.println("Restaurante não encontrado.");
+        return false;
     }
     public static LocalDate formatarDataRecebida(String dataRecebida) {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return LocalDate.parse(dataRecebida, formatador);
     }
-//
-//    TODO decidir se iremos usar esse método de calcular idade
-//    public static int calcularIdade(LocalDate dataNascimento) {
-//        // Cria uma data com o horário atual e armazena em dataAtual
-//        LocalDate dataAtual = LocalDate.now();
-//
-//        // Pega o periodo entre dataNascimento e dataAtual e armazena em periodoIdade
-//        Period periodoIdade = Period.between(dataNascimento, dataAtual);
-//
-//        // Retorna o periodo só que apenas os anos (caso contrario retornaria o mes e o dia também)
-//        return periodoIdade.getYears();
-//    }
-//
 
-    // TODO tentar fazer esse método exibir todos os cliente e todos vendor independentemente do tamanho da lista
-    public void imprimirClientes() {
-        for (Client cliente : Cadastro.clientes) {
-            cliente.toString();
-        }
-    }
-
-    //
-    public void imprimirVendors() {
-        for (Vendor vendor : vendors) {
-            vendor.toString();
-        }
-//
-//    }
-//}
-    }}
+}
 

@@ -1,5 +1,4 @@
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 //Classe dos estabelecimentos comerciais
 public class Restaurante {
@@ -12,9 +11,8 @@ public class Restaurante {
     private List<Produto> cardapio;
 
     // Construtor
-    public Restaurante(String nomeRestaurante, int idRestaurante, Vendor proprietario, String endereco, String cep, List<Produto> cardapio) {
+    public Restaurante(String nomeRestaurante, int idRestaurante, String endereco, String cep, List<Produto> cardapio) {
         this.idRestaurante = idRestaurante;
-        this.proprietario = proprietario;
         this.endereco = endereco;
         this.cep = cep;
         this.cardapio = cardapio;
@@ -75,6 +73,26 @@ public class Restaurante {
         // adiciona à lista do restaurante Cardápio, a pergunta é como editar isso depois e onde vai ficar esse código
         cardapio.add(produto);
     }
+
+    public void PedeItensAdicionarLista(int quantidadeItens) {
+        Scanner scan = new Scanner(System.in);
+
+        for (int i = 0; i < quantidadeItens; i++) {
+            System.out.println("\nEntre com o nome do produto: ");
+            String nomeProduto = scan.nextLine();
+
+            System.out.println("Entre com a descrição do produto: ");
+            String descricaoProduto = scan.nextLine();
+
+            System.out.println("Entre com o valor do produto: ");
+            double valorProduto = scan.nextDouble();
+
+            scan.nextLine(); // Limpa o buffer do scanner
+
+            AdicionarProdutoLista(nomeProduto, descricaoProduto, valorProduto);
+        }
+    }
+
 
     public void EditarListaRestaurante(int indexLista, String novoNomeProduto, String novaDescricaoProduto, double novoValor) {
         if (indexLista >= 0 && indexLista < cardapio.size()) {
