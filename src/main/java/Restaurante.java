@@ -12,6 +12,7 @@ public class Restaurante {
 
     // Construtor
     public Restaurante(String nomeRestaurante, int idRestaurante, String endereco, String cep, List<Produto> cardapio) {
+        this.nomeRestaurante = nomeRestaurante;
         this.idRestaurante = idRestaurante;
         this.endereco = endereco;
         this.cep = cep;
@@ -110,13 +111,14 @@ public class Restaurante {
             System.out.println(produto.toString());
         }
     }
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append("Nome do Restaurante: ").append(nomeRestaurante).append("\n");
         sb.append("ID: ").append(idRestaurante).append("\n");
         sb.append("Endereço: ").append(endereco).append("\n");
         sb.append("CEP: ").append(cep).append("\n");
-        sb.append("Propietário: ").append(proprietario).append("\n");
+        sb.append("Propietário: ").append(proprietario.getNome()).append("\n");
         sb.append("Cardápio do restaurante ").append(nomeRestaurante).append(": ").append(cardapio);
         return sb.toString();
     }

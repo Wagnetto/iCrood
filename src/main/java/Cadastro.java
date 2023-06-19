@@ -52,7 +52,7 @@ public class Cadastro {
         nome = scan.nextLine();
         System.out.println("Entre seu CPF: ");
         cpf = scan.nextLine();
-        System.out.println("Entre sua Data de Nascimento: ");
+        System.out.println("Entre sua Data de Nascimento: ex:formato dd/mm/aaaa ");
         dataNascimento = scan.nextLine();
         System.out.println("Entre seu endereço: ");
         endereco = scan.nextLine();
@@ -71,7 +71,6 @@ public class Cadastro {
         // Printa mensagem e mostra ID
         System.out.println("Conta criada com sucesso! Seu ID é: "+idCliente);
 
-        Cadastro.buscarClientePorId(idCliente); // TODO por que busca cliente por id aqui?
     }
     public static void cadastrarVendor(){
         Scanner scan = new Scanner(System.in);
@@ -85,7 +84,7 @@ public class Cadastro {
         nomeVendor = scan.nextLine();
         System.out.println("Entre seu CPF: ");
         cpfVendor = scan.nextLine();
-        System.out.println("Entre sua Data de Nascimento: ");
+        System.out.println("Entre sua Data de Nascimento: ex:formato dd/mm/aaaa ");
         dataNascimentoVendor = scan.nextLine();
         System.out.println("Entre seu endereço: ");
         enderecoVendor = scan.nextLine();
@@ -99,8 +98,6 @@ public class Cadastro {
 
         // Atribui os dados instanciando um Vendor e adicionando esse Vendor à lista de vendors
         vendors.add(new Vendor(nomeVendor, cpfVendor, formatarDataRecebida(dataNascimentoVendor), enderecoVendor, numeroTelefoneVendor, emailVendor, 0, idVendor, new ArrayList<Restaurante>()));
-
-        Cadastro.buscarVendorPorId(idVendor); // TODO por que buscar Vendor por ID aqui?
     }
 
     public static void cadastrarRestaurante(){
@@ -122,8 +119,6 @@ public class Cadastro {
 
         // Atribui os dados instanciando um Restaurante e adicionando esse Restaurante à lista de restaurantes
         restaurantes.add(new Restaurante(nomeRestaurante,idRestaurante, endereco, cep, new ArrayList<>()));
-
-        Cadastro.buscarRestaurantePorId(idRestaurante);
     }
 
     public Restaurante buscarUltimoRestauranteCriado() {
@@ -165,7 +160,7 @@ public class Cadastro {
         return null; // Caso a lista esteja vazia ou não haja restaurante válido
     }
 
-    public static boolean buscarClientePorId(int idCliente) {
+    public boolean buscarClientePorId(int idCliente) {
         for (Client cliente : clientes) {
             if (cliente.getIdCliente() == idCliente) {
                 System.out.println(cliente.toString());

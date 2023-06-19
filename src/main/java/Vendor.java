@@ -46,19 +46,19 @@ public class Vendor extends User {
         StringBuilder vendorInfo = new StringBuilder();
         vendorInfo.append("\nVendor:\n");
         vendorInfo.append("Nome: ");
-        vendorInfo.append(this.getNome());
+        vendorInfo.append(getNome());
         vendorInfo.append("\nCPF: ");
-        vendorInfo.append(this.getCpf());
+        vendorInfo.append(getCpf());
         vendorInfo.append("\nData de Nascimento: ");
-        vendorInfo.append(this.getDataNascimento());
+        vendorInfo.append(getDataNascimento());
         vendorInfo.append("\nEndereço: ");
-        vendorInfo.append(this.getEndereco());
+        vendorInfo.append(getEndereco());
         vendorInfo.append("\nTelefone: ");
-        vendorInfo.append(this.getNumeroTelefone());
+        vendorInfo.append(getNumeroTelefone());
         vendorInfo.append("\nE-mail: ");
-        vendorInfo.append(this.getEmail());
+        vendorInfo.append(getEmail());
         vendorInfo.append("\nSaldo: ");
-        vendorInfo.append(this.getSaldoCarteira());
+        vendorInfo.append(getSaldoCarteira());
         vendorInfo.append("\nRestaurantes Relacionados:\n");
 
         for (Restaurante restaurante : estabelecimentos) {

@@ -85,21 +85,21 @@ public class Client extends User {
         StringBuilder cliente = new StringBuilder();
         cliente.append("\nCliente:\n");
         cliente.append("Nome: ");
-        cliente.append(this.getNome());
+        cliente.append(getNome());
         cliente.append("\nCPF: ");
-        cliente.append(this.getCpf());
+        cliente.append(getCpf());
         cliente.append("\nData de Nascimento: ");
-        cliente.append(this.getDataNascimento());
+        cliente.append(getDataNascimento());
         cliente.append("\nEndereço: ");
-        cliente.append(this.getEndereco());
+        cliente.append(getEndereco());
         cliente.append("\nTelefone: ");
-        cliente.append(this.getNumeroTelefone());
+        cliente.append(getNumeroTelefone());
         cliente.append("\nE-mail: ");
-        cliente.append(this.getEmail());
+        cliente.append(getEmail());
         cliente.append("\nSaldo: ");
-        cliente.append(this.getSaldoCarteira());
+        cliente.append(getSaldoCarteira());
         cliente.append("\nSeu código de identificação é: ");
-        cliente.append(this.getIdCliente());
+        cliente.append(getIdCliente());
         //todo incluir print do ID
         return cliente.toString();
     }

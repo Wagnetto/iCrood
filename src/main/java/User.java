@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.UUID;
+
 //Classe do usuário
 public abstract class User {
     // Atributos
