@@ -1,7 +1,6 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
 //Classe do vendedor, pode realisar compras e greneciar seus estabelecimentos
 public class Vendor extends User {
     private int idVendor;
@@ -27,49 +26,26 @@ public class Vendor extends User {
         restauranteX.setProprietario(null);
         estabelecimentos.remove(restauranteX);
     }
-
-    public String toStringUser() {
-        return "Vendor{" +
-                "id=" + idVendor +
-                ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", endereco='" + endereco + '\'' +
-                ", numeroTelefone='" + numeroTelefone + '\'' +
-                ", email='" + email + '\'' +
-                ", saldoCarteira=" + saldoCarteira +
-                '}';
-    }
-
     @Override
     public String toString() {
         StringBuilder vendorInfo = new StringBuilder();
-        vendorInfo.append("\nVendor:\n");
-        vendorInfo.append("Nome: ");
-        vendorInfo.append(getNome());
-        vendorInfo.append("\nCPF: ");
-        vendorInfo.append(getCpf());
-        vendorInfo.append("\nData de Nascimento: ");
-        vendorInfo.append(getDataNascimento());
-        vendorInfo.append("\nEndereço: ");
-        vendorInfo.append(getEndereco());
-        vendorInfo.append("\nTelefone: ");
-        vendorInfo.append(getNumeroTelefone());
-        vendorInfo.append("\nE-mail: ");
-        vendorInfo.append(getEmail());
-        vendorInfo.append("\nSaldo: ");
-        vendorInfo.append(getSaldoCarteira());
+        vendorInfo.append("\n-----------------------------");
+        vendorInfo.append("\n          Vendedor:\n");
+        vendorInfo.append("\nNome: ").append(getNome());
+        vendorInfo.append("\nCPF: ").append(getCpf());
+        vendorInfo.append("\nData de Nascimento: ").append(getDataNascimento());
+        vendorInfo.append("\nEndereço: ").append(getEndereco());
+        vendorInfo.append("\nTelefone: ").append(getNumeroTelefone());
+        vendorInfo.append("\nE-mail: ").append(getEmail());
+        vendorInfo.append("\nSaldo: ").append(getSaldoCarteira());
+        vendorInfo.append("\n-----------------------------");
         vendorInfo.append("\nRestaurantes Relacionados:\n");
-
         for (Restaurante restaurante : estabelecimentos) {
             vendorInfo.append(restaurante.toString());
             vendorInfo.append("\n");
         }
-
-        vendorInfo.append("ID de Vendor: ");
-        vendorInfo.append(getIdVendor());
-
+        vendorInfo.append("\n-----------------------------");
+        vendorInfo.append("ID de Vendor: ").append(getIdVendor());
         return vendorInfo.toString();
     }
-
 }

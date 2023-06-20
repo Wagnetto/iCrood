@@ -9,9 +9,6 @@ public class Client extends User {
     private int idCliente;
     private List<Produto> compras;
 
-
-    //TODO RETIREI lista de compras no do construtor do cliente: , List<Produto> compras
-    // Construtor
     public Client(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira, int idCliente) {
         super(nome, cpf, dataNascimento, endereco, numeroTelefone, email, saldoCarteira);
         this.idCliente = idCliente;
@@ -83,24 +80,18 @@ public class Client extends User {
     @Override
     public String toString() {
         StringBuilder cliente = new StringBuilder();
-        cliente.append("\nCliente:\n");
-        cliente.append("Nome: ");
-        cliente.append(getNome());
-        cliente.append("\nCPF: ");
-        cliente.append(getCpf());
-        cliente.append("\nData de Nascimento: ");
-        cliente.append(getDataNascimento());
-        cliente.append("\nEndereço: ");
-        cliente.append(getEndereco());
-        cliente.append("\nTelefone: ");
-        cliente.append(getNumeroTelefone());
-        cliente.append("\nE-mail: ");
-        cliente.append(getEmail());
-        cliente.append("\nSaldo: ");
-        cliente.append(getSaldoCarteira());
-        cliente.append("\nSeu código de identificação é: ");
-        cliente.append(getIdCliente());
-        //todo incluir print do ID
+        cliente.append("\n------------------------------------");
+        cliente.append("\n             Cliente:\n");
+        cliente.append("Nome: ").append(getNome());
+        cliente.append("\nCPF: ").append(getCpf());
+        cliente.append("\nData de Nascimento: ").append(getDataNascimento());
+        cliente.append("\nEndereço: ").append(getEndereco());
+        cliente.append("\nTelefone: ").append(getNumeroTelefone());
+        cliente.append("\nE-mail: ").append(getEmail());
+        cliente.append("\nSaldo: ").append(getSaldoCarteira());
+        cliente.append("\n------------------------------------");
+        cliente.append("\nSeu código  é: ").append(getIdCliente());
+        cliente.append("\n------------------------------------");
         return cliente.toString();
     }
 }
