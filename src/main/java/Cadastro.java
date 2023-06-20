@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Cadastro {
@@ -13,34 +14,32 @@ public class Cadastro {
     public List<Client> getClientes() {
         return clientes;
     }
-    public int getClientesTamanho(){
+
+    public int getClientesTamanho() {
         return clientes.size();
     }
+
     public List<Vendor> getVendors() {
         return vendors;
     }
-    public int getVendorsTamanho(){
+
+    public int getVendorsTamanho() {
         return vendors.size();
     }
 
     // Métodos
 
-    public void exibeTelaInicial(){
-        System.out.println("█ █▀▀ █▀█ █▀█ █▀█ █▀▄\n" +
-                "█ █▄▄ █▀▄ █▄█ █▄█ █▄▀");
-        System.out.println("=====================");
-    }
-
-    public boolean jaTemCadastro(){
+    public boolean jaTemCadastro() {
         System.out.println("Bem-vindo!"
-                +"Ja possui um cadastro?\n"
-                +"1. Sim          2. Não");
-        if(input.nextInt() == 1){
+                + "Ja possui um cadastro?\n"
+                + "1. Sim          2. Não");
+        if (input.nextInt() == 1) {
             return true;
         }
         return false;
     }
-    public static void cadastrarCliente(){
+
+    public static void cadastrarCliente() {
         Scanner scan = new Scanner(System.in);
         Random id = new Random();
 
@@ -52,8 +51,10 @@ public class Cadastro {
         nome = scan.nextLine();
         System.out.println("Entre seu CPF: ");
         cpf = scan.nextLine();
-        System.out.println("Entre sua Data de Nascimento: ex:formato dd/mm/aaaa ");
-        dataNascimento = scan.nextLine();
+
+
+        LocalDate dataNascimentoLocalDate = pedirDataNascimentoMostrarErro();
+
         System.out.println("Entre seu endereço: ");
         endereco = scan.nextLine();
         System.out.println("Entre seu Numero de Telefone: ");
@@ -66,13 +67,14 @@ public class Cadastro {
         int idCliente = id.nextInt(999) + 201;
 
         // Atribui os dados instanciando um Cliente e adicionando esse cliente à lista de clientes
-        clientes.add(new Client(nome, cpf, formatarDataRecebida(dataNascimento), endereco, numeroTelefone, email, 0, idCliente));
+        clientes.add(new Client(nome, cpf, dataNascimentoLocalDate, endereco, numeroTelefone, email, 0, idCliente));
 
         // Printa mensagem e mostra ID
-        System.out.println("Conta criada com sucesso! Seu ID é: "+idCliente);
+        System.out.println("Conta criada com sucesso! Seu ID é: " + idCliente);
 
     }
-    public static void cadastrarVendor(){
+
+    public static void cadastrarVendor() {
         Scanner scan = new Scanner(System.in);
         Random random = new Random();
 
@@ -84,8 +86,9 @@ public class Cadastro {
         nomeVendor = scan.nextLine();
         System.out.println("Entre seu CPF: ");
         cpfVendor = scan.nextLine();
-        System.out.println("Entre sua Data de Nascimento: ex:formato dd/mm/aaaa ");
-        dataNascimentoVendor = scan.nextLine();
+
+        LocalDate dataNascimentoLocalDate = pedirDataNascimentoMostrarErro();
+
         System.out.println("Entre seu endereço: ");
         enderecoVendor = scan.nextLine();
         System.out.println("Entre seu Numero de Telefone: ");
@@ -94,13 +97,13 @@ public class Cadastro {
         emailVendor = scan.nextLine();
 
         // atribui random ID como inteiro, para passar ao construtor
-        int idVendor = random.nextInt(200)+1;
+        int idVendor = random.nextInt(200) + 1;
 
         // Atribui os dados instanciando um Vendor e adicionando esse Vendor à lista de vendors
-        vendors.add(new Vendor(nomeVendor, cpfVendor, formatarDataRecebida(dataNascimentoVendor), enderecoVendor, numeroTelefoneVendor, emailVendor, 0, idVendor, new ArrayList<Restaurante>()));
+        vendors.add(new Vendor(nomeVendor, cpfVendor,dataNascimentoLocalDate , enderecoVendor, numeroTelefoneVendor, emailVendor, 0, idVendor, new ArrayList<Restaurante>()));
     }
 
-    public static void cadastrarRestaurante(){
+    public static void cadastrarRestaurante() {
         Random random = new Random();
         Scanner scan = new Scanner(System.in);
 
@@ -118,7 +121,7 @@ public class Cadastro {
         int idRestaurante = random.nextInt(1500) + 1000;
 
         // Atribui os dados instanciando um Restaurante e adicionando esse Restaurante à lista de restaurantes
-        restaurantes.add(new Restaurante(nomeRestaurante,idRestaurante, endereco, cep, new ArrayList<>()));
+        restaurantes.add(new Restaurante(nomeRestaurante, idRestaurante, endereco, cep, new ArrayList<>()));
     }
 
     public Restaurante buscarUltimoRestauranteCriado() {
@@ -192,10 +195,32 @@ public class Cadastro {
         System.out.println("Restaurante não encontrado.");
         return false;
     }
+
     public static LocalDate formatarDataRecebida(String dataRecebida) {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return LocalDate.parse(dataRecebida, formatador);
     }
 
+    public static LocalDate pedirDataNascimentoMostrarErro(){
+        Scanner input = new Scanner(System.in);
+
+        String dataNascimento;
+        LocalDate dataNascimentoLocalDate = null;
+        boolean dataFormatoValido = false;
+
+        do {
+            System.out.println("Entre sua Data de Nascimento: ");
+            dataNascimento = input.nextLine();
+
+            try {
+                dataNascimentoLocalDate = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                dataFormatoValido = true;
+                return dataNascimentoLocalDate;
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato de data inválido. Certifique-se de usar o formato dd/mm/aaaa.");
+            }
+        }while (!dataFormatoValido);
+        return null;
+    }
 }
 
