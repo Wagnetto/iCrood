@@ -20,19 +20,19 @@ public class Client extends User {
     }
 
     //getters herdados de User
-    public String getNome(){
+    public String getNome() {
         return super.getNome();
     }
 
-    public String getCpf(){
+    public String getCpf() {
         return super.getCpf();
     }
 
-    public LocalDate getDataNascimento(){
+    public LocalDate getDataNascimento() {
         return super.getDataNascimento();
     }
 
-    public String getEndereco(){
+    public String getEndereco() {
         return super.getEndereco();
     }
 
@@ -73,6 +73,7 @@ public class Client extends User {
             System.out.println("Produto não encontrado no cardápio.");
         }
     }
+
     public void removerDoCarrinho(Produto produto) {
         //Remove o produto desejado presente no carrinho e desconta o valor aplicado
         carrinho.removerItem(produto);
@@ -80,6 +81,7 @@ public class Client extends User {
         setSaldoCarteira(novoSaldo);
         System.out.println("Produto removido do carrinho com sucesso!");
     }
+
     @Override
     public String toString() {
         StringBuilder cliente = new StringBuilder();

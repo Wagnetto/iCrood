@@ -66,7 +66,7 @@ public class Restaurante {
     }
 
     // Métodos
-    public void AdicionarProdutoLista(String nomeProduto, String descricaoProduto, double valor){
+    public void AdicionarProdutoLista(String nomeProduto, String descricaoProduto, double valor) {
         // quando chamado, gera ID guarda em IDproduto
         UUID idProduto = UUID.randomUUID();
         // cria um objeto produto com os atributos de produto
@@ -106,11 +106,13 @@ public class Restaurante {
             System.out.println("Índice inválido. O produto não foi atualizado.");
         }
     }
+
     public void mostraCardapio() {
         for (Produto produto : cardapio) {
             System.out.println(produto.toString());
         }
     }
+
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();

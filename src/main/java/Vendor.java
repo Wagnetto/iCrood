@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 //Classe do vendedor, pode realisar compras e greneciar seus estabelecimentos
 public class Vendor extends User {
     private int idVendor;
@@ -19,10 +20,11 @@ public class Vendor extends User {
     }
 
     // Métodos
-    public void AdicionarRestaurante(Restaurante restauranteX){
+    public void AdicionarRestaurante(Restaurante restauranteX) {
         restauranteX.setProprietario(this);
         estabelecimentos.add(restauranteX);
     }
+
     public void RemoverRestaurante(Restaurante restauranteX) {
         restauranteX.setProprietario(null);
         estabelecimentos.remove(restauranteX);

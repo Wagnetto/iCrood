@@ -3,9 +3,10 @@ import java.util.Scanner;
 
 public class MenuPedido {
     //TODO - trocar esta lista por dados reais do banco ou de uma implementação melhor
-    String restaurantes[] = { "1 - Mc Donalds", "2 - Subway", "3 - A la minuta da Bia"};
-    public void exibirRestaurantes(){
-        for(int i = 0; i < restaurantes.length; i++){
+    String restaurantes[] = {"1 - Mc Donalds", "2 - Subway", "3 - A la minuta da Bia"};
+
+    public void exibirRestaurantes() {
+        for (int i = 0; i < restaurantes.length; i++) {
             System.out.println(restaurantes[i]);
         }
     }
@@ -32,24 +33,24 @@ public class MenuPedido {
         }
     }
 
-    public void perguntarPedidoOuConsultarDados(){
+    public void perguntarPedidoOuConsultarDados() {
         Scanner input = new Scanner(System.in);
         int entrada;
 
         System.out.println("Deseja consultar dados ou fazer um pedido? \n 1- Consultar Dados     2- Fazer Pedido");
         entrada = input.nextInt();
 
-        if(entrada == 1){ // Consulta dados
+        if (entrada == 1) { // Consulta dados
             System.out.println("Entre seu ID");
-            if(Cadastro.buscarVendorPorId(entrada) == true){ // Se vendor existir
+            if (Cadastro.buscarVendorPorId(entrada) == true) { // Se vendor existir
 
 
-            }else if (Cadastro.buscarVendorPorId(entrada) == false){ // Se vendor não existir iniciar compra
+            } else if (Cadastro.buscarVendorPorId(entrada) == false) { // Se vendor não existir iniciar compra
 
                 // TODO talvez puxar castrarCliente/vendor? mas como fazer voltar tudo?
 
             }
-        } else if (entrada == 2){ // Faz Pedido
+        } else if (entrada == 2) { // Faz Pedido
             exibirRestaurantes();
             selecionaRestaurante();
 
@@ -60,10 +61,9 @@ public class MenuPedido {
         }
 
 
-
     }
 
-    public void pedeID(){
+    public void pedeID() {
         Scanner input = new Scanner(System.in);
         int entradaID;
 
