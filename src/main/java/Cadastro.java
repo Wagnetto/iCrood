@@ -11,16 +11,20 @@ public class Cadastro {
 
 
     // Getters
-    public List<Client> getClientes() {
+
+    public static List<Restaurante> getRestaurantes() {
+        return restaurantes;
+    }
+
+    public static List<Client> getClientes() {
         return clientes;
+    }
+    public static List<Vendor> getVendors() {
+        return vendors;
     }
 
     public int getClientesTamanho() {
         return clientes.size();
-    }
-
-    public List<Vendor> getVendors() {
-        return vendors;
     }
 
     public int getVendorsTamanho() {

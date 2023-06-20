@@ -21,26 +21,25 @@ public class Fluxo {
         return false;
     }
 
-    public void exibirFluxo() {
+    public void exibirFluxo(boolean entradaCadastradoOuNao) {
         Cadastro cadastro = new Cadastro();
         Scanner input = new Scanner(System.in);
 
-        int idinserido = 0;
-        if (cadastro.buscarClientePorId(idinserido)) {
-            int idInserido;
-            System.out.println("Entre seu ID: ");
-            idInserido = input.nextInt();
+        if (entradaCadastradoOuNao = true){
 
-            //VALIDA se é cliente POR ID, se for, bora gastar:
-            if (cadastro.buscarClientePorId(idinserido)) {
+            System.out.println("Entre seu ID: ");
+            int idInserido = input.nextInt();
+            // VALIDA se é cliente POR ID, se for, bora gastar:
+            if (cadastro.buscarClientePorId(idInserido)) { // está funcionando
                 MenuPedido menu = new MenuPedido();
                 menu.exibirRestaurantes();
-                menu.selecionaRestaurante().mostraCardapio();
+                menu.selecionaRestaurante().mostraCardapio(); // da pra selecionar o restaurante mas não foi adicionado cardapio em restaurante teste
+
 
                 // TODO testar se metodo funciona e incrementar escolha de pedido / terminar entrega logo após
             }
             // ou, se é Vendor, exibir menu respectivo
-            else if (!Cadastro.buscarVendorPorId(idinserido)) {
+            else if (!Cadastro.buscarVendorPorId(idInserido)) {
                 System.out.println("ID não encontrado, deseja criar outra conta?");
 
             }
@@ -58,7 +57,7 @@ public class Fluxo {
                 MenuPedido menu = new MenuPedido();
                 Cadastro.cadastrarCliente();
                 menu.exibirRestaurantes();
-
+                // TODO criar método para e caminho pra adicionar itens do cardapio de restaurante tal etc etc
             }
         }
     }
