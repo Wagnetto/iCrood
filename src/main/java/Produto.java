@@ -1,8 +1,10 @@
 import java.util.UUID;
+import java.util.List;
 
 //Classe dos produtos oferecidos pelos restaurantes
 public class Produto {
     // Atributos
+    private List<Produto> itens;
     private UUID idProduto;
     private String nomeProduto;
     private String descricaoProduto;
@@ -46,6 +48,11 @@ public class Produto {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    //Métodos
+    public void adicionarItem(Produto produto) {
+        itens.add(produto);
     }
 
     @Override

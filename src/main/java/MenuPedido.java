@@ -1,11 +1,47 @@
+
 import java.util.List;
 import java.util.Scanner;
 
-public class MenuPedido {
+//Classe para todos os pedidos
+class MenuPedido {
+    //Atributos
+    private Client cliente;
+    private Restaurante restaurante;
+    private List<Produto> itens;
+    private boolean entregue;
+
+    //Getters
+    public Client getCliente() {
+        return cliente;
+    }
+
+    public Restaurante getRestaurante() {
+        return restaurante;
+    }
+
+    //Métodos
+    public void MenuPedido(Client cliente, Restaurante restaurante, List<Produto> itens) {
+        this.cliente = cliente;
+        this.restaurante = restaurante;
+        this.itens = itens;
+        this.entregue = false;
+    }
+
+    public void realizarEntrega(String cidade) {
+        if (cidade.equalsIgnoreCase("Porto Alegre")) {
+            // Lógica para realizar a entrega
+            this.entregue = true;
+            System.out.println("Pedido realizado com sucesso em Porto Alegre.");
+        } else {
+            System.out.println("Desculpe, as entregas só podem ser feitas em Porto Alegre.");
+        }
+    }
+
     //TODO - trocar esta lista por dados reais do banco ou de uma implementação melhor
-    String restaurantes[] = { "1 - Mc Donalds", "2 - Subway", "3 - A la minuta da Bia"};
-    public void exibirRestaurantes(){
-        for(int i = 0; i < restaurantes.length; i++){
+    String restaurantes[] = {"1 - Mc Donalds", "2 - Subway", "3 - A la minuta da Bia"};
+
+    public void exibirRestaurantes() {
+        for (int i = 0; i < restaurantes.length; i++) {
             System.out.println(restaurantes[i]);
         }
     }
@@ -32,24 +68,24 @@ public class MenuPedido {
         }
     }
 
-    public void perguntarPedidoOuConsultarDados(){
+    public void perguntarPedidoOuConsultarDados() {
         Scanner input = new Scanner(System.in);
         int entrada;
 
         System.out.println("Deseja consultar dados ou fazer um pedido? \n 1- Consultar Dados     2- Fazer Pedido");
         entrada = input.nextInt();
 
-        if(entrada == 1){ // Consulta dados
+        if (entrada == 1) { // Consulta dados
             System.out.println("Entre seu ID");
-            if(Cadastro.buscarVendorPorId(entrada) == true){ // Se vendor existir
+            if (Cadastro.buscarVendorPorId(entrada) == true) { // Se vendor existir
 
 
-            }else if (Cadastro.buscarVendorPorId(entrada) == false){ // Se vendor não existir iniciar compra
+            } else if (Cadastro.buscarVendorPorId(entrada) == false) { // Se vendor não existir iniciar compra
 
                 // TODO talvez puxar castrarCliente/vendor? mas como fazer voltar tudo?
 
             }
-        } else if (entrada == 2){ // Faz Pedido
+        } else if (entrada == 2) { // Faz Pedido
             exibirRestaurantes();
             selecionaRestaurante();
 
@@ -58,15 +94,5 @@ public class MenuPedido {
             System.out.println("Entrada inválida");
             perguntarPedidoOuConsultarDados();
         }
-
-
-
-    }
-
-    public void pedeID(){
-        Scanner input = new Scanner(System.in);
-        int entradaID;
-
-
     }
 }
