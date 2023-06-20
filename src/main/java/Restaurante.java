@@ -1,44 +1,44 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-//Classe dos estabelecimentos comerciais
-public class Restaurante {
-    // Atributos
-    private String nomeRestaurante;
-    private int idRestaurante;
-    private Vendor proprietario;
+class Restaurante {
+    private User dono;
+    private String nome;
     private String endereco;
     private String cep;
+    private int identificador;
     private List<Produto> cardapio;
 
-    // Construtor
-    public Restaurante(String nomeRestaurante, int idRestaurante, String endereco, String cep, List<Produto> cardapio) {
-        this.nomeRestaurante = nomeRestaurante;
-        this.idRestaurante = idRestaurante;
+    public Restaurante(String nome, String endereco, String cep, User dono) {
+        this.nome = nome;
         this.endereco = endereco;
         this.cep = cep;
-        this.cardapio = cardapio;
+        this.identificador = gerarIdentificador();
+        this.dono = dono;
+        this.cardapio = new ArrayList<>();
     }
 
-    // Getters e Setters
-
-    public String getNomeRestaurante() {
-        return nomeRestaurante;
+    public void adicionarPrato(Produto prato) {
+        cardapio.add(prato);
     }
 
-    public void setNomeRestaurante(String nomeRestaurante) {
-        this.nomeRestaurante = nomeRestaurante;
+    public void removerPrato(Produto prato) {
+        cardapio.remove(prato);
     }
 
-    public int getIdRestaurante() {
-        return idRestaurante;
+    public List<Produto> getCardapio() {
+        return cardapio;
     }
 
-    public Vendor getProprietario() {
-        return proprietario;
+    // Getters e setters
+
+    public String getNome() {
+        return nome;
     }
 
-    public void setProprietario(Vendor proprietario) {
-        this.proprietario = proprietario;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEndereco() {
@@ -57,69 +57,25 @@ public class Restaurante {
         this.cep = cep;
     }
 
-    public List<Produto> getCardapio() {
-        return cardapio;
+    public int getIdentificador() {
+        return identificador;
     }
 
-    public void setCardapio(List<Produto> cardapio) {
-        this.cardapio = cardapio;
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
     }
 
-    // Métodos
-    public void AdicionarProdutoLista(String nomeProduto, String descricaoProduto, double valor){
-        // quando chamado, gera ID guarda em IDproduto
-        UUID idProduto = UUID.randomUUID();
-        // cria um objeto produto com os atributos de produto
-        Produto produto = new Produto(idProduto, nomeProduto, descricaoProduto, valor);
-        // adiciona à lista do restaurante Cardápio, a pergunta é como editar isso depois e onde vai ficar esse código
-        cardapio.add(produto);
+    public String getDono() {
+        return dono;
     }
 
-    public void PedeItensAdicionarLista(int quantidadeItens) {
-        Scanner scan = new Scanner(System.in);
-
-        for (int i = 0; i < quantidadeItens; i++) {
-            System.out.println("\nEntre com o nome do produto: ");
-            String nomeProduto = scan.nextLine();
-
-            System.out.println("Entre com a descrição do produto: ");
-            String descricaoProduto = scan.nextLine();
-
-            System.out.println("Entre com o valor do produto: ");
-            double valorProduto = scan.nextDouble();
-
-            scan.nextLine(); // Limpa o buffer do scanner
-
-            AdicionarProdutoLista(nomeProduto, descricaoProduto, valorProduto);
-        }
+    public void setDono(String dono) {
+        this.dono = dono;
     }
 
-
-    public void EditarListaRestaurante(int indexLista, String novoNomeProduto, String novaDescricaoProduto, double novoValor) {
-        if (indexLista >= 0 && indexLista < cardapio.size()) {
-            Produto produto = cardapio.get(indexLista);
-            produto.setNomeProduto(novoNomeProduto);
-            produto.setDescricaoProduto(novaDescricaoProduto);
-            produto.setValor(novoValor);
-            System.out.println("Produto atualizado com sucesso.");
-        } else {
-            System.out.println("Índice inválido. O produto não foi atualizado.");
-        }
-    }
-    public void mostraCardapio() {
-        for (Produto produto : cardapio) {
-            System.out.println(produto.toString());
-        }
-    }
-    @Override
-    public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("Nome do Restaurante: ").append(nomeRestaurante).append("\n");
-        sb.append("ID: ").append(idRestaurante).append("\n");
-        sb.append("Endereço: ").append(endereco).append("\n");
-        sb.append("CEP: ").append(cep).append("\n");
-        sb.append("Propietário: ").append(proprietario.getNome()).append("\n");
-        sb.append("Cardápio do restaurante ").append(nomeRestaurante).append(": ").append(cardapio);
-        return sb.toString();
+    private int gerarIdentificador() {
+        // Gera um identificador aleatório
+        Random random = new Random();
+        return random.nextInt(9999) + 1;
     }
 }
