@@ -1,206 +1,160 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Cadastro {
-    private static List<Client> clientes = new ArrayList<>();
-    private static List<Vendor> vendors = new ArrayList<>();
-    private static List<Restaurante> restaurantes = new ArrayList<>();
-    Scanner input = new Scanner(System.in);
+    private List<Client> clientes;
+    private List<Vendor> vendedores;
+    private List<Restaurante> restaurantes;
+    private List<Pedido> pedidos;
 
-
-    // Getters
-    public List<Client> getClientes() {
-        return clientes;
-    }
-    public int getClientesTamanho(){
-        return clientes.size();
-    }
-    public List<Vendor> getVendors() {
-        return vendors;
-    }
-    public int getVendorsTamanho(){
-        return vendors.size();
+    public Cadastro() {
+        this.clientes = new ArrayList<>();
+        this.vendedores = new ArrayList<>();
+        this.restaurantes = new ArrayList<>();
+        this.pedidos = new ArrayList<>();
     }
 
-    // Métodos
+    // Métodos para cadastrar cliente, vendor e restaurante
 
-    public void exibeTelaInicial(){
-        System.out.println("█ █▀▀ █▀█ █▀█ █▀█ █▀▄\n" +
-                "█ █▄▄ █▀▄ █▄█ █▄█ █▄▀");
-        System.out.println("=====================");
-    }
+    public void cadastrarCliente() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Cadastro de Cliente");
+        System.out.println("-------------------");
+        System.out.println("Nome: ");
+        String nome = input.nextLine();
+        System.out.println("CPF: ");
+        String cpf = input.nextLine();
+        System.out.println("Email:");
+        String email=input.nextLine();
+        System.out.println("Data de nascimento (Dia/Mês/Ano): ");
+        String dataNascimentoStr = input.nextLine();
+        System.out.println("Telefone para contato: ");
+        String telefonecontato = input.nextLine();
+        System.out.println("Endereco: ");
+        String endereco = input.nextLine();
+        System.out.println("Gênero: ");
+        String genero = input.nextLine();
 
-    public boolean jaTemCadastro(){
-        System.out.println("Bem-vindo!"
-                +"Ja possui um cadastro?\n"
-                +"1. Sim          2. Não");
-        if(input.nextInt() == 1){
-            return true;
+
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataNascimento = null;
+
+        try {
+            dataNascimento = formatter.parse(dataNascimentoStr);
+        } catch (ParseException e) {
+            System.out.println("Formato de data inválido. Certifique-se de usar o formato dd/MM/yyyy.");
         }
-        return false;
+
+
+            // Outros atributos do cliente
+
+        double saldo = 0.0; // Defina o saldo inicial do cliente
+        int identificador = 0; // Defina o identificador do cliente
+        Client cliente = new Client(nome, cpf,email,dataNascimentoStr, telefonecontato, endereco, genero, "a", saldo);
+        clientes.add(cliente);
     }
-    public static void cadastrarCliente(){
-        Scanner scan = new Scanner(System.in);
-        Random id = new Random();
 
-        // Guarda todos atributos que serão usados
-        String nome = "", cpf = "", dataNascimento = "", endereco = "", numeroTelefone = "", email = "";
-
-        // armazena eles nas variaveis
-        System.out.println("Entre seu Nome: ");
-        nome = scan.nextLine();
-        System.out.println("Entre seu CPF: ");
-        cpf = scan.nextLine();
-        System.out.println("Entre sua Data de Nascimento: ");
-        dataNascimento = scan.nextLine();
+    public void cadastrarVendor() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Cadastro de Vendor");
+        System.out.println("------------------");
+        System.out.println("Nome: ");
+        String nome = input.nextLine();
+        System.out.println("CPF: ");
+        String cpf = input.nextLine();
+        System.out.println("E-mail: ");
+        String email = input.nextLine();
+        System.out.println("Data Nascimento: ");
+        String dataNascimento = input.nextLine();
+        System.out.println("Entre seu numero de telefone: ");
+        String numeroContato = input.nextLine();
         System.out.println("Entre seu endereço: ");
-        endereco = scan.nextLine();
-        System.out.println("Entre seu Numero de Telefone: ");
-        numeroTelefone = scan.nextLine();
-        System.out.println("Entre seu E-mail: ");
-        email = scan.nextLine();
+        String endereco = input.nextLine();
+        System.out.println("Entre seu gênero: ");
+        String genero = input.nextLine();
 
 
-        // atribui random ID como inteiro, para passar ao construtor
-        int idCliente = id.nextInt(999) + 201;
+        // Outros atributos do vendor
 
-        // Atribui os dados instanciando um Cliente e adicionando esse cliente à lista de clientes
-        clientes.add(new Client(nome, cpf, formatarDataRecebida(dataNascimento), endereco, numeroTelefone, email, 0, idCliente));
-
-        // Printa mensagem e mostra ID
-        System.out.println("Conta criada com sucesso! Seu ID é: "+idCliente);
-
-        Cadastro.buscarClientePorId(idCliente); // TODO por que busca cliente por id aqui?
-    }
-    public static void cadastrarVendor(){
-        Scanner scan = new Scanner(System.in);
-        Random random = new Random();
-
-        // Guarda todos atributos que serão usados
-        String nomeVendor = "", cpfVendor = "", dataNascimentoVendor = "", enderecoVendor = "", numeroTelefoneVendor = "", emailVendor = "";
-
-        // Armazena eles nas variaveis
-        System.out.println("Entre seu Nome: ");
-        nomeVendor = scan.nextLine();
-        System.out.println("Entre seu CPF: ");
-        cpfVendor = scan.nextLine();
-        System.out.println("Entre sua Data de Nascimento: ");
-        dataNascimentoVendor = scan.nextLine();
-        System.out.println("Entre seu endereço: ");
-        enderecoVendor = scan.nextLine();
-        System.out.println("Entre seu Numero de Telefone: ");
-        numeroTelefoneVendor = scan.nextLine();
-        System.out.println("Entre seu E-mail: ");
-        emailVendor = scan.nextLine();
-
-        // atribui random ID como inteiro, para passar ao construtor
-        int idVendor = random.nextInt(200)+1;
-
-        // Atribui os dados instanciando um Vendor e adicionando esse Vendor à lista de vendors
-        vendors.add(new Vendor(nomeVendor, cpfVendor, formatarDataRecebida(dataNascimentoVendor), enderecoVendor, numeroTelefoneVendor, emailVendor, 0, idVendor, new ArrayList<Restaurante>()));
-
-        Cadastro.buscarVendorPorId(idVendor); // TODO por que buscar Vendor por ID aqui?
+        // TODO rever interesse em constructor
+        vendedores.add(new Vendor(nome, cpf, email, dataNascimento, numeroContato, endereco, genero, ""));
     }
 
-    public static void cadastrarRestaurante(){
-        Random random = new Random();
-        Scanner scan = new Scanner(System.in);
+    public void cadastrarRestaurante(User dono) {//TODO: Faz o cadastro de todos e restaurante, vou cuidar do client e Pedido
+        Scanner input = new Scanner(System.in);
+        System.out.println("Cadastro de Restaurante");
+        System.out.println("-----------------------");
+        System.out.println("Nome: ");
+        String nome = input.nextLine();
+        System.out.println("Endereço: ");
+        String endereco = input.nextLine();
+        System.out.println("CEP:");
+        String cep = input.nextLine();
 
-        // Guarda todos atributos que serão usados
-        String nomeRestaurante = "", endereco = "", cep = "";
-
-        System.out.println("\nEntre o nome de seu restaurante: ");
-        nomeRestaurante = scan.nextLine();
-        System.out.println("Entre o CEP de seu restaurante: ");
-        cep = scan.nextLine();
-        System.out.println("Entre seu endereço: ");
-        endereco = scan.nextLine();
-
-        // atribui random ID como inteiro, para passar ao construtor
-        int idRestaurante = random.nextInt(1500) + 1000;
-
-        // Atribui os dados instanciando um Restaurante e adicionando esse Restaurante à lista de restaurantes
-        restaurantes.add(new Restaurante(nomeRestaurante,idRestaurante, endereco, cep, new ArrayList<>()));
-
-        Cadastro.buscarRestaurantePorId(idRestaurante);
+        Restaurante restaurante = new Restaurante(nome, endereco,cep,dono);
+        restaurantes.add(restaurante);
     }
 
-    public Restaurante buscarUltimoRestauranteCriado() {
-        if (!restaurantes.isEmpty()) {
-            // Percorre a lista de restaurantes em ordem reversa
-            for (int i = restaurantes.size() - 1; i >= 0; i--) {
-                Restaurante restaurante = restaurantes.get(i);
-                if (restaurante != null) {
-                    return restaurante; // Retorna o primeiro restaurante encontrado
-                }
-            }
-        }
-        return null; // Caso a lista esteja vazia ou não haja restaurante válido
-    }
-
-    public Vendor buscarUltimoVendorCriado() {
-        if (!vendors.isEmpty()) {
-            // Varre a lista de vendors em ordem reversa
-            for (int i = vendors.size() - 1; i >= 0; i--) {
-                Vendor vendor = vendors.get(i);
-                if (vendor != null) {
-                    return vendor; // Retorna o primeiro vendor encontrado
-                }
-            }
-        }
-        return null; // Caso a lista esteja vazia ou não haja vendor válido
-    }
-
-    public Client buscarUltimoClienteCriado() {
-        if (!clientes.isEmpty()) {
-            // Percorre a lista de Cliente em ordem reversa
-            for (int i = clientes.size() - 1; i >= 0; i--) {
-                Client client = clientes.get(i);
-                if (client != null) {
-                    return client; // Retorna o primeiro Cliente encontrado
-                }
-            }
-        }
-        return null; // Caso a lista esteja vazia ou não haja restaurante válido
-    }
-
-    public static boolean buscarClientePorId(int idCliente) {
-        for (Client cliente : clientes) {
-            if (cliente.getIdCliente() == idCliente) {
-                System.out.println(cliente.toString());
-                return true; // Encerra o loop assim que encontrar o cliente
-            }
-        }
-        System.out.println("Cliente não encontrado.");
-        return false;
-    }
-
-    public static boolean buscarVendorPorId(int idVendor) {
-        for (Vendor vendor : vendors) {
-            if (vendor.getIdVendor() == idVendor) {
-                System.out.println(vendor.toString());
-                return true; // Encerra o loop assim que encontrar o cliente
-            }
-        }
-        System.out.println("Vendor não encontrado.");
-        return false;
-    }
-
-    public static boolean buscarRestaurantePorId(int idRestaurante) {
-        for (Restaurante restaurante : restaurantes) {
-            if (restaurante.getIdRestaurante() == idRestaurante) {
-                System.out.println(restaurante.toString());
-                return true;
-            }
-        }
-        System.out.println("Restaurante não encontrado.");
-        return false;
-    }
+    // TODO Métodos para instaciar
     public static LocalDate formatarDataRecebida(String dataRecebida) {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return LocalDate.parse(dataRecebida, formatador);
     }
+    private int gerarIdentificador() {
+        // Gera um identificador aleatório
+        Random random = new Random();
+        return random.nextInt(9999) + 1;
+    }
 
+    // TODO Métodos para gerenciar produtos e restaurantes dos vendors
+    public void gerenciarProdutos(Vendor vendor) {
+        // Implemente o código para gerenciar os produtos do vendor
+    }
+
+    public void gerenciarRestaurantes(Vendor vendor) {
+        // Implemente o código para gerenciar os restaurantes do vendor
+        
+    }
+//TODO Parte do armazenamento
+    public void salvarDadosEmArquivo() {
+       //Banco de Dados
+    }
+
+    public void carregarDadosDoArquivo() {
+       //Banco de Dados
+    }
+
+    public boolean jaTemCadastro() {
+        //Banco de Dados
+        return false;
+    }
+
+    public boolean buscarClientePorId(int id) {
+        // Implementar lógica para buscar um cliente pelo ID
+        return false;
+    }
+
+    public boolean buscarVendorPorId(int id) {
+        // Implementar lógica para buscar um vendor pelo ID
+        return false;
+    }
+
+    public Vendor buscarUltimoVendorCriado() {
+        // Implementar lógica para buscar o último vendor criado na lista
+        return null;
+    }
+
+    public Restaurante buscarUltimoRestauranteCriado() {
+        // Implementar lógica para buscar o último restaurante criado na lista
+        return null;
+    }
+    public void exibeTelaInicial() {
+        System.out.println("█ █▀▀ █▀█ █▀█ █▀█ █▀▄");
+        System.out.println("█ █▄▄ █▀▄ █▄█ █▄█ █▄▀");
+        System.out.println("=====================");
+    }
 }
-
