@@ -1,12 +1,75 @@
-class Vendor extends User {
-    private Conta conta;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+//Classe do vendedor, pode realisar compras e greneciar seus estabelecimentos
+public class Vendor extends User {
+    private int idVendor;
+    private List<Restaurante> estabelecimentos;
 
-    public Vendor(String nome, String cpf, String email, String dataNascimento, String numeroContato, String endereco, String genero, String interesse) {
-        super(nome, cpf, email, dataNascimento, numeroContato, endereco, genero, interesse);
-        this.conta = new Conta(identificador, cpf);
+    // Construtor
+    public Vendor(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira, int idVendor, List<Restaurante> estabelecimentos) {
+        super(nome, cpf, dataNascimento, endereco, numeroTelefone, email, saldoCarteira);
+        this.idVendor = idVendor;
+        this.estabelecimentos = estabelecimentos;
     }
 
-    public Conta getConta() {
-        return conta;
+    public int getIdVendor() {
+        return idVendor;
     }
+
+    // Métodos
+    public void AdicionarRestaurante(Restaurante restauranteX){
+        restauranteX.setProprietario(this);
+        estabelecimentos.add(restauranteX);
+    }
+    public void RemoverRestaurante(Restaurante restauranteX) {
+        restauranteX.setProprietario(null);
+        estabelecimentos.remove(restauranteX);
+    }
+
+    public String toStringUser() {
+        return "Vendor{" +
+                "id=" + idVendor +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", endereco='" + endereco + '\'' +
+                ", numeroTelefone='" + numeroTelefone + '\'' +
+                ", email='" + email + '\'' +
+                ", saldoCarteira=" + saldoCarteira +
+                '}';
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder vendorInfo = new StringBuilder();
+        vendorInfo.append("\nVendor:\n");
+        vendorInfo.append("Nome: ");
+        vendorInfo.append(getNome());
+        vendorInfo.append("\nCPF: ");
+        vendorInfo.append(getCpf());
+        vendorInfo.append("\nData de Nascimento: ");
+        vendorInfo.append(getDataNascimento());
+        vendorInfo.append("\nEndereço: ");
+        vendorInfo.append(getEndereco());
+        vendorInfo.append("\nTelefone: ");
+        vendorInfo.append(getNumeroTelefone());
+        vendorInfo.append("\nE-mail: ");
+        vendorInfo.append(getEmail());
+        vendorInfo.append("\nSaldo: ");
+        vendorInfo.append(getSaldoCarteira());
+        vendorInfo.append("\nRestaurantes Relacionados:\n");
+
+        for (Restaurante restaurante : estabelecimentos) {
+            vendorInfo.append(restaurante.toString());
+            vendorInfo.append("\n");
+        }
+
+        vendorInfo.append("ID de Vendor: ");
+        vendorInfo.append(getIdVendor());
+
+        return vendorInfo.toString();
+    }
+
 }
