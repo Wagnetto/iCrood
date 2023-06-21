@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Fluxo {
@@ -55,7 +57,6 @@ public class Fluxo {
         int resposta = scan.nextInt();
 
         if (resposta == 1) {
-            Cadastro.cadastrarPessoa();
             System.out.println("Você tem um Restaurante ou quer fazer um pedido?\n1. Restaurante    2. Cliente");
             int opcao = scan.nextInt();
 
@@ -63,18 +64,18 @@ public class Fluxo {
                 criarVendorRestauranteConsole();
             } else if (opcao == 2) {
                 MenuPedido menu = new MenuPedido();
+                criarCliente();
                 menu.exibirRestaurantes();
                 menu.selecionaRestaurante().mostraCardapio();
             } else {
                 System.out.println("Opção inválida!");
             }
-        } else if (resposta == 2) {
-
-        } else {
-            System.out.println("Opção inválida!");
         }
     }
 
+    public void criarCliente(){
+        Cadastro.cadastrarCliente();
+    }
     public void criarVendorRestauranteConsole() {
         Scanner input = new Scanner(System.in);
         Cadastro cadastro = new Cadastro();
