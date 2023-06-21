@@ -42,6 +42,7 @@ public class Cadastro {
 
     public static boolean procuraCadastro(int id, List<String> filenames) {
         for (String filename : filenames) {
+            //Método maluco, cria Scanner para o arquivo e pesquise as palavras chaves dentro do arquivo
             try (Scanner fileScanner = new Scanner(new File(filename))) {
                 while (fileScanner.hasNextLine()) {
                     String line = fileScanner.nextLine();
@@ -169,8 +170,6 @@ public class Cadastro {
 
         //Salva dados do restaurante
         restaurantes.add(restaurante);
-        SalvarDados.salvarRestaurante(restaurante);
-        SalvarDados.salvarCardapioRestaurante(restaurante);
     }
 
     public Restaurante buscarUltimoRestauranteCriado() {

@@ -20,7 +20,7 @@ public class Fluxo {
             System.out.println("Digite o ID para procurar o cadastro:");
             int id = scan.nextInt();
 
-            if (cadastro.procuraCadastro(id, Arrays.asList("Client.data", "Vendor.data"))) {
+            if (Cadastro.procuraCadastro(id, Arrays.asList("Client.data", "Vendor.data"))) {
                 System.out.println("Cadastro encontrado!");
 
                 if (isCliente()) {
@@ -53,13 +53,12 @@ public class Fluxo {
         int resposta = scan.nextInt();
 
         if (resposta == 1) {
-
-          //Cadastro.cadastrarPessoa();
-            System.out.println("Você tem um Restaurante ou quer fazer um pedido?\n1. Restaurante    2. Cliente");
+            Cadastro.cadastrarPessoa();
+            System.out.println("Cadastrar um restaurante ou quer fazer um pedido?\n1. Restaurante    2. Pedido");
             int opcao = scan.nextInt();
 
             if (opcao == 1) {
-                cadastrarVendorRestaurante();
+                criarVendorRestauranteConsole();
             } else if (opcao == 2) {
                 criarClienteConsole();
                 MenuPedido menu = new MenuPedido();
@@ -69,12 +68,22 @@ public class Fluxo {
                 System.out.println("Opção inválida!");
             }
         } else if (resposta == 2) {
-            //Fecha o programa
+            System.out.println("Fechando programa");
         } else {
             System.out.println("Opção inválida!");
         }
     }
-    public void cadastrarVendorRestaurante() {
+
+    public void criarClienteConsole() {
+        Cadastro cadastro = new Cadastro();
+
+        // Zera variável restaurante para poder ser reutilizada
+        Client client=null;
+
+        Cadastro.cadastrarCliente();
+    }
+
+    public void criarVendorRestauranteConsole() {
         Scanner input = new Scanner(System.in);
         Cadastro cadastro = new Cadastro();
 
@@ -82,9 +91,8 @@ public class Fluxo {
         Restaurante restaurante = null;
         Vendor vendor = null;
 
-        Cadastro.cadastrarVendor(); //OK
-        System.out.println("Cadastre agora seu restaurante: ");
-        Cadastro.cadastrarRestaurante(); //OK
+        Cadastro.cadastrarVendor();
+        Cadastro.cadastrarRestaurante();
 
         System.out.println("Quer adicionar quantos itens ao cardápio? ");
         int quantidadeItens = input.nextInt();
@@ -95,9 +103,11 @@ public class Fluxo {
 
         // Vincula o vendor recém-criado ao restaurante recém-criado
         vendor.AdicionarRestaurante(restaurante);
+        SalvarDados.salvarRestaurante(restaurante);
 
         // Cria itens e guarda na lista, em seguida mostra o cardápio do restaurante
         restaurante.PedeItensAdicionarLista(quantidadeItens);
+        SalvarDados.salvarCardapioRestaurante(restaurante);
         restaurante.mostraCardapio();
 
         System.out.println("Você cadastrou seu restaurante, seu perfil junto e seu cardápio com sucesso");

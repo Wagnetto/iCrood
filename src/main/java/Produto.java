@@ -58,7 +58,7 @@ public class Produto {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("         \n<Produto>\n");
+        sb.append("         \nProduto\n");
         sb.append("Nome do Produto: ").append(nomeProduto).append("\n");
         sb.append("| Descricao do Produto: ").append(descricaoProduto).append("\n");
         sb.append("| Valor: R$").append(valor).append("\n");
