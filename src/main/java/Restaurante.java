@@ -65,7 +65,18 @@ public class Restaurante {
     }
 
     // Métodos
-    public void pedeItensAdicionarLista(int quantidadeItens) {
+
+    public void AdicionarProdutoLista(String nomeProduto, String descricaoProduto, double valor) {
+        // quando chamado, gera ID guarda em IDproduto
+        UUID idProduto = UUID.randomUUID();
+        // cria um objeto produto com os atributos de produto
+        Produto produto = new Produto(idProduto, nomeProduto, descricaoProduto, valor);
+        // adiciona à lista do restaurante Cardápio, a pergunta é como editar isso depois e onde vai ficar esse código
+        cardapio.add(produto);
+    }
+
+    public void PedeItensAdicionarLista(int quantidadeItens) {
+
         Scanner scan = new Scanner(System.in);
 
         for (int i = 0; i < quantidadeItens; i++) {
@@ -99,12 +110,14 @@ public class Restaurante {
             System.out.println("Índice inválido. O produto não foi atualizado.");
         }
     }
+
     public void mostraCardapio() {
         System.out.println("Cardápio do restaurante " + nomeRestaurante + ":");
         for (Produto produto : cardapio) {
             System.out.println(produto);
         }
     }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

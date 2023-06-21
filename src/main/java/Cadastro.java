@@ -43,7 +43,8 @@ public class Cadastro {
             try (Scanner fileScanner = new Scanner(new File(filename))) {
                 while (fileScanner.hasNextLine()) {
                     String line = fileScanner.nextLine();
-                    if ((line.startsWith("ID Cliente:") || line.startsWith("ID Vendor:")) && line.contains(String.valueOf(id))) {
+                    if ((line.startsWith("Seu ID:") || line.startsWith("ID Dono:")) && line.contains(String.valueOf(id))) {
+
                         return true;
                     }
                 }
@@ -98,9 +99,13 @@ public class Cadastro {
         // atribui random ID como inteiro, para passar ao construtor
         int idCliente = id.nextInt(9999) + 1000;
         Client cliente = new Client(nome, cpf, dataNascimentoLocalDate, endereco, numeroTelefone, email, 0, idCliente);
+
         //Salva dados na lista
         clientes.add(cliente);
+
+        // Salva dados no Banco
         SalvarDados.salvarCliente(cliente);
+
         // Printa mensagem e mostra ID
         System.out.println("Conta criada com sucesso! Seu ID é: " + idCliente);
 

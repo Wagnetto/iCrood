@@ -1,3 +1,7 @@
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -20,7 +24,8 @@ public class Fluxo {
             System.out.println("Digite o ID para procurar o cadastro:");
             int id = scan.nextInt();
 
-            if (Cadastro.procuraCadastro(id, Arrays.asList("Client.data", "Vendor.data"))) {
+            if (Cadastro.procuraCadastro(id, Arrays.asList("Cliente.data","Vendor.data"))) {
+
                 System.out.println("Cadastro encontrado!");
 
                 if (isCliente()) {
@@ -53,8 +58,8 @@ public class Fluxo {
         int resposta = scan.nextInt();
 
         if (resposta == 1) {
-            Cadastro.cadastrarPessoa();
-            System.out.println("Cadastrar um restaurante ou quer fazer um pedido?\n1. Restaurante    2. Pedido");
+            System.out.println("Você tem um Restaurante ou quer fazer um pedido?\n1. Restaurante    2. Cliente");
+
             int opcao = scan.nextInt();
 
             if (opcao == 1) {
@@ -62,11 +67,22 @@ public class Fluxo {
             } else if (opcao == 2) {
                 criarClienteConsole();
                 MenuPedido menu = new MenuPedido();
+                criarCliente();
                 menu.exibirRestaurantes();
                 menu.selecionaRestaurante().mostraCardapio();
             } else {
                 System.out.println("Opção inválida!");
             }
+
+        }
+    }
+
+    public void criarCliente(){
+        Cadastro.cadastrarCliente();
+    }
+    public void criarVendorRestauranteConsole() {
+        Scanner input = new Scanner(System.in);
+
         } else if (resposta == 2) {
             System.out.println("Fechando programa");
         } else {
@@ -75,6 +91,7 @@ public class Fluxo {
     }
 
     public void criarClienteConsole() {
+
         Cadastro cadastro = new Cadastro();
 
         // Zera variável restaurante para poder ser reutilizada
@@ -107,8 +124,18 @@ public class Fluxo {
         restaurante.pedeItensAdicionarLista(quantidadeItens);
         SalvarDados.salvarCardapioRestaurante(restaurante);
 
+        // Cria itens e guarda na lista, em seguida mostra o cardápio do restaurante
+        restaurante.PedeItensAdicionarLista(quantidadeItens);
+
+        // Salvar no Banco
+        SalvarDados.salvarVendor(vendor);
+        SalvarDados.salvarRestaurante(restaurante);
+
+        // Printa cardápio
+
         // Mostrar o cardápio do restaurante
         System.out.println("Cardápio do restaurante " + restaurante.getNomeRestaurante() + ":");
+
         restaurante.mostraCardapio();
 
         System.out.println("Você cadastrou seu restaurante, seu perfil junto e seu cardápio com sucesso");
