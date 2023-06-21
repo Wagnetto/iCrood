@@ -7,12 +7,10 @@ import java.util.*;
 
 public class Cadastro {
     private int idCliente;
-    private static List<Client> clientes = new ArrayList<>();
-    private static List<Vendor> vendors = new ArrayList<>();
-    private static List<Restaurante> restaurantes = new ArrayList<>();
+    private static final List<Client> clientes = new ArrayList<>();
+    private static final List<Vendor> vendors = new ArrayList<>();
+    private static final List<Restaurante> restaurantes = new ArrayList<>();
     Scanner input = new Scanner(System.in);
-
-
 
     // Getters
     public int getIdCliente() {
@@ -55,7 +53,6 @@ public class Cadastro {
         }
         return false;
     }
-
 
     public static void cadastrarPessoa() {//Método de entrada
         Scanner scanner = new Scanner(System.in);
@@ -175,15 +172,14 @@ public class Cadastro {
 
     public Restaurante buscarUltimoRestauranteCriado() {
         if (!restaurantes.isEmpty()) {
-            // Percorre a lista de restaurantes em ordem reversa
             for (int i = restaurantes.size() - 1; i >= 0; i--) {
                 Restaurante restaurante = restaurantes.get(i);
                 if (restaurante != null) {
-                    return restaurante; // Retorna o primeiro restaurante encontrado
+                    return restaurante;
                 }
             }
         }
-        return null; // Caso a lista esteja vazia ou não haja restaurante válido
+        return null;
     }
 
     public Vendor buscarUltimoVendorCriado() {
@@ -199,7 +195,7 @@ public class Cadastro {
         return null; // Caso a lista esteja vazia ou não haja vendor válido
     }
 
-    public Client buscarUltimoClienteCriado() {
+    /*public Client buscarUltimoClienteCriado() {
         if (!clientes.isEmpty()) {
             // Percorre a lista de Cliente em ordem reversa
             for (int i = clientes.size() - 1; i >= 0; i--) {
@@ -210,7 +206,7 @@ public class Cadastro {
             }
         }
         return null; // Caso a lista esteja vazia ou não haja restaurante válido
-    }
+    }*/
 
     public static LocalDate formatarDataRecebida(String dataRecebida) {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -235,7 +231,6 @@ public class Cadastro {
             } catch (DateTimeParseException e) {
                 System.out.println("Formato de data inválido. Certifique-se de usar o formato dd/mm/aaaa.");
             }
-        }while (!dataFormatoValido);
-        return null;
+        }while (true);
     }
 }

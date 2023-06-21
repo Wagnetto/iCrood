@@ -20,7 +20,7 @@ public class Fluxo {
             System.out.println("Digite o ID para procurar o cadastro:");
             int id = scan.nextInt();
 
-            if (cadastro.procuraCadastro(id, Arrays.asList("Client.data", "Vendor.data"))) {
+            if (Cadastro.procuraCadastro(id, Arrays.asList("Client.data", "Vendor.data"))) {
                 System.out.println("Cadastro encontrado!");
 
                 if (isCliente()) {
@@ -53,13 +53,12 @@ public class Fluxo {
         int resposta = scan.nextInt();
 
         if (resposta == 1) {
-
-          //Cadastro.cadastrarPessoa();
-            System.out.println("Você tem um Restaurante ou quer fazer um pedido?\n1. Restaurante    2. Cliente");
+            Cadastro.cadastrarPessoa();
+            System.out.println("Cadastrar um restaurante ou quer fazer um pedido?\n1. Restaurante    2. Pedido");
             int opcao = scan.nextInt();
 
             if (opcao == 1) {
-                cadastrarVendorRestaurante();
+                criarVendorRestauranteConsole();
             } else if (opcao == 2) {
                 criarClienteConsole();
                 MenuPedido menu = new MenuPedido();
@@ -69,44 +68,53 @@ public class Fluxo {
                 System.out.println("Opção inválida!");
             }
         } else if (resposta == 2) {
-            //Fecha o programa
+            System.out.println("Fechando programa");
         } else {
             System.out.println("Opção inválida!");
         }
     }
-    public void cadastrarVendorRestaurante() {
-        Scanner input = new Scanner(System.in);
+
+    public void criarClienteConsole() {
         Cadastro cadastro = new Cadastro();
 
         // Zera variável restaurante para poder ser reutilizada
-        Restaurante restaurante = null;
-        Vendor vendor = null;
+        Client client=null;
 
-        Cadastro.cadastrarVendor(); //OK
-        System.out.println("Cadastre agora seu restaurante: ");
-        Cadastro.cadastrarRestaurante(); //OK
+        Cadastro.cadastrarCliente();
+    }
 
-        System.out.println("Quer adicionar quantos itens ao cardápio? ");
+    public void criarVendorRestauranteConsole() {
+        Scanner input = new Scanner(System.in);
+        Cadastro cadastro = new Cadastro();
+
+        // Cadastrar o Vendor
+        Cadastro.cadastrarVendor();
+        Vendor vendor = cadastro.buscarUltimoVendorCriado();
+
+        // Cadastrar o Restaurante
+        Cadastro.cadastrarRestaurante();
+        Restaurante restaurante = cadastro.buscarUltimoRestauranteCriado();
+
+        // Adicionar o Restaurante ao Vendor
+        vendor.adicionarRestaurante(restaurante);
+        SalvarDados.salvarRestaurante(restaurante);
+
+        // Adicionar itens ao cardápio
+        System.out.println("Quantos itens você deseja adicionar ao cardápio? ");
         int quantidadeItens = input.nextInt();
+        input.nextLine(); // Limpar o buffer do scanner
 
-        // Pega o último restaurante e armazena em restaurante
-        restaurante = cadastro.buscarUltimoRestauranteCriado();
-        vendor = cadastro.buscarUltimoVendorCriado();
+        restaurante.pedeItensAdicionarLista(quantidadeItens);
+        SalvarDados.salvarCardapioRestaurante(restaurante);
 
-        // Vincula o vendor recém-criado ao restaurante recém-criado
-        vendor.AdicionarRestaurante(restaurante);
-
-        // Cria itens e guarda na lista, em seguida mostra o cardápio do restaurante
-        restaurante.PedeItensAdicionarLista(quantidadeItens);
+        // Mostrar o cardápio do restaurante
+        System.out.println("Cardápio do restaurante " + restaurante.getNomeRestaurante() + ":");
         restaurante.mostraCardapio();
 
         System.out.println("Você cadastrou seu restaurante, seu perfil junto e seu cardápio com sucesso");
-        // TODO: Área de teste para verificar se está tudo ok
-
-        // Printa informações do restaurante para testar se está tudo ok
-        System.out.println(restaurante);
-        // TODO: Fim da área de teste
+        System.out.println(restaurante); // Área de teste para verificar se está tudo ok
     }
+        // TODO: Fim da área de teste
 
     private boolean isVendedor() {
         return true;
