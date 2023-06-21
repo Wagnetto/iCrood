@@ -5,7 +5,6 @@ import java.util.List;
 public class Client extends User {
     // Atributos
     private CarrinhoDeCompras carrinho;
-
     private int idCliente;
     private List<Produto> compras;
 
@@ -17,19 +16,19 @@ public class Client extends User {
     }
 
     //getters herdados de User
-    public String getNome(){
+    public String getNome() {
         return super.getNome();
     }
 
-    public String getCpf(){
+    public String getCpf() {
         return super.getCpf();
     }
 
-    public LocalDate getDataNascimento(){
+    public LocalDate getDataNascimento() {
         return super.getDataNascimento();
     }
 
-    public String getEndereco(){
+    public String getEndereco() {
         return super.getEndereco();
     }
 
@@ -70,6 +69,7 @@ public class Client extends User {
             System.out.println("Produto não encontrado no cardápio.");
         }
     }
+
     public void removerDoCarrinho(Produto produto) {
         //Remove o produto desejado presente no carrinho e desconta o valor aplicado
         carrinho.removerItem(produto);
@@ -77,21 +77,19 @@ public class Client extends User {
         setSaldoCarteira(novoSaldo);
         System.out.println("Produto removido do carrinho com sucesso!");
     }
-    @Override
+
     public String toString() {
-        StringBuilder cliente = new StringBuilder();
-        cliente.append("\n------------------------------------");
-        cliente.append("\n             Cliente:\n");
-        cliente.append("Nome: ").append(getNome());
-        cliente.append("\nCPF: ").append(getCpf());
-        cliente.append("\nData de Nascimento: ").append(getDataNascimento());
-        cliente.append("\nEndereço: ").append(getEndereco());
-        cliente.append("\nTelefone: ").append(getNumeroTelefone());
-        cliente.append("\nE-mail: ").append(getEmail());
-        cliente.append("\nSaldo: ").append(getSaldoCarteira());
-        cliente.append("\n------------------------------------");
-        cliente.append("\nSeu código  é: ").append(getIdCliente());
-        cliente.append("\n------------------------------------");
-        return cliente.toString();
+        return "\n------------------------------------" +
+                "\n             Cliente:\n" +
+                "Nome: " + getNome() +
+                "\nCPF: " + getCpf() +
+                "\nData de Nascimento: " + getDataNascimento() +
+                "\nEndereço: " + getEndereco() +
+                "\nTelefone: " + getNumeroTelefone() +
+                "\nE-mail: " + getEmail() +
+                "\nSaldo: " + getSaldoCarteira() +
+                "\n------------------------------------" +
+                "\nSeu código é: " + getIdCliente() +
+                "\n------------------------------------";
     }
 }
