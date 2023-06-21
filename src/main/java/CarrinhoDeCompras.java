@@ -3,7 +3,7 @@ import java.util.List;
 //Classe do carrinho de compras
 public class  CarrinhoDeCompras {
     //Atributos
-    private List<Produto> itens;
+    private static List<Produto> itens;
 
     //Métodos
     public CarrinhoDeCompras() {

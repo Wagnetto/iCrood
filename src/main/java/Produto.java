@@ -57,10 +57,12 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "Produto{" +
-                "\n Nome do Produto: " + nomeProduto +
-                "\n | Descricao do Produto: " + descricaoProduto +
-                "\n | Valor: R$" + valor +
-                '}';
+        StringBuffer sb = new StringBuffer();
+        sb.append("         \n<Produto>\n");
+        sb.append("Nome do Produto: ").append(nomeProduto).append("\n");
+        sb.append("| Descricao do Produto: ").append(descricaoProduto).append("\n");
+        sb.append("| Valor: R$").append(valor).append("\n");
+        sb.append("\n");
+        return sb.toString();
     }
 }
