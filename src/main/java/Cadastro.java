@@ -13,6 +13,7 @@ public class Cadastro {
     Scanner input = new Scanner(System.in);
 
 
+
     // Getters
     public int getIdCliente() {
         return idCliente;
@@ -53,6 +54,23 @@ public class Cadastro {
         return false;
     }
 
+    public static void cadastrarPessoa() {//Método de entrada
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Que bom que quer criar uma conta!");
+        System.out.println("E para qual funcionalidade teria essa conta?");
+        System.out.println("1. Gerenciar estabelecimentos    2. Cliente");
+
+        int opcao = scanner.nextInt();
+
+        if (opcao == 1) {
+            cadastrarVendor();
+        } else if (opcao == 2) {
+            cadastrarCliente();
+        } else {
+            System.out.println("Não foi possível completar a ação, opção não existente!");
+        }
+    }
+
     public static void cadastrarCliente() {
         Scanner scan = new Scanner(System.in);
         Random id = new Random();
@@ -61,7 +79,7 @@ public class Cadastro {
         String nome = "", cpf = "", dataNascimento = "", endereco = "", numeroTelefone = "", email = "";
 
         // armazena eles nas variaveis
-        System.out.println("Cadastro de Vendedor");
+        System.out.println("Cadastro de Cliente");
         System.out.println("-----------------------");
         System.out.println("Nome: ");
         nome = scan.nextLine();
