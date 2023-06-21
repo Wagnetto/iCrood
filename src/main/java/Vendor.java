@@ -45,7 +45,7 @@ public class Vendor extends User {
             vendorInfo.append("\n");
         }
         vendorInfo.append("\n-----------------------------");
-        vendorInfo.append("ID: ").append(getIdVendor());
+        vendorInfo.append("ID Dono: ").append(getIdVendor());
         return vendorInfo.toString();
     }
 }

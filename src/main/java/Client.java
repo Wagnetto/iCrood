@@ -89,7 +89,7 @@ public class Client extends User {
                 "\nE-mail: " + getEmail() +
                 "\nSaldo: " + getSaldoCarteira() +
                 "\n------------------------------------" +
-                "\nSeu código é: " + getIdCliente() +
+                "\nSeu ID: " + getIdCliente() +
                 "\n------------------------------------";
     }
 }

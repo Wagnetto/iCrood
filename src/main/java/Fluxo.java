@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class Fluxo {
             System.out.println("Digite o ID para procurar o cadastro:");
             int id = scan.nextInt();
 
-            if (Cadastro.procuraCadastro(id)) {
+            if (Cadastro.procuraCadastro(id, Arrays.asList("Cliente.data","Vendor.data"))) {
                 System.out.println("Cadastro encontrado!");
 
                 // VALIDA se é cliente POR ID, se for, bora gastar:
@@ -97,8 +98,15 @@ public class Fluxo {
         // Vincula o vendor recém-criado ao restaurante recém-criado
         vendor.AdicionarRestaurante(restaurante);
 
+
         // Cria itens e guarda na lista, em seguida mostra o cardápio do restaurante
         restaurante.PedeItensAdicionarLista(quantidadeItens);
+
+        // Salvar no Banco
+        SalvarDados.salvarVendor(vendor);
+        SalvarDados.salvarRestaurante(restaurante);
+
+        // Printa cardápio
         restaurante.mostraCardapio();
 
         System.out.println("Você cadastrou seu restaurante, seu perfil junto e seu cardápio com sucesso");

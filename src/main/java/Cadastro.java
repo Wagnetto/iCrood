@@ -40,16 +40,19 @@ public class Cadastro {
     }
     // Métodos
 
-    public static boolean procuraCadastro(int id) {
-        try (Scanner fileScanner = new Scanner(new File("idList.data"))) {
-            while (fileScanner.hasNextLine()) {
-                String line = fileScanner.nextLine();
-                if ((line.startsWith("ID Cliente:") || line.startsWith("ID Vendor:")) && line.contains(String.valueOf(id))) {
-                    return true;
+    public static boolean procuraCadastro(int id, List<String> filenames) {
+        for (String filename : filenames) {
+            //Método maluco, cria Scanner para o arquivo e pesquise as palavras chaves dentro do arquivo
+            try (Scanner fileScanner = new Scanner(new File(filename))) {
+                while (fileScanner.hasNextLine()) {
+                    String line = fileScanner.nextLine();
+                    if ((line.startsWith("Seu ID:") || line.startsWith("ID Dono:")) && line.contains(String.valueOf(id))) {
+                        return true;
+                    }
                 }
+            } catch (FileNotFoundException e) {
+                System.err.println("Arquivo não encontrado: " + e.getMessage());
             }
-        } catch (FileNotFoundException e) {
-            System.err.println("ID não encontrado: " + e.getMessage());
         }
         return false;
     }
@@ -95,10 +98,16 @@ public class Cadastro {
         System.out.println("E-mail: ");
         email = scan.nextLine();
 
+        // atribui random ID como inteiro, para passar ao construtor
         int idCliente = id.nextInt(9999) + 1000;
-        // Atribui os dados instanciando um Cliente e adicionando esse cliente à lista de clientes
-        clientes.add(new Client(nome, cpf, dataNascimentoLocalDate, endereco, numeroTelefone, email, 0, idCliente));
-        SalvarDados.salvarID(idCliente, 0, 0);
+        Client cliente = new Client(nome, cpf, dataNascimentoLocalDate, endereco, numeroTelefone, email, 0, idCliente);
+
+        //Salva dados na lista
+        clientes.add(cliente);
+
+        // Salva dados no Banco
+        SalvarDados.salvarCliente(cliente);
+
         // Printa mensagem e mostra ID
         System.out.println("Conta criada com sucesso! Seu ID é: " + idCliente);
 
