@@ -1,6 +1,8 @@
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Fluxo {
@@ -23,18 +25,16 @@ public class Fluxo {
             int id = scan.nextInt();
 
             if (Cadastro.procuraCadastro(id, Arrays.asList("Cliente.data","Vendor.data"))) {
+
                 System.out.println("Cadastro encontrado!");
 
-                // VALIDA se é cliente POR ID, se for, bora gastar:
                 if (isCliente()) {
                     MenuPedido menu = new MenuPedido();
                     menu.exibirRestaurantes();
                     menu.selecionaRestaurante().mostraCardapio();
 
                     // TODO: Testar se o método funciona e incrementar a escolha de pedido / terminar a entrega
-                }
-                // ou, se é Vendor, exibir menu respectivo
-                else if (isVendedor()) {
+                } else if (isVendedor()) {
                     MenuPedido menu = new MenuPedido();
                     menu.exibirRestaurantes();
                     menu.selecionaRestaurante().mostraCardapio();
@@ -59,11 +59,13 @@ public class Fluxo {
 
         if (resposta == 1) {
             System.out.println("Você tem um Restaurante ou quer fazer um pedido?\n1. Restaurante    2. Cliente");
+
             int opcao = scan.nextInt();
 
             if (opcao == 1) {
                 criarVendorRestauranteConsole();
             } else if (opcao == 2) {
+                criarClienteConsole();
                 MenuPedido menu = new MenuPedido();
                 criarCliente();
                 menu.exibirRestaurantes();
@@ -71,6 +73,7 @@ public class Fluxo {
             } else {
                 System.out.println("Opção inválida!");
             }
+
         }
     }
 
@@ -79,25 +82,47 @@ public class Fluxo {
     }
     public void criarVendorRestauranteConsole() {
         Scanner input = new Scanner(System.in);
+
+        } else if (resposta == 2) {
+            System.out.println("Fechando programa");
+        } else {
+            System.out.println("Opção inválida!");
+        }
+    }
+
+    public void criarClienteConsole() {
+
         Cadastro cadastro = new Cadastro();
 
         // Zera variável restaurante para poder ser reutilizada
-        Restaurante restaurante = null;
-        Vendor vendor = null;
+        Client client=null;
 
+        Cadastro.cadastrarCliente();
+    }
+
+    public void criarVendorRestauranteConsole() {
+        Scanner input = new Scanner(System.in);
+        Cadastro cadastro = new Cadastro();
+
+        // Cadastrar o Vendor
         Cadastro.cadastrarVendor();
+        Vendor vendor = cadastro.buscarUltimoVendorCriado();
+
+        // Cadastrar o Restaurante
         Cadastro.cadastrarRestaurante();
+        Restaurante restaurante = cadastro.buscarUltimoRestauranteCriado();
 
-        System.out.println("Quer adicionar quantos itens ao cardápio? ");
+        // Adicionar o Restaurante ao Vendor
+        vendor.adicionarRestaurante(restaurante);
+        SalvarDados.salvarRestaurante(restaurante);
+
+        // Adicionar itens ao cardápio
+        System.out.println("Quantos itens você deseja adicionar ao cardápio? ");
         int quantidadeItens = input.nextInt();
+        input.nextLine(); // Limpar o buffer do scanner
 
-        // Pega o último restaurante e armazena em restaurante
-        restaurante = cadastro.buscarUltimoRestauranteCriado();
-        vendor = cadastro.buscarUltimoVendorCriado();
-
-        // Vincula o vendor recém-criado ao restaurante recém-criado
-        vendor.AdicionarRestaurante(restaurante);
-
+        restaurante.pedeItensAdicionarLista(quantidadeItens);
+        SalvarDados.salvarCardapioRestaurante(restaurante);
 
         // Cria itens e guarda na lista, em seguida mostra o cardápio do restaurante
         restaurante.PedeItensAdicionarLista(quantidadeItens);
@@ -107,15 +132,16 @@ public class Fluxo {
         SalvarDados.salvarRestaurante(restaurante);
 
         // Printa cardápio
+
+        // Mostrar o cardápio do restaurante
+        System.out.println("Cardápio do restaurante " + restaurante.getNomeRestaurante() + ":");
+
         restaurante.mostraCardapio();
 
         System.out.println("Você cadastrou seu restaurante, seu perfil junto e seu cardápio com sucesso");
-        // TODO: Área de teste para verificar se está tudo ok
-
-        // Printa informações do restaurante para testar se está tudo ok
-        System.out.println(restaurante);
-        // TODO: Fim da área de teste
+        System.out.println(restaurante); // Área de teste para verificar se está tudo ok
     }
+        // TODO: Fim da área de teste
 
     private boolean isVendedor() {
         return true;

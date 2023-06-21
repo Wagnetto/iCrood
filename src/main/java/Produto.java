@@ -11,7 +11,7 @@ public class Produto {
     private double valor;
 
     // Construtor
-    public Produto(UUID idProduto, String nomeProduto, String descricaoProduto, double valor) {
+    public Produto(String nomeProduto, String descricaoProduto, double valor) {
         this.idProduto = idProduto;
         this.nomeProduto = nomeProduto;
         this.descricaoProduto = descricaoProduto;
@@ -58,7 +58,8 @@ public class Produto {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("         \n<Produto>\n");
+        sb.append("-------------------------------");
+        sb.append("         \nProduto\n");
         sb.append("Nome do Produto: ").append(nomeProduto).append("\n");
         sb.append("| Descricao do Produto: ").append(descricaoProduto).append("\n");
         sb.append("| Valor: R$").append(valor).append("\n");

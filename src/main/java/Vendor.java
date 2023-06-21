@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.List;
 
-//Classe do vendedor, pode realisar compras e greneciar seus estabelecimentos
+//Classe do vendedor, pode realizar compras e gerenciar seus estabelecimentos
 public class Vendor extends User {
     private int idVendor;
     private List<Restaurante> estabelecimentos;
@@ -18,14 +18,15 @@ public class Vendor extends User {
     }
 
     // Métodos
-    public void AdicionarRestaurante(Restaurante restauranteX){
-        restauranteX.setProprietario(this);
-        estabelecimentos.add(restauranteX);
+    public void adicionarRestaurante(Restaurante restaurante) {
+        restaurante.setProprietario(this);
+        estabelecimentos.add(restaurante);
     }
-    public void RemoverRestaurante(Restaurante restauranteX) {
-        restauranteX.setProprietario(null);
-        estabelecimentos.remove(restauranteX);
+    public void removerRestaurante(Restaurante restaurante) {
+        restaurante.setProprietario(null);
+        estabelecimentos.remove(restaurante);
     }
+
     @Override
     public String toString() {
         StringBuilder vendorInfo = new StringBuilder();
@@ -38,14 +39,17 @@ public class Vendor extends User {
         vendorInfo.append("\nTelefone: ").append(getNumeroTelefone());
         vendorInfo.append("\nE-mail: ").append(getEmail());
         vendorInfo.append("\nSaldo: ").append(getSaldoCarteira());
+        vendorInfo.append("\nSeu ID é: ").append(getIdVendor());
         vendorInfo.append("\n-----------------------------");
-        vendorInfo.append("\nRestaurantes Relacionados:\n");
-        for (Restaurante restaurante : estabelecimentos) {
-            vendorInfo.append(restaurante.toString());
-            vendorInfo.append("\n");
-        }
+//        vendorInfo.append("\nRestaurantes Relacionados:\n");
+//        for (Restaurante restaurante : estabelecimentos) {
+//            vendorInfo.append(restaurante.toString());
+//            vendorInfo.append("\n");
+//        }
         vendorInfo.append("\n-----------------------------");
+      
         vendorInfo.append("ID Dono: ").append(getIdVendor());
+
         return vendorInfo.toString();
     }
 }

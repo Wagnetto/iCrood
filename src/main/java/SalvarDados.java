@@ -23,6 +23,7 @@ public class SalvarDados {
             System.err.println("Erro ao salvar a entrega: " + e.getMessage());
         }
     }
+
     public static void salvarCliente(Client client) {
         try (PrintWriter writer = new PrintWriter(new FileWriter("Client.data", true))) {
             writer.println(client.toString());
@@ -32,6 +33,7 @@ public class SalvarDados {
             System.err.println("Erro ao salvar o cliente: " + e.getMessage());
         }
     }
+
     public static void salvarVendor(Vendor vendor) {
         try (PrintWriter writer = new PrintWriter(new FileWriter("Vendor.data", true))) {
             writer.println(vendor.toString());
