@@ -107,15 +107,13 @@ public class Restaurante {
         }
     }
     public void mostraCardapio() {
-        System.out.println("Cardápio do restaurante " + nomeRestaurante + ":");
         for (Produto produto : cardapio) {
-            System.out.println(produto);
+            System.out.println(produto.toString());
         }
-    }//Mostra o cardápio do restaurante selecionado
+    }
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("\n--------------------------------------");
         sb.append("Nome do Restaurante: ").append(nomeRestaurante).append("\n");
         sb.append("ID: ").append(idRestaurante).append("\n");
         sb.append("Endereço: ").append(endereco).append("\n");

@@ -1,56 +1,48 @@
 import java.util.ArrayList;
 import java.util.List;
+//Classe do carrinho de compras
+public class  CarrinhoDeCompras {
+    //Atributos
+    private static List<Produto> itens;
 
-// Classe do carrinho de compras
-public class CarrinhoDeCompras {
-    // Atributos
-    private List<Produto> itens;
-
-    // Construtor
+    //Métodos
     public CarrinhoDeCompras() {
         this.itens = new ArrayList<>();
-    }
+    }//Lista do carrinho de compras
 
-    // Adicionar um produto ao carrinho de compras
     public void adicionarItem(Produto produto) {
         itens.add(produto);
-    }
+    }//Adição de novos produtos
 
-    // Remover um produto do carrinho de compras
     public void removerItem(Produto produto) {
         itens.remove(produto);
-    }
+    }//Remoção de produtos já existentes no Carrinho de compras (ArrayList)
 
-    // Limpar o carrinho de compras
     public void limparCarrinho() {
         itens.clear();
-    }
+    }//Caso usuário não queira nada no carrinho de compras
 
-    // Obter a lista de itens do carrinho de compras
     public List<Produto> getItens() {
         return itens;
     }
 
-    // Calcular o preço total dos produtos no carrinho de compras
-    public double calcularPrecoTotal() {
+    public static double calcularPrecoTotal(List<Produto> produtos) {
         double precoTotal = 0.0;
 
-        for (Produto produto : itens) {
+        for (Produto produto : produtos) {
             precoTotal += produto.getValor();
         }
-
         return precoTotal;
-    }
+    }//Calcula todos os produtos presentes no carrinho
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("---------------------------------\n");
         sb.append("Carrinho de compras:\n\n");
         for (Produto produto : itens) {
             sb.append(produto.toString()).append("\n");
         }
-        sb.append("\nPreço total: R$").append(calcularPrecoTotal());
+        sb.append("\nPreço total: R$").append(calcularPrecoTotal(itens));
         return sb.toString();
     }
 }
