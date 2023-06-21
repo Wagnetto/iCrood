@@ -5,17 +5,8 @@ import java.util.Scanner;
 class MenuPedido {
     private Client cliente;
     private Restaurante restaurante;
-    private List<Restaurante> estabelecimentos;
-    private List<Produto> itens;
     private boolean entregue;
     private Vendor vendor;
-
-    public void MenuPedido(Client cliente, List<Restaurante> estabelecimentos, List<Produto> itens) {
-        this.cliente = cliente;
-        this.estabelecimentos = estabelecimentos;
-        this.itens = itens;
-        this.entregue = false;
-    }
 
     public void realizarEntrega(String cidade) {
         if (cidade.equalsIgnoreCase("Porto Alegre") || cidade.equalsIgnoreCase("POA")) {
@@ -32,9 +23,9 @@ class MenuPedido {
         }
     }
 
-    public void exibirRestaurantes() {
-        for (Restaurante estabelecimento : estabelecimentos) {
-            System.out.println(estabelecimento.getNomeRestaurante());
+    public void exibirRestaurantes() { // exibe todos os restaurantes puxando de Cadastro
+        for (Restaurante restaurante : Cadastro.getRestaurantes()) {
+            System.out.println(restaurante.getNomeRestaurante());
         }
     }
 
@@ -45,8 +36,10 @@ class MenuPedido {
         System.out.println("Entre o número do Restaurante: ");
         entrada = input.nextInt();
 
-        if (entrada >= 1 && entrada <= estabelecimentos.size()) {
-            Restaurante restauranteSelecionado = estabelecimentos.get(entrada - 1);
+        List<Restaurante> restaurantes = Cadastro.getRestaurantes();
+
+        if (entrada >= 1 && entrada <= restaurantes.size()) {
+            Restaurante restauranteSelecionado = restaurantes.get(entrada - 1);
             System.out.println("Restaurante selecionado: " + restauranteSelecionado.getNomeRestaurante());
             this.restaurante = restauranteSelecionado;
             return restauranteSelecionado;
