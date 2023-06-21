@@ -20,7 +20,6 @@ public class Restaurante {
     }
 
     // Getters e Setters
-
     public String getNomeRestaurante() {
         return nomeRestaurante;
     }
@@ -66,20 +65,12 @@ public class Restaurante {
     }
 
     // Métodos
-    public void AdicionarProdutoLista(String nomeProduto, String descricaoProduto, double valor){
-        // quando chamado, gera ID guarda em IDproduto
-        UUID idProduto = UUID.randomUUID();
-        // cria um objeto produto com os atributos de produto
-        Produto produto = new Produto(idProduto, nomeProduto, descricaoProduto, valor);
-        // adiciona à lista do restaurante Cardápio, a pergunta é como editar isso depois e onde vai ficar esse código
-        cardapio.add(produto);
-    }
-
-    public void PedeItensAdicionarLista(int quantidadeItens) {
+    public void pedeItensAdicionarLista(int quantidadeItens) {
         Scanner scan = new Scanner(System.in);
 
         for (int i = 0; i < quantidadeItens; i++) {
-            System.out.println("\nEntre com o nome do produto: ");
+            System.out.println("-------------------------------");
+            System.out.println("Entre com o nome do produto: ");
             String nomeProduto = scan.nextLine();
 
             System.out.println("Entre com a descrição do produto: ");
@@ -90,12 +81,14 @@ public class Restaurante {
 
             scan.nextLine(); // Limpa o buffer do scanner
 
-            AdicionarProdutoLista(nomeProduto, descricaoProduto, valorProduto);
+            adicionarProdutoLista(nomeProduto, descricaoProduto, valorProduto);
         }
     }
-
-
-    public void EditarCardapioRestaurante(int indexLista, String novoNomeProduto, String novaDescricaoProduto, double novoValor) {
+    public void adicionarProdutoLista(String nomeProduto, String descricaoProduto, double valor) {
+        Produto produto = new Produto(nomeProduto, descricaoProduto, valor);
+        cardapio.add(produto);
+    }
+    public void editarCardapioRestaurante(int indexLista, String novoNomeProduto, String novaDescricaoProduto, double novoValor) {
         if (indexLista >= 0 && indexLista < cardapio.size()) {
             Produto produto = cardapio.get(indexLista);
             produto.setNomeProduto(novoNomeProduto);
@@ -111,16 +104,16 @@ public class Restaurante {
         for (Produto produto : cardapio) {
             System.out.println(produto);
         }
-    }//Mostra o cardápio do restaurante selecionado
+    }
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("\n--------------------------------------");
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n--------------------------------------\n");
         sb.append("Nome do Restaurante: ").append(nomeRestaurante).append("\n");
         sb.append("ID: ").append(idRestaurante).append("\n");
         sb.append("Endereço: ").append(endereco).append("\n");
         sb.append("CEP: ").append(cep).append("\n");
-        sb.append("Propietário: ").append(proprietario.getNome()).append("\n");
+        sb.append("Proprietário: ").append(proprietario.getNome()).append("\n");
         sb.append("Cardápio do restaurante ").append(nomeRestaurante).append(": ").append(cardapio);
         return sb.toString();
     }

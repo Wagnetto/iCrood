@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.List;
 
-//Classe do vendedor, pode realisar compras e greneciar seus estabelecimentos
+//Classe do vendedor, pode realizar compras e gerenciar seus estabelecimentos
 public class Vendor extends User {
     private int idVendor;
     private List<Restaurante> estabelecimentos;
@@ -18,14 +18,15 @@ public class Vendor extends User {
     }
 
     // Métodos
-    public void AdicionarRestaurante(Restaurante restauranteX){
-        restauranteX.setProprietario(this);
-        estabelecimentos.add(restauranteX);
+    public void adicionarRestaurante(Restaurante restaurante) {
+        restaurante.setProprietario(this);
+        estabelecimentos.add(restaurante);
     }
-    public void RemoverRestaurante(Restaurante restauranteX) {
-        restauranteX.setProprietario(null);
-        estabelecimentos.remove(restauranteX);
+    public void removerRestaurante(Restaurante restaurante) {
+        restaurante.setProprietario(null);
+        estabelecimentos.remove(restaurante);
     }
+
     @Override
     public String toString() {
         StringBuilder vendorInfo = new StringBuilder();
