@@ -129,9 +129,12 @@ public class Cadastro {
 
         // atribui random ID como inteiro, para passar ao construtor
         int idVendor = random.nextInt(999) + 100;
-
+        Vendor vendor = new Vendor(nomeVendor, cpfVendor,dataNascimentoLocalDate , enderecoVendor, numeroTelefoneVendor, emailVendor, 0, idVendor, new ArrayList<Restaurante>());
+        //printa dados Vendor
+        System.out.println(vendor.toString());
         // Atribui os dados instanciando um Vendor e adicionando esse Vendor à lista de vendors
-        vendors.add(new Vendor(nomeVendor, cpfVendor,dataNascimentoLocalDate , enderecoVendor, numeroTelefoneVendor, emailVendor, 0, idVendor, new ArrayList<Restaurante>()));
+        vendors.add(vendor);
+
     }
 
     public static void cadastrarRestaurante() {
