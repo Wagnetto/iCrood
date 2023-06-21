@@ -95,7 +95,7 @@ public class Restaurante {
     }
 
 
-    public void EditarListaRestaurante(int indexLista, String novoNomeProduto, String novaDescricaoProduto, double novoValor) {
+    public void EditarCardapioRestaurante(int indexLista, String novoNomeProduto, String novaDescricaoProduto, double novoValor) {
         if (indexLista >= 0 && indexLista < cardapio.size()) {
             Produto produto = cardapio.get(indexLista);
             produto.setNomeProduto(novoNomeProduto);

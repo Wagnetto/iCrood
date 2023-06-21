@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
-
 public class SalvarDados {
     private static int idCliente;
     private static int idRestaurante;
@@ -25,16 +24,46 @@ public class SalvarDados {
         }
     }
 
-    public static void salvarID(int idCliente, int idVendor, int idRestaurante) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("idList.data", true))) {
-            writer.println("ID Cliente: " + idCliente);
-            writer.println("ID Vendor: " + idVendor);
-            writer.println("ID Restaurante: " + idRestaurante);
-            writer.println();
+    public static void salvarCliente(Client client) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("Client.data", true))) {
+            writer.println(client.toString());
             writer.flush();
-            System.out.println("IDs salvos com sucesso!");
+            System.out.println("Cliente salvo com sucesso!");
         } catch (IOException e) {
-            System.err.println("Erro ao salvar IDs: " + e.getMessage());
+            System.err.println("Erro ao salvar o cliente: " + e.getMessage());
+        }
+    }
+
+    public static void salvarVendor(Vendor vendor) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("Vendor.data", true))) {
+            writer.println(vendor.toString());
+            writer.flush();
+            System.out.println("Vendedor salvo com sucesso!");
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar o vendedor: " + e.getMessage());
+        }
+    }
+
+    public static void salvarRestaurante(Restaurante restaurante) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("Restaurante.data", true))) {
+            writer.println(restaurante.toString());
+            writer.flush();
+            System.out.println("Restaurante salvo com sucesso!");
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar o restaurante: " + e.getMessage());
+        }
+    }
+
+    public static void salvarCardapioRestaurante(Restaurante restaurante) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("CardapioRestaurante.data", true))) {
+            writer.println("Cardapio do restaurante " + restaurante.getNomeRestaurante() + ":");
+            for (Produto produto : restaurante.getCardapio()) {
+                writer.println(produto.toString());
+            }
+            writer.flush();
+            System.out.println("Cardápio do restaurante salvo com sucesso!");
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar o cardápio do restaurante: " + e.getMessage());
         }
     }
 }

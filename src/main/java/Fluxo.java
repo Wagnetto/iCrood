@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Fluxo {
@@ -19,19 +20,16 @@ public class Fluxo {
             System.out.println("Digite o ID para procurar o cadastro:");
             int id = scan.nextInt();
 
-            if (Cadastro.procuraCadastro(id)) {
+            if (cadastro.procuraCadastro(id, Arrays.asList("Client.data", "Vendor.data"))) {
                 System.out.println("Cadastro encontrado!");
 
-                // VALIDA se é cliente POR ID, se for, bora gastar:
                 if (isCliente()) {
                     MenuPedido menu = new MenuPedido();
                     menu.exibirRestaurantes();
                     menu.selecionaRestaurante().mostraCardapio();
 
                     // TODO: Testar se o método funciona e incrementar a escolha de pedido / terminar a entrega
-                }
-                // ou, se é Vendor, exibir menu respectivo
-                else if (isVendedor()) {
+                } else if (isVendedor()) {
                     MenuPedido menu = new MenuPedido();
                     menu.exibirRestaurantes();
                     menu.selecionaRestaurante().mostraCardapio();
@@ -55,13 +53,15 @@ public class Fluxo {
         int resposta = scan.nextInt();
 
         if (resposta == 1) {
-//            Cadastro.cadastrarPessoa();
+
+          //Cadastro.cadastrarPessoa();
             System.out.println("Você tem um Restaurante ou quer fazer um pedido?\n1. Restaurante    2. Cliente");
             int opcao = scan.nextInt();
 
             if (opcao == 1) {
                 cadastrarVendorRestaurante();
             } else if (opcao == 2) {
+                criarClienteConsole();
                 MenuPedido menu = new MenuPedido();
                 menu.exibirRestaurantes();
                 menu.selecionaRestaurante().mostraCardapio();
@@ -69,12 +69,11 @@ public class Fluxo {
                 System.out.println("Opção inválida!");
             }
         } else if (resposta == 2) {
-
+            //Fecha o programa
         } else {
             System.out.println("Opção inválida!");
         }
     }
-
     public void cadastrarVendorRestaurante() {
         Scanner input = new Scanner(System.in);
         Cadastro cadastro = new Cadastro();
