@@ -53,12 +53,13 @@ public class Fluxo {
         int resposta = scan.nextInt();
 
         if (resposta == 1) {
-            Cadastro.cadastrarPessoa();
-            System.out.println("Cadastrar um restaurante ou quer fazer um pedido?\n1. Restaurante    2. Pedido");
+
+          //Cadastro.cadastrarPessoa();
+            System.out.println("Você tem um Restaurante ou quer fazer um pedido?\n1. Restaurante    2. Cliente");
             int opcao = scan.nextInt();
 
             if (opcao == 1) {
-                criarVendorRestauranteConsole();
+                cadastrarVendorRestaurante();
             } else if (opcao == 2) {
                 criarClienteConsole();
                 MenuPedido menu = new MenuPedido();
@@ -73,18 +74,7 @@ public class Fluxo {
             System.out.println("Opção inválida!");
         }
     }
-
-    public void criarClienteConsole() {
-        Scanner input = new Scanner(System.in);
-        Cadastro cadastro = new Cadastro();
-
-        // Zera variável restaurante para poder ser reutilizada
-        Client client=null;
-
-        Cadastro.cadastrarCliente();
-    }
-
-    public void criarVendorRestauranteConsole() {
+    public void cadastrarVendorRestaurante() {
         Scanner input = new Scanner(System.in);
         Cadastro cadastro = new Cadastro();
 
@@ -92,8 +82,9 @@ public class Fluxo {
         Restaurante restaurante = null;
         Vendor vendor = null;
 
-        Cadastro.cadastrarVendor();
-        Cadastro.cadastrarRestaurante();
+        Cadastro.cadastrarVendor(); //OK
+        System.out.println("Cadastre agora seu restaurante: ");
+        Cadastro.cadastrarRestaurante(); //OK
 
         System.out.println("Quer adicionar quantos itens ao cardápio? ");
         int quantidadeItens = input.nextInt();

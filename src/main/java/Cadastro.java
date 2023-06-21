@@ -134,7 +134,6 @@ public class Cadastro {
 
         // atribui random ID como inteiro, para passar ao construtor
         int idVendor = random.nextInt(999) + 100;
-
         Vendor vendor = new Vendor(nomeVendor, cpfVendor, dataNascimentoLocalDate, enderecoVendor, numeroTelefoneVendor, emailVendor, 0, idVendor, new ArrayList<>());
 
         //Salva dados na lista
@@ -143,6 +142,7 @@ public class Cadastro {
 
         // Printa mensagem e mostra ID
         System.out.println("Conta criada com sucesso! Seu ID é: " + idVendor);
+
     }
 
     public static void cadastrarRestaurante() {

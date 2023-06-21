@@ -38,14 +38,15 @@ public class Vendor extends User {
         vendorInfo.append("\nTelefone: ").append(getNumeroTelefone());
         vendorInfo.append("\nE-mail: ").append(getEmail());
         vendorInfo.append("\nSaldo: ").append(getSaldoCarteira());
+        vendorInfo.append("\nSeu ID é: ").append(getIdVendor());
         vendorInfo.append("\n-----------------------------");
-        vendorInfo.append("\nRestaurantes Relacionados:\n");
-        for (Restaurante restaurante : estabelecimentos) {
-            vendorInfo.append(restaurante.toString());
-            vendorInfo.append("\n");
-        }
+//        vendorInfo.append("\nRestaurantes Relacionados:\n");
+//        for (Restaurante restaurante : estabelecimentos) {
+//            vendorInfo.append(restaurante.toString());
+//            vendorInfo.append("\n");
+//        }
         vendorInfo.append("\n-----------------------------");
-        vendorInfo.append("ID: ").append(getIdVendor());
+
         return vendorInfo.toString();
     }
 }
