@@ -6,7 +6,7 @@ public class Main {
         Fluxo fluxo = new Fluxo();
         // perguntar ja tem cadastro?
         fluxo.exibeTelaInicial();
-        fluxo.jaTemCadastro();
+//        fluxo.jaTemCadastro();
         fluxo.exibirFluxo();
     }
 }
