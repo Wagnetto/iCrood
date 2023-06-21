@@ -1,46 +1,74 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Cadastro {
+    private int idCliente;
     private static List<Client> clientes = new ArrayList<>();
     private static List<Vendor> vendors = new ArrayList<>();
     private static List<Restaurante> restaurantes = new ArrayList<>();
     Scanner input = new Scanner(System.in);
 
 
-    // Getters
 
-    public static List<Restaurante> getRestaurantes() {
-        return restaurantes;
+    // Getters
+    public int getIdCliente() {
+        return idCliente;
     }
 
     public static List<Client> getClientes() {
         return clientes;
-    }
-    public static List<Vendor> getVendors() {
-        return vendors;
     }
 
     public int getClientesTamanho() {
         return clientes.size();
     }
 
+    public static List<Vendor> getVendors() {
+        return vendors;
+    }
+
     public int getVendorsTamanho() {
         return vendors.size();
     }
 
+    public static List<Restaurante> getRestaurantes() {
+        return restaurantes;
+    }
     // Métodos
 
-    public boolean jaTemCadastro() {
-        System.out.println("Bem-vindo!"
-                + "Ja possui um cadastro?\n"
-                + "1. Sim          2. Não");
-        if (input.nextInt() == 1) {
-            return true;
+    public static boolean procuraCadastro(int id) {
+        try (Scanner fileScanner = new Scanner(new File("idList.data"))) {
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+                if ((line.startsWith("ID Cliente:") || line.startsWith("ID Vendor:")) && line.contains(String.valueOf(id))) {
+                    return true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("ID não encontrado: " + e.getMessage());
         }
         return false;
+    }
+
+    public static void cadastrarPessoa() {//Método de entrada
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Que bom que quer criar uma conta!");
+        System.out.println("E para qual funcionalidade teria essa conta?");
+        System.out.println("1. Gerenciar estabelecimentos    2. Cliente");
+
+        int opcao = scanner.nextInt();
+
+        if (opcao == 1) {
+            cadastrarVendor();
+        } else if (opcao == 2) {
+            cadastrarCliente();
+        } else {
+            System.out.println("Não foi possível completar a ação, opção não existente!");
+        }
     }
 
     public static void cadastrarCliente() {
@@ -51,28 +79,26 @@ public class Cadastro {
         String nome = "", cpf = "", dataNascimento = "", endereco = "", numeroTelefone = "", email = "";
 
         // armazena eles nas variaveis
-        System.out.println("Entre seu Nome: ");
+        System.out.println("Cadastro de Cliente");
+        System.out.println("-----------------------");
+        System.out.println("Nome: ");
         nome = scan.nextLine();
-        System.out.println("Entre seu CPF: ");
+        System.out.println("CPF: ");
         cpf = scan.nextLine();
-
 
         LocalDate dataNascimentoLocalDate = pedirDataNascimentoMostrarErro();
 
-        System.out.println("Entre seu endereço: ");
+        System.out.println("Endereço: ");
         endereco = scan.nextLine();
-        System.out.println("Entre seu Numero de Telefone: ");
+        System.out.println("Número de Telefone: ");
         numeroTelefone = scan.nextLine();
-        System.out.println("Entre seu E-mail: ");
+        System.out.println("E-mail: ");
         email = scan.nextLine();
 
-
-        // atribui random ID como inteiro, para passar ao construtor
-        int idCliente = id.nextInt(999) + 201;
-
+        int idCliente = id.nextInt(9999) + 1000;
         // Atribui os dados instanciando um Cliente e adicionando esse cliente à lista de clientes
         clientes.add(new Client(nome, cpf, dataNascimentoLocalDate, endereco, numeroTelefone, email, 0, idCliente));
-
+        SalvarDados.salvarID(idCliente, 0, 0);
         // Printa mensagem e mostra ID
         System.out.println("Conta criada com sucesso! Seu ID é: " + idCliente);
 
@@ -85,44 +111,47 @@ public class Cadastro {
         // Guarda todos atributos que serão usados
         String nomeVendor = "", cpfVendor = "", dataNascimentoVendor = "", enderecoVendor = "", numeroTelefoneVendor = "", emailVendor = "";
 
-        // Armazena eles nas variaveis
-        System.out.println("Entre seu Nome: ");
+        System.out.println("Cadastro de Vendedor");
+        System.out.println("-----------------------");
+        System.out.println("Nome: ");
         nomeVendor = scan.nextLine();
-        System.out.println("Entre seu CPF: ");
+        System.out.println("CPF: ");
         cpfVendor = scan.nextLine();
-
+        
         LocalDate dataNascimentoLocalDate = pedirDataNascimentoMostrarErro();
 
-        System.out.println("Entre seu endereço: ");
+        System.out.println("Endereço: ");
         enderecoVendor = scan.nextLine();
-        System.out.println("Entre seu Numero de Telefone: ");
+        System.out.println("Número de Telefone: ");
         numeroTelefoneVendor = scan.nextLine();
-        System.out.println("Entre seu E-mail: ");
+        System.out.println("E-mail: ");
         emailVendor = scan.nextLine();
 
         // atribui random ID como inteiro, para passar ao construtor
-        int idVendor = random.nextInt(200) + 1;
+        int idVendor = random.nextInt(999) + 100;
 
         // Atribui os dados instanciando um Vendor e adicionando esse Vendor à lista de vendors
         vendors.add(new Vendor(nomeVendor, cpfVendor,dataNascimentoLocalDate , enderecoVendor, numeroTelefoneVendor, emailVendor, 0, idVendor, new ArrayList<Restaurante>()));
     }
 
     public static void cadastrarRestaurante() {
-        Random random = new Random();
+        Random id = new Random();
         Scanner scan = new Scanner(System.in);
 
         // Guarda todos atributos que serão usados
         String nomeRestaurante = "", endereco = "", cep = "";
-
-        System.out.println("\nEntre o nome de seu restaurante: ");
-        nomeRestaurante = scan.nextLine();
-        System.out.println("Entre o CEP de seu restaurante: ");
-        cep = scan.nextLine();
-        System.out.println("Entre seu endereço: ");
+        
+        System.out.println("Cadastro de Restaurante");
+        System.out.println("-----------------------");
+        System.out.println("Nome: ");
+        nomeRestaurante= scan.nextLine();
+        System.out.println("Endereço: ");
         endereco = scan.nextLine();
+        System.out.println("CEP: ");
+        cep = scan.nextLine();
 
         // atribui random ID como inteiro, para passar ao construtor
-        int idRestaurante = random.nextInt(1500) + 1000;
+        int idRestaurante = id.nextInt(99) + 1;
 
         // Atribui os dados instanciando um Restaurante e adicionando esse Restaurante à lista de restaurantes
         restaurantes.add(new Restaurante(nomeRestaurante, idRestaurante, endereco, cep, new ArrayList<>()));
@@ -167,39 +196,6 @@ public class Cadastro {
         return null; // Caso a lista esteja vazia ou não haja restaurante válido
     }
 
-    public boolean buscarClientePorId(int idCliente) {
-        for (Client cliente : clientes) {
-            if (cliente.getIdCliente() == idCliente) {
-                System.out.println(cliente.toString());
-                return true; // Encerra o loop assim que encontrar o cliente
-            }
-        }
-        System.out.println("Cliente não encontrado.");
-        return false;
-    }
-
-    public static boolean buscarVendorPorId(int idVendor) {
-        for (Vendor vendor : vendors) {
-            if (vendor.getIdVendor() == idVendor) {
-                System.out.println(vendor.toString());
-                return true; // Encerra o loop assim que encontrar o cliente
-            }
-        }
-        System.out.println("Vendor não encontrado.");
-        return false;
-    }
-
-    public static boolean buscarRestaurantePorId(int idRestaurante) {
-        for (Restaurante restaurante : restaurantes) {
-            if (restaurante.getIdRestaurante() == idRestaurante) {
-                System.out.println(restaurante.toString());
-                return true;
-            }
-        }
-        System.out.println("Restaurante não encontrado.");
-        return false;
-    }
-
     public static LocalDate formatarDataRecebida(String dataRecebida) {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return LocalDate.parse(dataRecebida, formatador);
@@ -227,4 +223,3 @@ public class Cadastro {
         return null;
     }
 }
-

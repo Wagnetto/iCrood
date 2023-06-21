@@ -4,7 +4,7 @@ import java.util.List;
 //Classe do carrinho de compras
 public class CarrinhoDeCompras {
     //Atributos
-    private List<Produto> itens;
+    private static List<Produto> itens;
 
     //Métodos
     public CarrinhoDeCompras() {
@@ -25,7 +25,7 @@ public class CarrinhoDeCompras {
 
     public List<Produto> getItens() {
         return itens;
-    }//Getter da classe
+    }
 
     public static double calcularPrecoTotal(List<Produto> produtos) {
         double precoTotal = 0.0;
@@ -33,12 +33,17 @@ public class CarrinhoDeCompras {
         for (Produto produto : produtos) {
             precoTotal += produto.getValor();
         }
-
         return precoTotal;
-    }
+    }//Calcula todos os produtos presentes no carrinho
 
     @Override
     public String toString() {
-        return "Carrinho de compras:\n" + itens.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Carrinho de compras:\n\n");
+        for (Produto produto : itens) {
+            sb.append(produto.toString()).append("\n");
+        }
+        sb.append("\nPreço total: R$").append(calcularPrecoTotal(itens));
+        return sb.toString();
     }
 }

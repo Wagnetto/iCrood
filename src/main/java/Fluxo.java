@@ -1,64 +1,77 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Fluxo {
     // Métodos para tela Console
     public void exibeTelaInicial() {
-        System.out.println("█ █▀▀ █▀█ █▀█ █▀█ █▀▄\n" +
-                            "█ █▄▄ █▀▄ █▄█ █▄█ █▄▀");
+        System.out.println("█ █▀▀ █▀█ █▀█ █▀█ █▀▄");
+        System.out.println("█ █▄▄ █▀▄ █▄█ █▄█ █▄▀");
         System.out.println("=====================");
     }
-    public boolean jaTemCadastro() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Bem-vindo!"
-                + "Ja possui um cadastro?\n"
-                + "1. Sim          2. Não");
-        if (input.nextInt() == 1) {
-            return true;
+
+    public void exibirFluxo() {
+        Scanner scan = new Scanner(System.in);
+        Cadastro cadastro = new Cadastro();
+
+        System.out.println("Bem-vindo! Já possui um cadastro?\n1. Sim          2. Não");
+        int resposta = scan.nextInt();
+
+        if (resposta == 1) {
+            System.out.println("Digite o ID para procurar o cadastro:");
+            int id = scan.nextInt();
+
+            if (Cadastro.procuraCadastro(id)) {
+                System.out.println("Cadastro encontrado!");
+
+                // VALIDA se é cliente POR ID, se for, bora gastar:
+                if (isCliente()) {
+                    MenuPedido menu = new MenuPedido();
+                    menu.exibirRestaurantes();
+                    menu.selecionaRestaurante().mostraCardapio();
+
+                    // TODO: Testar se o método funciona e incrementar a escolha de pedido / terminar a entrega
+                }
+                // ou, se é Vendor, exibir menu respectivo
+                else if (isVendedor()) {
+                    MenuPedido menu = new MenuPedido();
+                    menu.exibirRestaurantes();
+                    menu.selecionaRestaurante().mostraCardapio();
+                } else {
+                    System.out.println("Parâmetro não existente!");
+                }
+            } else {
+                System.out.println("Cadastro não encontrado.");
+                criarConta();
+            }
+        } else if (resposta == 2) {
+            criarConta();
+        } else {
+            System.out.println("Opção inválida!");
         }
-        return false;
     }
 
-    public void exibirFluxo(boolean entradaCadastradoOuNao) {
-        Cadastro cadastro = new Cadastro();
-        Scanner input = new Scanner(System.in);
+    public void criarConta() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Deseja criar uma conta?\n1. Sim       2. Não");
+        int resposta = scan.nextInt();
 
-        if (entradaCadastradoOuNao = true){
+        if (resposta == 1) {
+            Cadastro.cadastrarPessoa();
+            System.out.println("Você tem um Restaurante ou quer fazer um pedido?\n1. Restaurante    2. Cliente");
+            int opcao = scan.nextInt();
 
-            System.out.println("Entre seu ID: ");
-            int idInserido = input.nextInt();
-            // VALIDA se é cliente POR ID, se for, bora gastar:
-            if (cadastro.buscarClientePorId(idInserido)) { // está funcionando
-                MenuPedido menu = new MenuPedido();
-                menu.exibirRestaurantes();
-                menu.selecionaRestaurante().mostraCardapio(); // da pra selecionar o restaurante mas não foi adicionado cardapio em restaurante teste
-
-
-                // TODO testar se metodo funciona e incrementar escolha de pedido / terminar entrega logo após
-            }
-            // ou, se é Vendor, exibir menu respectivo
-            else if (!Cadastro.buscarVendorPorId(idInserido)) {
-                System.out.println("ID não encontrado, deseja criar outra conta?");
-
-            }
-            //TODO exibirMenuVendor() ? a ser criadote
-        } else {
-            //se não tem uma conta:
-            //TODO terminar este fluxo, conectando com as funções de cadastro
-            System.out.println("Você tem um Restaurante ou quer fazer um pedido?\n"
-                    + "1. Restaurante          2. Cliente");
-            int entrada;
-            entrada = input.nextInt();
-            if (entrada == 1) {
+            if (opcao == 1) {
                 criarVendorRestauranteConsole();
-            } else if (entrada == 2) {
+            } else if (opcao == 2) {
                 MenuPedido menu = new MenuPedido();
-                Cadastro.cadastrarCliente();
                 menu.exibirRestaurantes();
-                // TODO criar método para e caminho pra adicionar itens do cardapio de restaurante tal etc etc
+                menu.selecionaRestaurante().mostraCardapio();
+            } else {
+                System.out.println("Opção inválida!");
             }
+        } else if (resposta == 2) {
+
+        } else {
+            System.out.println("Opção inválida!");
         }
     }
 
@@ -66,63 +79,40 @@ public class Fluxo {
         Scanner input = new Scanner(System.in);
         Cadastro cadastro = new Cadastro();
 
-        // zera variavel restaurante para poder ser reutilizada
-        Restaurante restaurantex = null;
-        Vendor vendorX = null;
-        int quantidadeItens;
+        // Zera variável restaurante para poder ser reutilizada
+        Restaurante restaurante = null;
+        Vendor vendor = null;
+
         Cadastro.cadastrarVendor();
         Cadastro.cadastrarRestaurante();
 
-        // Adiciona Produtos ao Cardápio do Restaurante
         System.out.println("Quer adicionar quantos itens ao cardápio? ");
-        quantidadeItens = input.nextInt();
+        int quantidadeItens = input.nextInt();
 
-        // Pega ultimo restaurante e armazena em restauranteX
-        restaurantex = cadastro.buscarUltimoRestauranteCriado();
-        vendorX = cadastro.buscarUltimoVendorCriado();
+        // Pega o último restaurante e armazena em restaurante
+        restaurante = cadastro.buscarUltimoRestauranteCriado();
+        vendor = cadastro.buscarUltimoVendorCriado();
 
-        // vincula vendor recém criado ao restaurante recém criado
-        vendorX.AdicionarRestaurante(restaurantex);
+        // Vincula o vendor recém-criado ao restaurante recém-criado
+        vendor.AdicionarRestaurante(restaurante);
 
-        // cria itens e guarda na lista, logo após mostra cardápio de restaurante x
-        restaurantex.PedeItensAdicionarLista(quantidadeItens);
-        restaurantex.mostraCardapio();
+        // Cria itens e guarda na lista, em seguida mostra o cardápio do restaurante
+        restaurante.PedeItensAdicionarLista(quantidadeItens);
+        restaurante.mostraCardapio();
 
         System.out.println("Você cadastrou seu restaurante, seu perfil junto e seu cardápio com sucesso");
-        // TODO area de teste para verificar tudo ok
+        // TODO: Área de teste para verificar se está tudo ok
 
-        // printa informações do restaurante pra testar ver tudo ok
-        System.out.println(restaurantex);
-        // TODO fim area de teste
+        // Printa informações do restaurante para testar se está tudo ok
+        System.out.println(restaurante);
+        // TODO: Fim da área de teste
     }
 
-    public void verificaIdConsole(int idInserido) {
-        Cadastro cadastro = new Cadastro();
-        Scanner input = new Scanner(System.in);
-
-
-        if (cadastro.buscarClientePorId(idInserido)) {
-            System.out.println("Entre seu ID: ");
-            idInserido = input.nextInt();
-
-            //VALIDA se é cliente POR ID, se for, bora gastar:
-            if (cadastro.buscarClientePorId(idInserido)) {
-                MenuPedido menu = new MenuPedido();
-                menu.exibirRestaurantes();
-                menu.selecionaRestaurante().mostraCardapio();
-
-                // TODO testar se metodo funciona e incrementar escolha de pedido / terminar entrega logo após
-            }
-            // ou, se é Vendor, exibir menu respectivo
-            else if (!cadastro.buscarVendorPorId(idInserido)) {
-                System.out.println("ID não encontrado, deseja criar outra conta?");
-
-            }
-        }
+    private boolean isVendedor() {
+        return true;
     }
 
-    public void exibirEntradaInvalida(){
-        System.out.println("Entrada Inválida");
+    private boolean isCliente() {
+        return true;
     }
-
 }

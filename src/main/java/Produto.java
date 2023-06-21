@@ -1,8 +1,10 @@
 import java.util.UUID;
+import java.util.List;
 
 //Classe dos produtos oferecidos pelos restaurantes
 public class Produto {
     // Atributos
+    private List<Produto> itens;
     private UUID idProduto;
     private String nomeProduto;
     private String descricaoProduto;
@@ -48,13 +50,19 @@ public class Produto {
         this.valor = valor;
     }
 
-    @Override
-    public String toString() {
-        return "Produto{" +
-                " Nome do Produto: " + nomeProduto +
-                " | Descricao do Produto: " + descricaoProduto +
-                " | Valor: R$" + valor +
-                '}';
+    //Métodos
+    public void adicionarItem(Produto produto) {
+        itens.add(produto);
     }
 
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("         \n<Produto>\n");
+        sb.append("Nome do Produto: ").append(nomeProduto).append("\n");
+        sb.append("| Descricao do Produto: ").append(descricaoProduto).append("\n");
+        sb.append("| Valor: R$").append(valor).append("\n");
+        sb.append("\n");
+        return sb.toString();
+    }
 }

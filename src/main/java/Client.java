@@ -5,13 +5,9 @@ import java.util.List;
 public class Client extends User {
     // Atributos
     private CarrinhoDeCompras carrinho;
-
     private int idCliente;
     private List<Produto> compras;
 
-
-    //TODO RETIREI lista de compras no do construtor do cliente: , List<Produto> compras
-    // Construtor
     public Client(String nome, String cpf, LocalDate dataNascimento, String endereco, String numeroTelefone, String email, double saldoCarteira, int idCliente) {
         super(nome, cpf, dataNascimento, endereco, numeroTelefone, email, saldoCarteira);
         this.idCliente = idCliente;
@@ -82,27 +78,18 @@ public class Client extends User {
         System.out.println("Produto removido do carrinho com sucesso!");
     }
 
-    @Override
     public String toString() {
-        StringBuilder cliente = new StringBuilder();
-        cliente.append("\nCliente:\n");
-        cliente.append("Nome: ");
-        cliente.append(getNome());
-        cliente.append("\nCPF: ");
-        cliente.append(getCpf());
-        cliente.append("\nData de Nascimento: ");
-        cliente.append(getDataNascimento());
-        cliente.append("\nEndereço: ");
-        cliente.append(getEndereco());
-        cliente.append("\nTelefone: ");
-        cliente.append(getNumeroTelefone());
-        cliente.append("\nE-mail: ");
-        cliente.append(getEmail());
-        cliente.append("\nSaldo: ");
-        cliente.append(getSaldoCarteira());
-        cliente.append("\nSeu código de identificação é: ");
-        cliente.append(getIdCliente());
-        //todo incluir print do ID
-        return cliente.toString();
+        return "\n------------------------------------" +
+                "\n             Cliente:\n" +
+                "Nome: " + getNome() +
+                "\nCPF: " + getCpf() +
+                "\nData de Nascimento: " + getDataNascimento() +
+                "\nEndereço: " + getEndereco() +
+                "\nTelefone: " + getNumeroTelefone() +
+                "\nE-mail: " + getEmail() +
+                "\nSaldo: " + getSaldoCarteira() +
+                "\n------------------------------------" +
+                "\nSeu código é: " + getIdCliente() +
+                "\n------------------------------------";
     }
 }
