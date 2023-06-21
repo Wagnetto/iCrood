@@ -40,19 +40,22 @@ public class Cadastro {
     }
     // Métodos
 
-    public static boolean procuraCadastro(int id) {
-        try (Scanner fileScanner = new Scanner(new File("idList.data"))) {
-            while (fileScanner.hasNextLine()) {
-                String line = fileScanner.nextLine();
-                if ((line.startsWith("ID Cliente:") || line.startsWith("ID Vendor:")) && line.contains(String.valueOf(id))) {
-                    return true;
+    public static boolean procuraCadastro(int id, List<String> filenames) {
+        for (String filename : filenames) {
+            try (Scanner fileScanner = new Scanner(new File(filename))) {
+                while (fileScanner.hasNextLine()) {
+                    String line = fileScanner.nextLine();
+                    if ((line.startsWith("ID Cliente:") || line.startsWith("ID Vendor:")) && line.contains(String.valueOf(id))) {
+                        return true;
+                    }
                 }
+            } catch (FileNotFoundException e) {
+                System.err.println("Arquivo não encontrado: " + e.getMessage());
             }
-        } catch (FileNotFoundException e) {
-            System.err.println("ID não encontrado: " + e.getMessage());
         }
         return false;
     }
+
 
     public static void cadastrarPessoa() {//Método de entrada
         Scanner scanner = new Scanner(System.in);
@@ -95,10 +98,12 @@ public class Cadastro {
         System.out.println("E-mail: ");
         email = scan.nextLine();
 
+        // atribui random ID como inteiro, para passar ao construtor
         int idCliente = id.nextInt(9999) + 1000;
-        // Atribui os dados instanciando um Cliente e adicionando esse cliente à lista de clientes
-        clientes.add(new Client(nome, cpf, dataNascimentoLocalDate, endereco, numeroTelefone, email, 0, idCliente));
-        SalvarDados.salvarID(idCliente, 0, 0);
+        Client cliente = new Client(nome, cpf, dataNascimentoLocalDate, endereco, numeroTelefone, email, 0, idCliente);
+        //Salva dados na lista
+        clientes.add(cliente);
+        SalvarDados.salvarCliente(cliente);
         // Printa mensagem e mostra ID
         System.out.println("Conta criada com sucesso! Seu ID é: " + idCliente);
 
@@ -117,7 +122,7 @@ public class Cadastro {
         nomeVendor = scan.nextLine();
         System.out.println("CPF: ");
         cpfVendor = scan.nextLine();
-        
+
         LocalDate dataNascimentoLocalDate = pedirDataNascimentoMostrarErro();
 
         System.out.println("Endereço: ");
@@ -130,8 +135,14 @@ public class Cadastro {
         // atribui random ID como inteiro, para passar ao construtor
         int idVendor = random.nextInt(999) + 100;
 
-        // Atribui os dados instanciando um Vendor e adicionando esse Vendor à lista de vendors
-        vendors.add(new Vendor(nomeVendor, cpfVendor,dataNascimentoLocalDate , enderecoVendor, numeroTelefoneVendor, emailVendor, 0, idVendor, new ArrayList<Restaurante>()));
+        Vendor vendor = new Vendor(nomeVendor, cpfVendor, dataNascimentoLocalDate, enderecoVendor, numeroTelefoneVendor, emailVendor, 0, idVendor, new ArrayList<>());
+
+        //Salva dados na lista
+        vendors.add(vendor);
+        SalvarDados.salvarVendor(vendor);
+
+        // Printa mensagem e mostra ID
+        System.out.println("Conta criada com sucesso! Seu ID é: " + idVendor);
     }
 
     public static void cadastrarRestaurante() {
@@ -140,11 +151,11 @@ public class Cadastro {
 
         // Guarda todos atributos que serão usados
         String nomeRestaurante = "", endereco = "", cep = "";
-        
+
         System.out.println("Cadastro de Restaurante");
         System.out.println("-----------------------");
         System.out.println("Nome: ");
-        nomeRestaurante= scan.nextLine();
+        nomeRestaurante = scan.nextLine();
         System.out.println("Endereço: ");
         endereco = scan.nextLine();
         System.out.println("CEP: ");
@@ -154,7 +165,12 @@ public class Cadastro {
         int idRestaurante = id.nextInt(99) + 1;
 
         // Atribui os dados instanciando um Restaurante e adicionando esse Restaurante à lista de restaurantes
-        restaurantes.add(new Restaurante(nomeRestaurante, idRestaurante, endereco, cep, new ArrayList<>()));
+        Restaurante restaurante = new Restaurante(nomeRestaurante, idRestaurante, endereco, cep, new ArrayList<>());
+
+        //Salva dados do restaurante
+        restaurantes.add(restaurante);
+        SalvarDados.salvarRestaurante(restaurante);
+        SalvarDados.salvarCardapioRestaurante(restaurante);
     }
 
     public Restaurante buscarUltimoRestauranteCriado() {
