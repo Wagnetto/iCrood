@@ -87,36 +87,34 @@ public class Fluxo {
         Scanner input = new Scanner(System.in);
         Cadastro cadastro = new Cadastro();
 
-        // Zera variável restaurante para poder ser reutilizada
-        Restaurante restaurante = null;
-        Vendor vendor = null;
-
+        // Cadastrar o Vendor
         Cadastro.cadastrarVendor();
+        Vendor vendor = cadastro.buscarUltimoVendorCriado();
+
+        // Cadastrar o Restaurante
         Cadastro.cadastrarRestaurante();
+        Restaurante restaurante = cadastro.buscarUltimoRestauranteCriado();
 
-        System.out.println("Quer adicionar quantos itens ao cardápio? ");
-        int quantidadeItens = input.nextInt();
-
-        // Pega o último restaurante e armazena em restaurante
-        restaurante = cadastro.buscarUltimoRestauranteCriado();
-        vendor = cadastro.buscarUltimoVendorCriado();
-
-        // Vincula o vendor recém-criado ao restaurante recém-criado
-        vendor.AdicionarRestaurante(restaurante);
+        // Adicionar o Restaurante ao Vendor
+        vendor.adicionarRestaurante(restaurante);
         SalvarDados.salvarRestaurante(restaurante);
 
-        // Cria itens e guarda na lista, em seguida mostra o cardápio do restaurante
-        restaurante.PedeItensAdicionarLista(quantidadeItens);
+        // Adicionar itens ao cardápio
+        System.out.println("Quantos itens você deseja adicionar ao cardápio? ");
+        int quantidadeItens = input.nextInt();
+        input.nextLine(); // Limpar o buffer do scanner
+
+        restaurante.pedeItensAdicionarLista(quantidadeItens);
         SalvarDados.salvarCardapioRestaurante(restaurante);
+
+        // Mostrar o cardápio do restaurante
+        System.out.println("Cardápio do restaurante " + restaurante.getNomeRestaurante() + ":");
         restaurante.mostraCardapio();
 
         System.out.println("Você cadastrou seu restaurante, seu perfil junto e seu cardápio com sucesso");
-        // TODO: Área de teste para verificar se está tudo ok
-
-        // Printa informações do restaurante para testar se está tudo ok
-        System.out.println(restaurante);
-        // TODO: Fim da área de teste
+        System.out.println(restaurante); // Área de teste para verificar se está tudo ok
     }
+        // TODO: Fim da área de teste
 
     private boolean isVendedor() {
         return true;

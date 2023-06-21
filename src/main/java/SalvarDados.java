@@ -43,24 +43,20 @@ public class SalvarDados {
             System.err.println("Erro ao salvar o vendedor: " + e.getMessage());
         }
     }
-
     public static void salvarRestaurante(Restaurante restaurante) {
         try (PrintWriter writer = new PrintWriter(new FileWriter("Restaurante.data", true))) {
             writer.println(restaurante.toString());
-            writer.flush();
             System.out.println("Restaurante salvo com sucesso!");
         } catch (IOException e) {
             System.err.println("Erro ao salvar o restaurante: " + e.getMessage());
         }
     }
-
     public static void salvarCardapioRestaurante(Restaurante restaurante) {
         try (PrintWriter writer = new PrintWriter(new FileWriter("CardapioRestaurante.data", true))) {
             writer.println("Cardápio do restaurante " + restaurante.getNomeRestaurante() + ":");
             for (Produto produto : restaurante.getCardapio()) {
                 writer.println(produto.toString());
             }
-            writer.flush();
             System.out.println("Cardápio do restaurante salvo com sucesso!");
         } catch (IOException e) {
             System.err.println("Erro ao salvar o cardápio do restaurante: " + e.getMessage());
