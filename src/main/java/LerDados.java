@@ -47,9 +47,9 @@ class LerDados {
                 }
             }
 
-            if (restaurante != null) {
-                restaurantes.add(restaurante);
-            }
+//            if (restaurante != null) {
+//                restaurantes.add(restaurante);
+//            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,13 +104,13 @@ class LerDados {
             this.proprietario = proprietario;
         }
 
-        @Override
-        public String toString() {
-            return "Nome do Restaurante: " + nome + "\n" +
-                    "ID: " + id + "\n" +
-                    "Endereço: " + endereco + "\n" +
-                    "CEP: " + cep + "\n" +
-                    "Proprietário: " + proprietario + "\n";
-        }
+//        @Override
+//        public String toString() {
+//            return "Nome do Restaurante: " + nome + "\n" +
+//                    "ID: " + id + "\n" +
+//                    "Endereço: " + endereco + "\n" +
+//                    "CEP: " + cep + "\n" +
+//                    "Proprietário: " + proprietario + "\n";
+//        }
     }
 }

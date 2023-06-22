@@ -6,14 +6,16 @@ public class CarrinhoDeCompras {
     // Atributos
     private List<Produto> itens;
 
-    // Construtor
-    public CarrinhoDeCompras() {
-        this.itens = new ArrayList<>();
+    public CarrinhoDeCompras(Restaurante restaurante) {
+        this.itens = restaurante.getCardapio();
     }
 
+    // Construtor
+
+
     // Adicionar um produto ao carrinho de compras
-    public void adicionarItem(Produto produto) {
-        itens.add(produto);
+    public void adicionarItem(Produto produtox) {
+        itens.add(produtox);
     }
 
     // Remover um produto do carrinho de compras
@@ -41,6 +43,8 @@ public class CarrinhoDeCompras {
 
         return precoTotal;
     }
+
+
 
     @Override
     public String toString() {

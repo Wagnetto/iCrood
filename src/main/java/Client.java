@@ -58,11 +58,19 @@ public class Client extends User {
 
 
     // Métodos
-    public void adicionarAoCarrinho(Produto produto, List<Produto> cardapio) {
+    public void adicionarAoCarrinho(List<Produto> cardapioRestaurante, int idProduto) {
+        Produto produtoEncontrado = null;
+        for (Produto produto : cardapioRestaurante) {
+            if (produto.getIdProduto() == idProduto) {
+                produtoEncontrado = produto;
+                break;
+            }
+        }
+
         //Adiciona o produto desejado ao carrinho e impõe o valor no carrinho de compras
-        if (cardapio.contains(produto)) {
-            carrinho.adicionarItem(produto);
-            double novoSaldo = getSaldoCarteira() - produto.getValor();
+        if (cardapioRestaurante.contains(produtoEncontrado)) {
+            carrinho.adicionarItem(produtoEncontrado);
+            double novoSaldo = getSaldoCarteira() - produtoEncontrado.getValor();
             setSaldoCarteira(novoSaldo);
             System.out.println("Produto adicionado ao carrinho com sucesso!");
         } else {

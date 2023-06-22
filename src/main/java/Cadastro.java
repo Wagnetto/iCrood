@@ -153,8 +153,6 @@ public class Cadastro {
 
         //Salva dados do restaurante
         restaurantes.add(restaurante);
-        SalvarDados.salvarRestaurante(restaurante);
-        SalvarDados.salvarCardapioRestaurante(restaurante);
     }
 
     public Restaurante buscarUltimoRestauranteCriado() {

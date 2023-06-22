@@ -15,6 +15,7 @@ public class Fluxo {
     public void exibirFluxo() {
         Scanner scan = new Scanner(System.in);
         Cadastro cadastro = new Cadastro();
+        int iteracaoRestaurantes = 1;
 
         System.out.println("Bem-vindo! Já possui um cadastro?\n1. Sim          2. Não");
         int resposta = scan.nextInt();
@@ -28,14 +29,18 @@ public class Fluxo {
 
                 if (isCliente()) {
                     MenuPedido menu = new MenuPedido();
-                    menu.exibirRestaurantes();
+                    menu.exibirRestaurantes(iteracaoRestaurantes);
+
                     menu.selecionaRestaurante().mostraCardapio();
+
+
 
                     // TODO: Testar se o método funciona e incrementar a escolha de pedido / terminar a entrega
                 } else if (isVendedor()) {
                     MenuPedido menu = new MenuPedido();
-                    menu.exibirRestaurantes();
+                    menu.exibirRestaurantes(iteracaoRestaurantes);
                     menu.selecionaRestaurante().mostraCardapio();
+
                 } else {
                     System.out.println("Parâmetro não existente!");
                 }
@@ -65,8 +70,10 @@ public class Fluxo {
             } else if (opcao == 2) {
                 criarClienteConsole();
                 MenuPedido menu = new MenuPedido();
-                menu.exibirRestaurantes();
-                menu.selecionaRestaurante().mostraCardapio();
+                int iteracaoRestaurantes = 1;
+                menu.exibirRestaurantes(iteracaoRestaurantes);
+                System.out.println("Digite o Número do Restaurante");
+//                menu.selecionaRestaurante().mostraCardapio();
             } else {
                 System.out.println("Opção inválida!");
             }
@@ -85,7 +92,7 @@ public class Fluxo {
         // Zera variável restaurante para poder ser reutilizada
         Client client=null;
 
-        Cadastro.cadastrarCliente();
+        cadastro.cadastrarCliente();
     }
 
     public void criarVendorRestauranteConsole() {
@@ -93,11 +100,11 @@ public class Fluxo {
         Cadastro cadastro = new Cadastro();
 
         // Cadastrar o Vendor
-        Cadastro.cadastrarVendor();
+        cadastro.cadastrarVendor();
         Vendor vendor = cadastro.buscarUltimoVendorCriado();
 
         // Cadastrar o Restaurante
-        Cadastro.cadastrarRestaurante();
+        cadastro.cadastrarRestaurante();
         Restaurante restaurante = cadastro.buscarUltimoRestauranteCriado();
 
         // Adicionar o Restaurante ao Vendor
@@ -110,8 +117,8 @@ public class Fluxo {
 
         restaurante.pedeItensAdicionarLista(quantidadeItens);
 
-        SalvarDados.salvarRestaurante(restaurante);
         SalvarDados.salvarVendor(vendor);
+        SalvarDados.salvarRestaurante(restaurante);
         SalvarDados.salvarCardapioRestaurante(restaurante);
 
         // Mostrar o cardápio do restaurante
