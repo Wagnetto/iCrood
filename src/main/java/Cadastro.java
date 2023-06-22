@@ -40,11 +40,11 @@ public class Cadastro {
 
     public static boolean procuraCadastro(int id, List<String> filenames) {
         for (String filename : filenames) {
+            //Método maluco, cria Scanner para o arquivo e pesquise as palavras chaves dentro do arquivo
             try (Scanner fileScanner = new Scanner(new File(filename))) {
                 while (fileScanner.hasNextLine()) {
                     String line = fileScanner.nextLine();
-                    if ((line.startsWith("Seu ID:") || line.startsWith("ID Dono:")) && line.contains(String.valueOf(id))) {
-
+                    if ((line.startsWith("ID Cliente:") || line.startsWith("ID Vendor:")) && line.contains(String.valueOf(id))) {
                         return true;
                     }
                 }
