@@ -29,27 +29,18 @@ public class Vendor extends User {
 
     @Override
     public String toString() {
-        StringBuilder vendorInfo = new StringBuilder();
-        vendorInfo.append("\n-----------------------------");
-        vendorInfo.append("\n          Vendedor:\n");
-        vendorInfo.append("\nNome: ").append(getNome());
-        vendorInfo.append("\nCPF: ").append(getCpf());
-        vendorInfo.append("\nData de Nascimento: ").append(getDataNascimento());
-        vendorInfo.append("\nEndereço: ").append(getEndereco());
-        vendorInfo.append("\nTelefone: ").append(getNumeroTelefone());
-        vendorInfo.append("\nE-mail: ").append(getEmail());
-        vendorInfo.append("\nSaldo: ").append(getSaldoCarteira());
-        vendorInfo.append("\nSeu ID é: ").append(getIdVendor());
-        vendorInfo.append("\n-----------------------------");
-//        vendorInfo.append("\nRestaurantes Relacionados:\n");
-//        for (Restaurante restaurante : estabelecimentos) {
-//            vendorInfo.append(restaurante.toString());
-//            vendorInfo.append("\n");
-//        }
-        vendorInfo.append("\n-----------------------------");
-      
-        vendorInfo.append("ID Dono: ").append(getIdVendor());
 
-        return vendorInfo.toString();
+        return "-----------------------------" +
+                "\n          Vendedor:\n" +
+                "\nNome: " + getNome() +
+                "\nCPF: " + getCpf() +
+                "\nData de Nascimento: " + getDataNascimento() +
+                "\nEndereço: " + getEndereco() +
+                "\nTelefone: " + getNumeroTelefone() +
+                "\nE-mail: " + getEmail() +
+                "\nSaldo: " + getSaldoCarteira() +
+                "\n-----------------------------" +
+                "\nID Dono: " + getIdVendor() +
+                "\n-----------------------------";
     }
 }

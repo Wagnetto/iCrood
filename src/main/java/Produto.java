@@ -58,12 +58,10 @@ public class Produto {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("-------------------------------");
-        sb.append("         \nProduto\n");
-        sb.append("Nome do Produto: ").append(nomeProduto).append("\n");
-        sb.append("| Descricao do Produto: ").append(descricaoProduto).append("\n");
-        sb.append("| Valor: R$").append(valor).append("\n");
-        sb.append("\n");
+        sb.append("Produto\n");
+        sb.append("Nome do Produto: ").append(nomeProduto);
+        sb.append(" | Descricao do Produto: ").append(descricaoProduto);
+        sb.append(" | Valor: R$").append(valor).append("\n");
         return sb.toString();
     }
 }
