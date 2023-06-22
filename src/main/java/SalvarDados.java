@@ -54,7 +54,7 @@ public class SalvarDados {
     }
     public static void salvarCardapioRestaurante(Restaurante restaurante) {
         try (PrintWriter writer = new PrintWriter(new FileWriter("CardapioRestaurante.data", true))) {
-            writer.println("Cardápio do restaurante " + restaurante.getNomeRestaurante() + ":");
+            writer.println("Cardapio do restaurante " + restaurante.getNomeRestaurante() + ":");
             for (Produto produto : restaurante.getCardapio()) {
                 writer.println(produto.toString());
             }

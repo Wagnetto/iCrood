@@ -24,8 +24,7 @@ public class Fluxo {
             System.out.println("Digite o ID para procurar o cadastro:");
             int id = scan.nextInt();
 
-            if (Cadastro.procuraCadastro(id, Arrays.asList("Cliente.data","Vendor.data"))) {
-
+            if (Cadastro.procuraCadastro(id, Arrays.asList("Client.data", "Vendor.data"))) {
                 System.out.println("Cadastro encontrado!");
 
                 if (isCliente()) {
@@ -67,7 +66,6 @@ public class Fluxo {
             } else if (opcao == 2) {
                 criarClienteConsole();
                 MenuPedido menu = new MenuPedido();
-                criarCliente();
                 menu.exibirRestaurantes();
                 menu.selecionaRestaurante().mostraCardapio();
             } else {
@@ -77,21 +75,7 @@ public class Fluxo {
         }
     }
 
-    public void criarCliente(){
-        Cadastro.cadastrarCliente();
-    }
-    public void criarVendorRestauranteConsole() {
-        Scanner input = new Scanner(System.in);
-
-        } else if (resposta == 2) {
-            System.out.println("Fechando programa");
-        } else {
-            System.out.println("Opção inválida!");
-        }
-    }
-
     public void criarClienteConsole() {
-
         Cadastro cadastro = new Cadastro();
 
         // Zera variável restaurante para poder ser reutilizada
@@ -122,16 +106,11 @@ public class Fluxo {
         input.nextLine(); // Limpar o buffer do scanner
 
         restaurante.pedeItensAdicionarLista(quantidadeItens);
-        SalvarDados.salvarCardapioRestaurante(restaurante);
-
-        // Cria itens e guarda na lista, em seguida mostra o cardápio do restaurante
-        restaurante.PedeItensAdicionarLista(quantidadeItens);
 
         // Salvar no Banco
+        SalvarDados.salvarCardapioRestaurante(restaurante);
         SalvarDados.salvarVendor(vendor);
         SalvarDados.salvarRestaurante(restaurante);
-
-        // Printa cardápio
 
         // Mostrar o cardápio do restaurante
         System.out.println("Cardápio do restaurante " + restaurante.getNomeRestaurante() + ":");

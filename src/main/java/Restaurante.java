@@ -70,12 +70,12 @@ public class Restaurante {
         // quando chamado, gera ID guarda em IDproduto
         UUID idProduto = UUID.randomUUID();
         // cria um objeto produto com os atributos de produto
-        Produto produto = new Produto(idProduto, nomeProduto, descricaoProduto, valor);
+        Produto produto = new Produto(nomeProduto, descricaoProduto, valor);
         // adiciona à lista do restaurante Cardápio, a pergunta é como editar isso depois e onde vai ficar esse código
         cardapio.add(produto);
     }
 
-    public void PedeItensAdicionarLista(int quantidadeItens) {
+    public void pedeItensAdicionarLista(int quantidadeItens) {
 
         Scanner scan = new Scanner(System.in);
 
@@ -126,7 +126,7 @@ public class Restaurante {
         sb.append("ID: ").append(idRestaurante).append("\n");
         sb.append("Endereço: ").append(endereco).append("\n");
         sb.append("CEP: ").append(cep).append("\n");
-        sb.append("Proprietário: ").append(proprietario.getNome()).append("\n");
+        sb.append("Proprietário: ").append(this.proprietario).append("\n");
         sb.append("Cardápio do restaurante ").append(nomeRestaurante).append(": ").append(cardapio);
         return sb.toString();
     }

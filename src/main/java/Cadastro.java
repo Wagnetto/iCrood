@@ -44,8 +44,7 @@ public class Cadastro {
             try (Scanner fileScanner = new Scanner(new File(filename))) {
                 while (fileScanner.hasNextLine()) {
                     String line = fileScanner.nextLine();
-                    if ((line.startsWith("Seu ID:") || line.startsWith("ID Dono:")) && line.contains(String.valueOf(id))) {
-
+                    if ((line.startsWith("ID Cliente:") || line.startsWith("ID Vendor:")) && line.contains(String.valueOf(id))) {
                         return true;
                     }
                 }
@@ -172,6 +171,8 @@ public class Cadastro {
 
         //Salva dados do restaurante
         restaurantes.add(restaurante);
+        SalvarDados.salvarRestaurante(restaurante);
+        SalvarDados.salvarCardapioRestaurante(restaurante);
     }
 
     public Restaurante buscarUltimoRestauranteCriado() {

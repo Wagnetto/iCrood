@@ -1,0 +1,97 @@
+Nome do Restaurante: restauranteVendorTeste
+ID: 52
+Endereço: endereçoRVendorTeste
+CEP: cepRVendorTeste
+Propietário: VendorTeste
+Cardápio do restaurante restauranteVendorTeste: [         
+<Produto>
+Nome do Produto: batata doce
+| Descricao do Produto: batata bem doce
+| Valor: R$15.0
+
+]
+
+--------------------------------------
+Nome do Restaurante: restaurantevendor2
+ID: 54
+Endereço: enderecovendor2
+CEP: cepvendor2
+Proprietário: null
+Cardápio do restaurante restaurantevendor2: []
+
+--------------------------------------
+Nome do Restaurante: restaurantevendor2
+ID: 54
+Endereço: enderecovendor2
+CEP: cepvendor2
+Proprietário: 
+-----------------------------
+          Vendedor:
+
+Nome: vendor2
+CPF: cpfvendor2
+Data de Nascimento: 2000-01-01
+Endereço: enderecovendor2
+Telefone: telefonevendor2
+E-mail: emailvendor2
+Saldo: 0.0
+Seu ID é: 558
+-----------------------------
+-----------------------------ID Dono: 558
+Cardápio do restaurante restaurantevendor2: []
+
+--------------------------------------
+Nome do Restaurante: restaurantewagner
+ID: 98
+Endereço: endereçoRestaurantewagner
+CEP: cepwagner
+Proprietário: null
+Cardápio do restaurante restaurantewagner: []
+
+--------------------------------------
+Nome do Restaurante: restaurantewagner
+ID: 98
+Endereço: endereçoRestaurantewagner
+CEP: cepwagner
+Proprietário: 
+-----------------------------
+          Vendedor:
+
+Nome: wagner
+CPF: cpfwagner
+Data de Nascimento: 2000-01-01
+Endereço: endereço
+Telefone: telefonewagner
+E-mail: emailwagner
+Saldo: 0.0
+Seu ID é: 734
+-----------------------------
+-----------------------------ID Dono: 734
+Cardápio do restaurante restaurantewagner: []
+
+--------------------------------------
+Nome do Restaurante: restaurantewagner
+ID: 98
+Endereço: endereçoRestaurantewagner
+CEP: cepwagner
+Proprietário: 
+-----------------------------
+          Vendedor:
+
+Nome: wagner
+CPF: cpfwagner
+Data de Nascimento: 2000-01-01
+Endereço: endereço
+Telefone: telefonewagner
+E-mail: emailwagner
+Saldo: 0.0
+Seu ID é: 734
+-----------------------------
+-----------------------------ID Dono: 734
+Cardápio do restaurante restaurantewagner: [-------------------------------         
+Produto
+Nome do Produto: 
+| Descricao do Produto: descrição
+| Valor: R$10.0
+
+]

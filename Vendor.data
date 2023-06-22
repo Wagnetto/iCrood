@@ -1,0 +1,97 @@
+
+-----------------------------
+          Vendedor:
+
+Nome: asdas
+CPF: asd
+Data de Nascimento: 2000-01-01
+Endereço: endereço
+Telefone: telefone
+E-mail: email
+Saldo: 0.0
+Seu ID é: 256
+-----------------------------
+-----------------------------
+
+-----------------------------
+          Vendedor:
+
+Nome: VendorTeste
+CPF: CpfVendorTeste
+Data de Nascimento: 2007-07-07
+Endereço: endereçoVendorTeste
+Telefone: telefoneVendorTeste
+E-mail: emailVendorTeste
+Saldo: 0.0
+-----------------------------
+Restaurantes Relacionados:
+Nome do Restaurante: restauranteVendorTeste
+ID: 52
+Endereço: endereçoRVendorTeste
+CEP: cepRVendorTeste
+Propietário: VendorTeste
+Cardápio do restaurante restauranteVendorTeste: [         
+<Produto>
+Nome do Produto: batata doce
+| Descricao do Produto: batata bem doce
+| Valor: R$15.0
+
+]
+
+-----------------------------ID: 481
+
+-----------------------------
+          Vendedor:
+
+Nome: vendor1234
+CPF: cpfvendor1234
+Data de Nascimento: 1994-03-01
+Endereço: endereçovendor1234
+Telefone: numerovendor1234
+E-mail: emailvendor1234
+Saldo: 0.0
+Seu ID é: 320
+-----------------------------
+-----------------------------ID Dono: 320
+
+-----------------------------
+          Vendedor:
+
+Nome: vendor2
+CPF: cpfvendor2
+Data de Nascimento: 2000-01-01
+Endereço: enderecovendor2
+Telefone: telefonevendor2
+E-mail: emailvendor2
+Saldo: 0.0
+Seu ID é: 558
+-----------------------------
+-----------------------------ID Dono: 558
+
+-----------------------------
+          Vendedor:
+
+Nome: wagner
+CPF: cpfwagner
+Data de Nascimento: 2000-01-01
+Endereço: endereço
+Telefone: telefonewagner
+E-mail: emailwagner
+Saldo: 0.0
+Seu ID é: 734
+-----------------------------
+-----------------------------ID Dono: 734
+
+-----------------------------
+          Vendedor:
+
+Nome: wagner
+CPF: cpfwagner
+Data de Nascimento: 2000-01-01
+Endereço: endereço
+Telefone: telefonewagner
+E-mail: emailwagner
+Saldo: 0.0
+Seu ID é: 734
+-----------------------------
+-----------------------------ID Dono: 734
