@@ -38,39 +38,22 @@ public class Cadastro {
     }
     // Métodos
 
-    public static boolean procuraCadastro(int id, List<String> filenames) {
-        for (String filename : filenames) {
-            //Método maluco, cria Scanner para o arquivo e pesquise as palavras chaves dentro do arquivo
-            try (Scanner fileScanner = new Scanner(new File(filename))) {
-                while (fileScanner.hasNextLine()) {
-                    String line = fileScanner.nextLine();
-                    if ((line.startsWith("ID Cliente:") || line.startsWith("ID Vendor:")) && line.contains(String.valueOf(id))) {
-                        return true;
-                    }
-                }
-            } catch (FileNotFoundException e) {
-                System.err.println("Arquivo não encontrado: " + e.getMessage());
-            }
-        }
-        return false;
-    }
-
-    public static void cadastrarPessoa() {//Método de entrada
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Que bom que quer criar uma conta!");
-        System.out.println("E para qual funcionalidade teria essa conta?");
-        System.out.println("1. Gerenciar estabelecimentos    2. Cliente");
-
-        int opcao = scanner.nextInt();
-
-        if (opcao == 1) {
-            cadastrarVendor();
-        } else if (opcao == 2) {
-            cadastrarCliente();
-        } else {
-            System.out.println("Não foi possível completar a ação, opção não existente!");
-        }
-    }
+//    public static void cadastrarPessoa() {//Método de entrada
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Que bom que quer criar uma conta!");
+//        System.out.println("E para qual funcionalidade teria essa conta?");
+//        System.out.println("1. Gerenciar estabelecimentos    2. Cliente");
+//
+//        int opcao = scanner.nextInt();
+//
+//        if (opcao == 1) {
+//            cadastrarVendor();
+//        } else if (opcao == 2) {
+//            cadastrarCliente();
+//        } else {
+//            System.out.println("Não foi possível completar a ação, opção não existente!");
+//        }
+//    }
 
     public static void cadastrarCliente() {
         Scanner scan = new Scanner(System.in);
@@ -140,7 +123,6 @@ public class Cadastro {
 
         //Salva dados na lista
         vendors.add(vendor);
-        SalvarDados.salvarVendor(vendor);
 
         // Printa mensagem e mostra ID
         System.out.println("Conta criada com sucesso! Seu ID é: " + idVendor);
@@ -237,5 +219,22 @@ public class Cadastro {
                 System.out.println("Formato de data inválido. Certifique-se de usar o formato dd/mm/aaaa.");
             }
         }while (true);
+    }
+
+    public static boolean procurarCadastro(int id, List<String> filenames) {
+        for (String filename : filenames) {
+            //Método maluco, cria Scanner para o arquivo e pesquise as palavras chaves dentro do arquivo
+            try (Scanner fileScanner = new Scanner(new File(filename))) {
+                while (fileScanner.hasNextLine()) {
+                    String line = fileScanner.nextLine();
+                    if ((line.startsWith("Seu ID:") || line.startsWith("ID Dono:")) && line.contains(String.valueOf(id))) {
+                        return true;
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                System.err.println("Arquivo não encontrado: " + e.getMessage());
+            }
+        }
+        return false;
     }
 }

@@ -1,65 +1,13 @@
 
 ------------------------------------
              Cliente:
-Nome: NomeCliente1
-CPF: cpfNomeCliente1
-Data de Nascimento: 2005-04-01
-Endereço: endereçoCliente1
-Telefone: telefoneCliente1
-E-mail: emailCliente1
+Nome: Pedro
+CPF: cpfPedro
+Data de Nascimento: 2006-02-05
+Endereço: endereçoPedro
+Telefone: telefoenPedro
+E-mail: emailPedro
 Saldo: 0.0
 ------------------------------------
-Seu ID: 7419
-------------------------------------
-
-------------------------------------
-             Cliente:
-Nome: Victor
-CPF: cpfVictor
-Data de Nascimento: 1993-08-05
-Endereço: enderecoVictor
-Telefone: telefoneVictor
-E-mail: emailVictor
-Saldo: 0.0
-------------------------------------
-Seu ID: 1567
-------------------------------------
-
-------------------------------------
-             Cliente:
-Nome: asd
-CPF: asd
-Data de Nascimento: 2000-01-01
-Endereço: asd
-Telefone: asd
-E-mail: asd
-Saldo: 0.0
-------------------------------------
-Seu ID: 9294
-------------------------------------
-
-------------------------------------
-             Cliente:
-Nome: cliente123
-CPF: cpfcliente123
-Data de Nascimento: 1994-09-01
-Endereço: enderecocliente123
-Telefone: telefonecliente123
-E-mail: emailcliente123
-Saldo: 0.0
-------------------------------------
-Seu ID: 4162
-------------------------------------
-
-------------------------------------
-             Cliente:
-Nome: asd
-CPF: asd
-Data de Nascimento: 1999-07-01
-Endereço: endereço
-Telefone: telefone
-E-mail: email
-Saldo: 0.0
-------------------------------------
-Seu ID: 10827
+Seu ID: 4199
 ------------------------------------

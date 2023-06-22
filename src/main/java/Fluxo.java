@@ -1,4 +1,3 @@
-
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Random;
@@ -24,7 +23,7 @@ public class Fluxo {
             System.out.println("Digite o ID para procurar o cadastro:");
             int id = scan.nextInt();
 
-            if (Cadastro.procuraCadastro(id, Arrays.asList("Client.data", "Vendor.data"))) {
+            if (Cadastro.procurarCadastro(id, Arrays.asList("Client.data", "Vendor.data"))) {
                 System.out.println("Cadastro encontrado!");
 
                 if (isCliente()) {
@@ -44,7 +43,8 @@ public class Fluxo {
                 System.out.println("Cadastro não encontrado.");
                 criarConta();
             }
-        } else if (resposta == 2) {
+        }
+        else if (resposta == 2) {
             criarConta();
         } else {
             System.out.println("Opção inválida!");
@@ -57,8 +57,7 @@ public class Fluxo {
         int resposta = scan.nextInt();
 
         if (resposta == 1) {
-            System.out.println("Você tem um Restaurante ou quer fazer um pedido?\n1. Restaurante    2. Cliente");
-
+            System.out.println("Cadastrar um restaurante ou quer fazer um pedido?\n1. Restaurante    2. Pedido");
             int opcao = scan.nextInt();
 
             if (opcao == 1) {
@@ -71,9 +70,14 @@ public class Fluxo {
             } else {
                 System.out.println("Opção inválida!");
             }
+        } else if (resposta == 2) {
+                System.out.println("Fechando programa");
+            } else {
+                System.out.println("Opção inválida!");
+            }
 
         }
-    }
+
 
     public void criarClienteConsole() {
         Cadastro cadastro = new Cadastro();
@@ -98,7 +102,6 @@ public class Fluxo {
 
         // Adicionar o Restaurante ao Vendor
         vendor.adicionarRestaurante(restaurante);
-        SalvarDados.salvarRestaurante(restaurante);
 
         // Adicionar itens ao cardápio
         System.out.println("Quantos itens você deseja adicionar ao cardápio? ");
@@ -107,14 +110,11 @@ public class Fluxo {
 
         restaurante.pedeItensAdicionarLista(quantidadeItens);
 
-        // Salvar no Banco
-        SalvarDados.salvarCardapioRestaurante(restaurante);
-        SalvarDados.salvarVendor(vendor);
         SalvarDados.salvarRestaurante(restaurante);
+        SalvarDados.salvarVendor(vendor);
+        SalvarDados.salvarCardapioRestaurante(restaurante);
 
         // Mostrar o cardápio do restaurante
-        System.out.println("Cardápio do restaurante " + restaurante.getNomeRestaurante() + ":");
-
         restaurante.mostraCardapio();
 
         System.out.println("Você cadastrou seu restaurante, seu perfil junto e seu cardápio com sucesso");

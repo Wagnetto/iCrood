@@ -1,5 +1,6 @@
 import java.util.*;
 
+
 //Classe dos estabelecimentos comerciais
 public class Restaurante {
     // Atributos
@@ -126,8 +127,15 @@ public class Restaurante {
         sb.append("ID: ").append(idRestaurante).append("\n");
         sb.append("Endereço: ").append(endereco).append("\n");
         sb.append("CEP: ").append(cep).append("\n");
-        sb.append("Proprietário: ").append(this.proprietario).append("\n");
-        sb.append("Cardápio do restaurante ").append(nomeRestaurante).append(": ").append(cardapio);
+
+        if (proprietario != null) {
+            sb.append("Proprietário: ").append(proprietario.getNome()).append("\n\n");
+        } else {
+            sb.append("Proprietário: N/A\n\n");
+        }
+
+        sb.append("ID: ").append(idRestaurante).append("\n");
+
         return sb.toString();
     }
 }
