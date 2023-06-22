@@ -25,7 +25,7 @@ class MenuPedido {
 
     public void exibirRestaurantes(int i) { // exibe todos os restaurantes puxando de Cadastro
         for (LerDados.Restaurante restaurante : LerDados.lerRestaurantesDoArquivo()) {
-            System.out.println(i+". " + restaurante.getNome());
+            System.out.println(i + ". " + restaurante.getNome());
             i++;
         }
     }
@@ -77,4 +77,5 @@ class MenuPedido {
 //            return selecionaRestaurante();
 //        }
     }
-    }
+
+}

@@ -34,11 +34,13 @@ public class Fluxo {
                     menu.selecionaRestaurante().mostraCardapio();
 
 
+
                     // TODO: Testar se o método funciona e incrementar a escolha de pedido / terminar a entrega
                 } else if (isVendedor()) {
                     MenuPedido menu = new MenuPedido();
                     menu.exibirRestaurantes(iteracaoRestaurantes);
-//                    menu.selecionaRestaurante().mostraCardapio();
+                    menu.selecionaRestaurante().mostraCardapio();
+
                 } else {
                     System.out.println("Parâmetro não existente!");
                 }
@@ -90,7 +92,7 @@ public class Fluxo {
         // Zera variável restaurante para poder ser reutilizada
         Client client=null;
 
-        Cadastro.cadastrarCliente();
+        cadastro.cadastrarCliente();
     }
 
     public void criarVendorRestauranteConsole() {
@@ -98,11 +100,11 @@ public class Fluxo {
         Cadastro cadastro = new Cadastro();
 
         // Cadastrar o Vendor
-        Cadastro.cadastrarVendor();
+        cadastro.cadastrarVendor();
         Vendor vendor = cadastro.buscarUltimoVendorCriado();
 
         // Cadastrar o Restaurante
-        Cadastro.cadastrarRestaurante();
+        cadastro.cadastrarRestaurante();
         Restaurante restaurante = cadastro.buscarUltimoRestauranteCriado();
 
         // Adicionar o Restaurante ao Vendor
@@ -115,8 +117,8 @@ public class Fluxo {
 
         restaurante.pedeItensAdicionarLista(quantidadeItens);
 
-        SalvarDados.salvarRestaurante(restaurante);
         SalvarDados.salvarVendor(vendor);
+        SalvarDados.salvarRestaurante(restaurante);
         SalvarDados.salvarCardapioRestaurante(restaurante);
 
         // Mostrar o cardápio do restaurante

@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.UUID;
 import java.util.List;
 
@@ -5,24 +6,30 @@ import java.util.List;
 public class Produto {
     // Atributos
     private List<Produto> itens;
-    private UUID idProduto;
+    private int idProduto;
     private String nomeProduto;
     private String descricaoProduto;
     private double valor;
 
     // Construtor
     public Produto(String nomeProduto, String descricaoProduto, double valor) {
-        this.idProduto = idProduto;
+        setIdProduto(gerarIdProduto());
         this.nomeProduto = nomeProduto;
         this.descricaoProduto = descricaoProduto;
         this.valor = valor;
     }
 
-    public UUID getIdProduto() {
+    public int getIdProduto() {
         return idProduto;
     }
+    public int gerarIdProduto(){
+        Random id = new Random();
+        int idRestaurante = id.nextInt(3000) + 2000;
 
-    public void setIdProduto(UUID idProduto) {
+        return idRestaurante;
+    }
+
+    public void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
     }
 
@@ -60,6 +67,7 @@ public class Produto {
         StringBuffer sb = new StringBuffer();
         sb.append("Produto\n");
         sb.append("Nome do Produto: ").append(nomeProduto);
+        sb.append(" | ID do Produto: ").append(idProduto);
         sb.append(" | Descricao do Produto: ").append(descricaoProduto);
         sb.append(" | Valor: R$").append(valor).append("\n");
         return sb.toString();

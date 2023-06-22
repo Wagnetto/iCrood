@@ -113,6 +113,7 @@ public class Restaurante {
     }
 
     public void mostraCardapio() {
+        getIdRestaurante();
         System.out.println("Cardápio do restaurante " + nomeRestaurante + ":");
         for (Produto produto : cardapio) {
             System.out.println(produto);
@@ -124,7 +125,6 @@ public class Restaurante {
         StringBuilder sb = new StringBuilder();
         sb.append("\n--------------------------------------\n");
         sb.append("Nome do Restaurante: ").append(nomeRestaurante).append("\n");
-        sb.append("ID: ").append(idRestaurante).append("\n");
         sb.append("Endereço: ").append(endereco).append("\n");
         sb.append("CEP: ").append(cep).append("\n");
 

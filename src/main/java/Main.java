@@ -10,11 +10,7 @@ public class Main {
         Fluxo fluxo = new Fluxo();
         MenuPedido menu = new MenuPedido();
 
-
-        // TODO instancia entidades para testar
-        // TODO fim de instancia
-
-//        fluxo.jaTemCadastro();
+        //fluxo.jaTemCadastro();
         fluxo.exibirFluxo();
 
     }
