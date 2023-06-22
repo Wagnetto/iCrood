@@ -10,14 +10,10 @@ public class Main {
         Fluxo fluxo = new Fluxo();
         MenuPedido menu = new MenuPedido();
 
+
         // TODO instancia entidades para testar
         // TODO fim de instancia
 
-
-
-        // perguntar ja tem cadastro?
-        menu.exibirRestaurantes();
-        LerDados.lerRestaurantesDoArquivo();
 //        fluxo.jaTemCadastro();
         fluxo.exibirFluxo();
 
