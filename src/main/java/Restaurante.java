@@ -91,8 +91,6 @@ public class Restaurante {
             default:
                 System.out.println("Não deu");
         }
-
-
     }
 
     static public void adicionaProdutoCardapio() {

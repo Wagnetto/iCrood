@@ -3,9 +3,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
+//Classe salva dados de Vendor,Cliente,Restaurante e cardapio atribuido ao restaurante
 public class SalvarDados {
     private static int idCliente;
     private static int idRestaurante;
+    public static Restaurante restaurante;
     private LocalDateTime dataEntrega;
 
 
@@ -14,6 +16,7 @@ public class SalvarDados {
         this.idRestaurante = idRestaurante;
         this.dataEntrega = dataEntrega;
     }
+
     public void salvarEntrega() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("delivery.data", true))) {
             writer.println("Pedido>" + idCliente + "," + idRestaurante + "," + dataEntrega);
@@ -50,8 +53,10 @@ public class SalvarDados {
             System.out.println("Restaurante salvo com sucesso!");
         } catch (IOException e) {
             System.err.println("Erro ao salvar o restaurante: " + e.getMessage());
+            SalvarDados.restaurante = restaurante;
         }
     }
+
     public static void salvarCardapioRestaurante(Restaurante restaurante) {
         try (PrintWriter writer = new PrintWriter(new FileWriter("CardapioRestaurante.data", true))) {
             for (Produto produto : restaurante.getCardapio()) {

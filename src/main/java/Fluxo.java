@@ -35,8 +35,6 @@ public class Fluxo {
                 // TODO: Testar se o método funciona e incrementar a escolha de pedido / terminar a entrega
             } else if (validacao == 2) {
                 //é vendor
-                int entrada2;
-                entrada2 = scan.nextInt();
                 Vendor.possuiRestaurante();
             }
         } else if (resposta == 2) {
@@ -110,6 +108,4 @@ public class Fluxo {
         System.out.println(restaurante); // Área de teste para verificar se está tudo ok
     }
     // TODO: Fim da área de teste
-
-
 }
