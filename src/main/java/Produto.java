@@ -1,6 +1,5 @@
-import java.util.Random;
-import java.util.UUID;
 import java.util.List;
+import java.util.Random;
 
 //Classe dos produtos oferecidos pelos restaurantes
 public class Produto {

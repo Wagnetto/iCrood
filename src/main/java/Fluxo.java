@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Random;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -14,8 +11,9 @@ public class Fluxo {
 
     public void exibirFluxo() {
         Scanner scan = new Scanner(System.in);
-        Cadastro cadastro = new Cadastro();
         int iteracaoRestaurantes = 1;
+
+        exibeTelaInicial();
 
         System.out.println("Bem-vindo! Já possui um cadastro?\n1. Sim          2. Não");
         int resposta = scan.nextInt();
@@ -23,33 +21,25 @@ public class Fluxo {
         if (resposta == 1) {
             System.out.println("Digite o ID para procurar o cadastro:");
             int id = scan.nextInt();
-
-            if (Cadastro.procurarCadastro(id, Arrays.asList("Client.data", "Vendor.data"))) {
-                System.out.println("Cadastro encontrado!");
-
-                if (isCliente()) {
-                    MenuPedido menu = new MenuPedido();
-                    menu.exibirRestaurantes(iteracaoRestaurantes);
-
-                    menu.selecionaRestaurante().mostraCardapio();
-
-
-
-                    // TODO: Testar se o método funciona e incrementar a escolha de pedido / terminar a entrega
-                } else if (isVendedor()) {
-                    MenuPedido menu = new MenuPedido();
-                    menu.exibirRestaurantes(iteracaoRestaurantes);
-                    menu.selecionaRestaurante().mostraCardapio();
-
-                } else {
-                    System.out.println("Parâmetro não existente!");
-                }
-            } else {
+            int validacao = Cadastro.procurarCadastro(id, Arrays.asList("Client.data", "Vendor.data"));
+            if (validacao == 0) {
                 System.out.println("Cadastro não encontrado.");
                 criarConta();
+            } else if (validacao == 1) {
+                //é cliente
+                MenuPedido menu = new MenuPedido();
+                menu.exibirRestaurantes(iteracaoRestaurantes);
+
+                menu.selecionaRestaurante().mostraCardapio();
+
+                // TODO: Testar se o método funciona e incrementar a escolha de pedido / terminar a entrega
+            } else if (validacao == 2) {
+                //é vendor
+                int entrada2;
+                entrada2 = scan.nextInt();
+                Vendor.possuiRestaurante();
             }
-        }
-        else if (resposta == 2) {
+        } else if (resposta == 2) {
             criarConta();
         } else {
             System.out.println("Opção inválida!");
@@ -66,54 +56,48 @@ public class Fluxo {
             int opcao = scan.nextInt();
 
             if (opcao == 1) {
-                criarVendorRestauranteConsole();
+                primeiroCadastroVendor();
             } else if (opcao == 2) {
-                criarClienteConsole();
+                primeiroCadastroCliente();
                 MenuPedido menu = new MenuPedido();
                 int iteracaoRestaurantes = 1;
                 menu.exibirRestaurantes(iteracaoRestaurantes);
                 System.out.println("Digite o Número do Restaurante");
-//                menu.selecionaRestaurante().mostraCardapio();
             } else {
                 System.out.println("Opção inválida!");
             }
         } else if (resposta == 2) {
-                System.out.println("Fechando programa");
-            } else {
-                System.out.println("Opção inválida!");
-            }
-
+            System.out.println("Fechando programa");
+        } else {
+            System.out.println("Opção inválida!");
         }
 
-
-    public void criarClienteConsole() {
-        Cadastro cadastro = new Cadastro();
-
-        // Zera variável restaurante para poder ser reutilizada
-        Client client=null;
-
-        cadastro.cadastrarCliente();
+    }
+    //primeiros cadastros (cliente e vendors)
+    public void primeiroCadastroCliente() {
+        Cadastro.cadastrarCliente();
     }
 
-    public void criarVendorRestauranteConsole() {
+    public void primeiroCadastroVendor() {
         Scanner input = new Scanner(System.in);
         Cadastro cadastro = new Cadastro();
 
-        // Cadastrar o Vendor
+        // Cadastra o Vendor
         cadastro.cadastrarVendor();
         Vendor vendor = cadastro.buscarUltimoVendorCriado();
 
-        // Cadastrar o Restaurante
+        // Cadastra o Restaurante
         cadastro.cadastrarRestaurante();
         Restaurante restaurante = cadastro.buscarUltimoRestauranteCriado();
 
-        // Adicionar o Restaurante ao Vendor
+        // Adiciona Restaurante à lista do Vendor
         vendor.adicionarRestaurante(restaurante);
 
         // Adicionar itens ao cardápio
         System.out.println("Quantos itens você deseja adicionar ao cardápio? ");
         int quantidadeItens = input.nextInt();
-        input.nextLine(); // Limpar o buffer do scanner
+        // Limpar o buffer do scanner
+        input.nextLine();
 
         restaurante.pedeItensAdicionarLista(quantidadeItens);
 
@@ -127,13 +111,7 @@ public class Fluxo {
         System.out.println("Você cadastrou seu restaurante, seu perfil junto e seu cardápio com sucesso");
         System.out.println(restaurante); // Área de teste para verificar se está tudo ok
     }
-        // TODO: Fim da área de teste
+    // TODO: Fim da área de teste
 
-    private boolean isVendedor() {
-        return true;
-    }
 
-    private boolean isCliente() {
-        return true;
-    }
 }

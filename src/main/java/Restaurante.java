@@ -3,13 +3,15 @@ import java.util.*;
 
 //Classe dos estabelecimentos comerciais
 public class Restaurante {
+
+    static Scanner input = new Scanner(System.in);
     // Atributos
     private String nomeRestaurante;
     private int idRestaurante;
     private Vendor proprietario;
     private String endereco;
     private String cep;
-    private List<Produto> cardapio;
+    static private List<Produto> cardapio;
 
     // Construtor
     public Restaurante(String nomeRestaurante, int idRestaurante, String endereco, String cep, List<Produto> cardapio) {
@@ -67,13 +69,46 @@ public class Restaurante {
 
     // Métodos
 
-    public void AdicionarProdutoLista(String nomeProduto, String descricaoProduto, double valor) {
-        // quando chamado, gera ID guarda em IDproduto
-        UUID idProduto = UUID.randomUUID();
-        // cria um objeto produto com os atributos de produto
-        Produto produto = new Produto(nomeProduto, descricaoProduto, valor);
-        // adiciona à lista do restaurante Cardápio, a pergunta é como editar isso depois e onde vai ficar esse código
+    public static void exibirMenuDeRestaurante(){
+        System.out.println("1 - Visualizar histórico de Pedidos\n2 - Adicionar produto ao cardápio\n3 - Encerrar programa");
+
+        int opcaoMenu = input.nextInt();
+
+        switch(opcaoMenu){
+            case 1:
+                //TODO VICTOR criar função
+                //Restaurante.exibeHistoricoRestaurante();
+
+                exibirMenuDeRestaurante();
+                break;
+            case 2:
+                Restaurante.adicionaProdutoCardapio();
+                exibirMenuDeRestaurante();
+                break;
+            case 3:
+                System.out.println("Encerrando programa...!");
+                break;
+            default:
+                System.out.println("Não deu");
+        }
+
+
+    }
+
+    static public void adicionaProdutoCardapio() {
+        System.out.println("Digite o nome do produto:\n");
+        String nome = input.nextLine();
+
+        System.out.println("Digite a descrição do produto:\n");
+        String descricao = input.nextLine();
+
+        System.out.println("Digite o valor do produto:\n");
+        double valor = input.nextFloat();
+        Produto produto = new Produto(nome, descricao, valor);
         cardapio.add(produto);
+
+        System.out.println(produto);
+
     }
 
     public void pedeItensAdicionarLista(int quantidadeItens) {
