@@ -60,8 +60,6 @@ public class Fluxo {
                 Cadastro.primeiroCadastroVendor();
             } else if (opcao == 2) {
                 Cadastro.cadastrarCliente();
-
-
             } else {
                 System.out.println("Opção inválida!");
             }

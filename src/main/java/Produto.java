@@ -61,14 +61,10 @@ public class Produto {
         itens.add(produto);
     }
 
+
+
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("Produto\n");
-        sb.append("Nome do Produto: ").append(nomeProduto);
-        sb.append(" | ID do Produto: ").append(idProduto);
-        sb.append(" | Descricao do Produto: ").append(descricaoProduto);
-        sb.append(" | Valor: R$").append(valor).append("\n");
-        return sb.toString();
+        return "Nome do Produto: " + nomeProduto + "\n | Descricao do Produto: " + descricaoProduto + "\n | Valor: R$" + valor + "\n";
     }
 }

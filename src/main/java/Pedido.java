@@ -32,7 +32,6 @@ public class Pedido {
     //generate constructor
 
     public static Restaurante selecionaRestaurante() {
-        System.out.println("Seleciona restaurante foi chamado");
         System.out.println("Digite o Número do Restaurante");
         Scanner input = new Scanner(System.in);
         int entrada = input.nextInt();
@@ -42,19 +41,21 @@ public class Pedido {
         if (entrada >= 1 && entrada <= restaurantes.size()) {
             // Restaurante válido selecionado
             LerDados.Restaurante restauranteSelecionado = restaurantes.get(entrada - 1);
-            System.out.println("Restaurante selecionado: " + restauranteSelecionado.getNome());  //OK até aqui
+            System.out.println("Restaurante selecionado: " + restauranteSelecionado.getNome());
 
+            restauranteSelecionado.mostraCardapio();
+            // todo talvez botar um for aqui e instanciar outros produtos
+            System.out.println("Nome do Produto: batata1 | Descricao do Produto: desc | Valor: R$100.0");
 
-            // TODO VICTOR | HELIO (não seria melhor retornar id do Restaurante ?) Retorna o restaurante selecionado
-            return null;
+            // Retorna o restaurante selecionado
+
         } else {
             System.out.println("Opção inválida. Tente novamente.");
 
-            // Chamada recursiva para selecionar novamente o restaurante, (fallback)
+            // Chamada recursiva para selecionar novamente o restaurante (fallback)
             return selecionaRestaurante();
         }
-
-
+        return null;
     }
 
     public double calcularPrecoTotal() {

@@ -3,8 +3,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
-class LerDados {
+public class LerDados {
 
     public LerDados() {
         List<Restaurante> restaurantes = lerRestaurantesDoArquivo();
@@ -17,6 +20,12 @@ class LerDados {
                 System.out.println(restaurante);
             }
         }
+
+        // Mostrar o cardápio do primeiro restaurante (altere conforme necessário)
+        if (!restaurantes.isEmpty()) {
+            Restaurante primeiroRestaurante = restaurantes.get(0);
+            primeiroRestaurante.mostraCardapio();
+        }
     }
 
     public static List<Restaurante> lerRestaurantesDoArquivo() {
@@ -27,30 +36,32 @@ class LerDados {
             Restaurante restaurante = null;
 
             while ((line = reader.readLine()) != null) {
+                String trim = line.substring(line.indexOf(":") + 1).trim();
                 if (line.startsWith("Nome do Restaurante:")) {
                     if (restaurante != null) {
                         restaurantes.add(restaurante);
                     }
 
                     restaurante = new Restaurante();
-                    restaurante.setNome(line.substring(line.indexOf(":") + 1).trim());
+                    restaurante.setNome(trim);
                 } else if (line.startsWith("ID:")) {
-                    restaurante.setId(Integer.parseInt(line.substring(line.indexOf(":") + 1).trim()));
+                    restaurante.setId(Integer.parseInt(trim));
                 } else if (line.startsWith("Endereço:")) {
-                    restaurante.setEndereco(line.substring(line.indexOf(":") + 1).trim());
+                    restaurante.setEndereco(trim);
                 } else if (line.startsWith("CEP:")) {
-                    restaurante.setCep(line.substring(line.indexOf(":") + 1).trim());
-                } else if (line.startsWith("Proprietário:")) {
-                    String proprietario = line.substring(line.indexOf(":") + 1).trim();
-                    if (!proprietario.equals("N/A")) {
-                        restaurante.setProprietario(proprietario);
-                    }
+                    restaurante.setCep();
+                }  else if (line.startsWith("Proprietário:")) {
+                String proprietario = trim;
+                if (!proprietario.equals("N/A")) {
+                    restaurante.setProprietario(proprietario);
                 }
             }
+        }Restaurante.cardapio = new ArrayList<>();  // Corrigir a chamada do método getCardapio()
+            // Add this line
 
-//            if (restaurante != null) {
-//                restaurantes.add(restaurante);
-//            }
+            if (restaurante != null) {
+                restaurantes.add(restaurante);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,16 +69,17 @@ class LerDados {
         return restaurantes;
     }
 
+
+
     static class Restaurante {
+        public static List <Produto> cardapio;
         private String nome;
         private int id;
-        private String endereco;
-        private String cep;
-        private String proprietario;
 
         public String getNome() {
             return nome;
         }
+
 
         public void setNome(String nome) {
             this.nome = nome;
@@ -81,28 +93,13 @@ class LerDados {
             this.id = id;
         }
 
-        public String getEndereco() {
-            return endereco;
-        }
-
         public void setEndereco(String endereco) {
-            this.endereco = endereco;
         }
 
-        public String getCep() {
-            return cep;
-        }
-
-        public void setCep(String cep) {
-            this.cep = cep;
-        }
-
-        public String getProprietario() {
-            return proprietario;
+        public void setCep() {
         }
 
         public void setProprietario(String proprietario) {
-            this.proprietario = proprietario;
         }
         public Vendor getVendorFromDataFile(String filename) {
             try (Scanner fileScanner = new Scanner(new File(filename))) {
@@ -144,13 +141,58 @@ class LerDados {
             return null; // Retorna null se não for possível ler as informações do arquivo
         }
 
-//        @Override
-//        public String toString() {
-//            return "Nome do Restaurante: " + nome + "\n" +
-//                    "ID: " + id + "\n" +
-//                    "Endereço: " + endereco + "\n" +
-//                    "CEP: " + cep + "\n" +
-//                    "Proprietário: " + proprietario + "\n";
-//        }
+        public static List<Produto> lerProdutosDoArquivo() {
+            List<Produto> cardapio = new ArrayList<>();
+            String nomeArquivo = "CardapioRestaurante.data";
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo));
+                String linha;
+                while ((linha = reader.readLine()) != null) {
+                    if (linha.equals("Nome do Produto:")) {
+                        String nome = "";
+                        String descricao = "";
+                        double valor = 0.0;
+
+                        // Read the next three lines and validate their format
+                        for (int i = 0; i < 3; i++) {
+                            linha = reader.readLine();
+                            if (linha != null && !linha.isEmpty()) {
+                                String[] parts = linha.split(": ");
+                                if (parts.length >= 2) {
+                                    String value = parts[1].trim();
+                                    if (parts[0].equals("Nome do Produto")) {
+                                        nome = value;
+                                    } else if (parts[0].equals("Descricao do Produto")) {
+                                        descricao = value;
+                                    } else if (parts[0].equals("Valor")) {
+                                        valor = Double.parseDouble(value.replace("R$", ""));
+                                    }
+                                } else {
+                                    throw new IOException("Invalid line format: " + linha);
+                                }
+                            } else {
+                                throw new IOException("Empty line encountered.");
+                            }
+                        }
+
+                        Produto produto = new Produto(nome, descricao, valor);
+                        cardapio.add(produto);
+                    }
+                }
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return cardapio;
+        }
+
+        public void mostraCardapio() {
+            cardapio = lerProdutosDoArquivo();
+            System.out.println("Cardápio do restaurante " + getNome() + ":");
+            for (Produto produto : cardapio) {
+                System.out.println(produto);
+            }
+        }
+
     }
 }

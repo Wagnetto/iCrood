@@ -31,7 +31,7 @@ class MenuCliente {
     }
 
     public void exibirMenuClienteJacadastrado() {
-        System.out.println("Digite 1 para procurar um restaurante e fazer pedido.\nDigite 2 para visualizar seu histórico de pedidos");
+        System.out.println("1. Procurar restaurante e fazer Pedido.\n2. Exibir historico do cliente");
         int opcaoMenu = input.nextInt();
         if(opcaoMenu == 1){
             exibirListaRestaurantes(1);
@@ -44,7 +44,6 @@ class MenuCliente {
 
     //TODO listar os pedidos de um cliente VICTOR integrar BANCO
     public void exibirHistoricoCliente(){
-
     }
 
 

@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 
@@ -11,7 +15,7 @@ public class Restaurante {
     private Vendor proprietario;
     private String endereco;
     private String cep;
-    static private List<Produto> cardapio;
+    static List<Produto> cardapio;
 
     // Construtor
     public Restaurante(String nomeRestaurante, int idRestaurante, String endereco, String cep, List<Produto> cardapio) {
@@ -153,6 +157,63 @@ public class Restaurante {
         for (Produto produto : cardapio) {
             System.out.println(produto);
         }
+    }
+
+    public static Vendor getVendorFromDataFile(String filename) {
+        File file = new File(filename);
+
+        if (!file.exists()) {
+            System.err.println("Arquivo não encontrado: " + filename);
+            return null;
+        }
+
+        try (Scanner fileScanner = new Scanner(file)) {
+            String nome = null;
+            String cpf = null;
+            LocalDate dataNascimento = null;
+            String endereco = null;
+            String telefone = null;
+            String email = null;
+            double saldo = 0.0;
+            int idDono = 0;
+
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+
+                if (line.startsWith("Nome:")) {
+                    nome = line.substring(line.indexOf(":") + 1).trim();
+                } else if (line.startsWith("CPF:")) {
+                    cpf = line.substring(line.indexOf(":") + 1).trim();
+                } else if (line.startsWith("Data de Nascimento:")) {
+                    String dataStr = line.substring(line.indexOf(":") + 1).trim();
+                    dataNascimento = LocalDate.parse(dataStr);
+                } else if (line.startsWith("Endereço:")) {
+                    endereco = line.substring(line.indexOf(":") + 1).trim();
+                } else if (line.startsWith("Telefone:")) {
+                    telefone = line.substring(line.indexOf(":") + 1).trim();
+                } else if (line.startsWith("E-mail:")) {
+                    email = line.substring(line.indexOf(":") + 1).trim();
+                } else if (line.startsWith("Saldo:")) {
+                    String saldoStr = line.substring(line.indexOf(":") + 1).trim();
+                    saldo = Double.parseDouble(saldoStr);
+                } else if (line.startsWith("ID Dono:")) {
+                    String idDonoStr = line.substring(line.indexOf(":") + 1).trim();
+                    idDono = Integer.parseInt(idDonoStr);
+                }
+            }
+
+            List<Restaurante> estabelecimentos = new ArrayList<>(); // Cria uma nova lista vazia
+
+            return new Vendor(nome, cpf, dataNascimento, endereco, telefone, email, saldo, idDono, estabelecimentos);
+        } catch (FileNotFoundException e) {
+            System.err.println("Arquivo não encontrado: " + e.getMessage());
+        } catch (DateTimeParseException e) {
+            System.err.println("Erro ao fazer parse da data: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Erro ao fazer parse de um número: " + e.getMessage());
+        }
+
+        return null; // Retorna null se não for possível ler as informações do arquivo ou ocorrer algum erro
     }
 
     @Override

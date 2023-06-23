@@ -39,12 +39,10 @@ public class Vendor extends User {
             Restaurante.exibirMenuDeRestaurante();
             }
         else if(resposta == 2){
-            System.out.println("Cadastre seu restaurante: ");
-
             // TODO
-
             Vendor vendor = getVendorFromDataFile(filename);
             Cadastro.cadastrarApenasRestauranteCardapio(vendor);
+            System.out.println(vendor.getNome());
 
         } else {
             System.out.println("Entrada Inválida. ");
