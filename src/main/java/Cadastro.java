@@ -92,6 +92,10 @@ public class Cadastro {
         // Printa mensagem e mostra ID
         System.out.println("Conta criada com sucesso! Seu ID é: " + idCliente);
 
+        //Abre o primeiro Menu
+        MenuCliente menu = new MenuCliente();
+        menu.exibirMenuClienteJacadastrado();
+
     }
 
     public static void cadastrarVendor() {
@@ -155,6 +159,7 @@ public class Cadastro {
         restaurantes.add(restaurante);
     }
 
+        //TODO PRECISA ISSO, VICTOR?
     public Restaurante buscarUltimoRestauranteCriado() {
         if (!restaurantes.isEmpty()) {
             for (int i = restaurantes.size() - 1; i >= 0; i--) {
@@ -167,6 +172,7 @@ public class Cadastro {
         return null;
     }
 
+    //TODO PRECISA ISSO, VICTOR?
     public Vendor buscarUltimoVendorCriado() {
         if (!vendors.isEmpty()) {
             // Varre a lista de vendors em ordem reversa

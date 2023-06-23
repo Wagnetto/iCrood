@@ -27,10 +27,10 @@ public class Fluxo {
                 criarConta();
             } else if (validacao == 1) {
                 //é cliente
-                MenuPedido menu = new MenuPedido();
-                menu.exibirRestaurantes(iteracaoRestaurantes);
+                MenuCliente menu = new MenuCliente();
 
-                menu.selecionaRestaurante().mostraCardapio();
+                //Mostra opções: Fazer pedido em restaurantes ou consultar histórico
+                menu.exibirMenuClienteJacadastrado();
 
                 // TODO: Testar se o método funciona e incrementar a escolha de pedido / terminar a entrega
             } else if (validacao == 2) {
@@ -58,11 +58,9 @@ public class Fluxo {
             if (opcao == 1) {
                 primeiroCadastroVendor();
             } else if (opcao == 2) {
-                primeiroCadastroCliente();
-                MenuPedido menu = new MenuPedido();
-                int iteracaoRestaurantes = 1;
-                menu.exibirRestaurantes(iteracaoRestaurantes);
-                System.out.println("Digite o Número do Restaurante");
+                Cadastro.cadastrarCliente();
+
+
             } else {
                 System.out.println("Opção inválida!");
             }
@@ -73,10 +71,10 @@ public class Fluxo {
         }
 
     }
-    //primeiros cadastros (cliente e vendors)
-    public void primeiroCadastroCliente() {
-        Cadastro.cadastrarCliente();
-    }
+
+    //TODO Será que levamos primeiroCadastroVendor para a classe Cadastro, HELIO?
+    //primeiros cadastros (cliente e vendors) - matei cliente
+
 
     public void primeiroCadastroVendor() {
         Scanner input = new Scanner(System.in);

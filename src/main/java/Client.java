@@ -4,7 +4,7 @@ import java.util.List;
 //Classe do Cliente, podem realisar compras sem modificar restaurante e derivados
 public class Client extends User {
     // Atributos
-    private CarrinhoDeCompras carrinho;
+
     private int idCliente;
     private List<Produto> compras;
 
@@ -44,9 +44,7 @@ public class Client extends User {
         return super.getSaldoCarteira();
     }
 
-    public CarrinhoDeCompras getCarrinho() {
-        return carrinho;
-    }
+
 
     public int getIdCliente() {
         return idCliente;
@@ -58,33 +56,36 @@ public class Client extends User {
 
 
     // Métodos
-    public void adicionarAoCarrinho(List<Produto> cardapioRestaurante, int idProduto) {
-        Produto produtoEncontrado = null;
-        for (Produto produto : cardapioRestaurante) {
-            if (produto.getIdProduto() == idProduto) {
-                produtoEncontrado = produto;
-                break;
-            }
-        }
 
-        //Adiciona o produto desejado ao carrinho e impõe o valor no carrinho de compras
-        if (cardapioRestaurante.contains(produtoEncontrado)) {
-            carrinho.adicionarItem(produtoEncontrado);
-            double novoSaldo = getSaldoCarteira() - produtoEncontrado.getValor();
-            setSaldoCarteira(novoSaldo);
-            System.out.println("Produto adicionado ao carrinho com sucesso!");
-        } else {
-            System.out.println("Produto não encontrado no cardápio.");
-        }
-    }
-
-    public void removerDoCarrinho(Produto produto) {
-        //Remove o produto desejado presente no carrinho e desconta o valor aplicado
-        carrinho.removerItem(produto);
-        double novoSaldo = getSaldoCarteira() + produto.getValor();
-        setSaldoCarteira(novoSaldo);
-        System.out.println("Produto removido do carrinho com sucesso!");
-    }
+    //TODO tudo isso qu envolve carrinho, aqui dentro do cliente, faz sentido ainda? Proponho eliminar a classe carrinho
+    // deem uma olhada em Pedido. Lá, carrinho é somente um atributo DO PEDIDO, e o pedido pode ser vinculado por id ao cliente
+//    public void adicionarAoCarrinho(List<Produto> cardapioRestaurante, int idProduto) {
+//        Produto produtoEncontrado = null;
+//        for (Produto produto : cardapioRestaurante) {
+//            if (produto.getIdProduto() == idProduto) {
+//                produtoEncontrado = produto;
+//                break;
+//            }
+//        }
+//
+//        //Adiciona o produto desejado ao carrinho e impõe o valor no carrinho de compras
+//        if (cardapioRestaurante.contains(produtoEncontrado)) {
+//            carrinho.adicionarItem(produtoEncontrado);
+//            double novoSaldo = getSaldoCarteira() - produtoEncontrado.getValor();
+//            setSaldoCarteira(novoSaldo);
+//            System.out.println("Produto adicionado ao carrinho com sucesso!");
+//        } else {
+//            System.out.println("Produto não encontrado no cardápio.");
+//        }
+//    }
+//
+//    public void removerDoCarrinho(Produto produto) {
+//        //Remove o produto desejado presente no carrinho e desconta o valor aplicado
+//        carrinho.removerItem(produto);
+//        double novoSaldo = getSaldoCarteira() + produto.getValor();
+//        setSaldoCarteira(novoSaldo);
+//        System.out.println("Produto removido do carrinho com sucesso!");
+//    }
 
     public String toString() {
         return "\n------------------------------------" +
