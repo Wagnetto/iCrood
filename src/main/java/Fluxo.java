@@ -10,6 +10,7 @@ public class Fluxo {
     }
 
     public void exibirFluxo() {
+
         Scanner scan = new Scanner(System.in);
         int iteracaoRestaurantes = 1;
 

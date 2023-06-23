@@ -8,6 +8,13 @@ public class Pedido {
 
     int idPedido;
 
+    String nomeDoRestaurante;
+
+    public Pedido(String nomeDoRestaurante, List<Produto> carrinho, double valorTotalPedido) {
+        this.nomeDoRestaurante = nomeDoRestaurante;
+        this.carrinho = carrinho;
+        this.valorTotalPedido = valorTotalPedido;
+    }
 
     //TODO essa lista deve ser uma lista de objetos produto?
     // ou uma lista dos IDs deles, que apenas apontam para um produto registrado no Banco ?
@@ -31,31 +38,7 @@ public class Pedido {
 
     //generate constructor
 
-    public static Restaurante selecionaRestaurante() {
-        System.out.println("Seleciona restaurante foi chamado");
-        System.out.println("Digite o Número do Restaurante");
-        Scanner input = new Scanner(System.in);
-        int entrada = input.nextInt();
 
-        List<LerDados.Restaurante> restaurantes = LerDados.lerRestaurantesDoArquivo();
-
-        if (entrada >= 1 && entrada <= restaurantes.size()) {
-            // Restaurante válido selecionado
-            LerDados.Restaurante restauranteSelecionado = restaurantes.get(entrada - 1);
-            System.out.println("Restaurante selecionado: " + restauranteSelecionado.getNome());  //OK até aqui
-
-
-            // TODO VICTOR | HELIO (não seria melhor retornar id do Restaurante ?) Retorna o restaurante selecionado
-            return null;
-        } else {
-            System.out.println("Opção inválida. Tente novamente.");
-
-            // Chamada recursiva para selecionar novamente o restaurante, (fallback)
-            return selecionaRestaurante();
-        }
-
-
-    }
 
     public double calcularPrecoTotal() {
         double precoTotal = 0.0;

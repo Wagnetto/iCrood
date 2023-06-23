@@ -155,8 +155,10 @@ public class Cadastro {
         // Atribui os dados instanciando um Restaurante e adicionando esse Restaurante à lista de restaurantes
         Restaurante restaurante = new Restaurante(nomeRestaurante, idRestaurante, endereco, cep, new ArrayList<>());
 
+        ListaDeRestaurantes.adicionaRestaurante(restaurante);
+
         //Salva dados do restaurante
-        restaurantes.add(restaurante);
+//        restaurantes.add(restaurante);
     }
 
         //TODO PRECISA ISSO, VICTOR?

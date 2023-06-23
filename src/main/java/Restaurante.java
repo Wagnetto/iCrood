@@ -59,7 +59,7 @@ public class Restaurante {
         this.cep = cep;
     }
 
-    public List<Produto> getCardapio() {
+    public static List<Produto> getCardapio() {
         return cardapio;
     }
 

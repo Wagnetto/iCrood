@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        ListaDeRestaurantes.prePopulaListaRestaurantes();
         Cadastro cadastro = new Cadastro();
         Fluxo fluxo = new Fluxo();
         fluxo.exibirFluxo();
-
 
     }
 }
