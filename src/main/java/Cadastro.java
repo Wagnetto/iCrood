@@ -219,20 +219,27 @@ public class Cadastro {
         }while (true);
     }
 
-    public static boolean procurarCadastro(int id, List<String> filenames) {
+    public static int procurarCadastro(int id, List<String> filenames) {
+        int validacao = 0;
         for (String filename : filenames) {
             //Método maluco, cria Scanner para o arquivo e pesquise as palavras chaves dentro do arquivo
             try (Scanner fileScanner = new Scanner(new File(filename))) {
                 while (fileScanner.hasNextLine()) {
                     String line = fileScanner.nextLine();
-                    if ((line.startsWith("Seu ID:") || line.startsWith("ID Dono:")) && line.contains(String.valueOf(id))) {
-                        return true;
+                    if (line.startsWith("Seu ID:")  && line.contains(String.valueOf(id))){
+                        //é cliente
+                        validacao = 1;
+                        return validacao;
+                    } else if(line.startsWith("ID Dono:") &&(line.contains(String.valueOf(id)))){
+                        //é dono de restaurante
+                        validacao = 2;
+                        return validacao;
                     }
                 }
             } catch (FileNotFoundException e) {
                 System.err.println("Arquivo não encontrado: " + e.getMessage());
             }
         }
-        return false;
+        return validacao;
     }
 }

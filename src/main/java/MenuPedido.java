@@ -56,6 +56,7 @@ class MenuPedido {
             // Chamada recursiva para selecionar novamente o restaurante
             return selecionaRestaurante();
         }
+
 //    public Restaurante selecionaRestaurante() {
 //        Scanner input = new Scanner(System.in);
 //        int entrada;
@@ -76,6 +77,10 @@ class MenuPedido {
 //            System.out.println("Opção inválida. Tente novamente.");
 //            return selecionaRestaurante();
 //        }
+    }
+    public void receberPedido() {
+        System.out.println("Pedido entregue com sucesso");
+// TODO CRIAR RECEBER ENTREGA
     }
 
 }
