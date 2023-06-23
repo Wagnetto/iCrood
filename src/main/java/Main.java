@@ -8,8 +8,8 @@ public class Main {
     public static void main(String[] args) {
         Cadastro cadastro = new Cadastro();
         Fluxo fluxo = new Fluxo();
-        fluxo.exibirFluxo();
 
+        fluxo.exibirFluxo();
 
     }
 }

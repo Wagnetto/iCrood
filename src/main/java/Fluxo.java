@@ -11,7 +11,6 @@ public class Fluxo {
 
     public void exibirFluxo() {
         Scanner scan = new Scanner(System.in);
-        int iteracaoRestaurantes = 1;
 
         exibeTelaInicial();
 
@@ -21,7 +20,9 @@ public class Fluxo {
         if (resposta == 1) {
             System.out.println("Digite o ID para procurar o cadastro:");
             int id = scan.nextInt();
+
             int validacao = Cadastro.procurarCadastro(id, Arrays.asList("Client.data", "Vendor.data"));
+
             if (validacao == 0) {
                 System.out.println("Cadastro não encontrado.");
                 criarConta();
@@ -32,11 +33,11 @@ public class Fluxo {
                 //Mostra opções: Fazer pedido em restaurantes ou consultar histórico
                 menu.exibirMenuClienteJacadastrado();
 
+
                 // TODO: Testar se o método funciona e incrementar a escolha de pedido / terminar a entrega
             } else if (validacao == 2) {
                 //é vendor
-                int entrada2;
-                entrada2 = scan.nextInt();
+                System.out.println("Cadastro de Vendor encontrado!");
                 Vendor.possuiRestaurante();
             }
         } else if (resposta == 2) {
@@ -56,7 +57,7 @@ public class Fluxo {
             int opcao = scan.nextInt();
 
             if (opcao == 1) {
-                primeiroCadastroVendor();
+                Cadastro.primeiroCadastroVendor();
             } else if (opcao == 2) {
                 Cadastro.cadastrarCliente();
 
@@ -71,44 +72,42 @@ public class Fluxo {
         }
 
     }
-
-    //TODO Será que levamos primeiroCadastroVendor para a classe Cadastro, HELIO?
-    //primeiros cadastros (cliente e vendors) - matei cliente
+    //  TODO Movi o primeiroCadastroVendor para cadastrar OK
 
 
-    public void primeiroCadastroVendor() {
-        Scanner input = new Scanner(System.in);
-        Cadastro cadastro = new Cadastro();
-
-        // Cadastra o Vendor
-        cadastro.cadastrarVendor();
-        Vendor vendor = cadastro.buscarUltimoVendorCriado();
-
-        // Cadastra o Restaurante
-        cadastro.cadastrarRestaurante();
-        Restaurante restaurante = cadastro.buscarUltimoRestauranteCriado();
-
-        // Adiciona Restaurante à lista do Vendor
-        vendor.adicionarRestaurante(restaurante);
-
-        // Adicionar itens ao cardápio
-        System.out.println("Quantos itens você deseja adicionar ao cardápio? ");
-        int quantidadeItens = input.nextInt();
-        // Limpar o buffer do scanner
-        input.nextLine();
-
-        restaurante.pedeItensAdicionarLista(quantidadeItens);
-
-        SalvarDados.salvarVendor(vendor);
-        SalvarDados.salvarRestaurante(restaurante);
-        SalvarDados.salvarCardapioRestaurante(restaurante);
-
-        // Mostrar o cardápio do restaurante
-        restaurante.mostraCardapio();
-
-        System.out.println("Você cadastrou seu restaurante, seu perfil junto e seu cardápio com sucesso");
-        System.out.println(restaurante); // Área de teste para verificar se está tudo ok
-    }
+//    public void primeiroCadastroVendor() {
+//        Scanner input = new Scanner(System.in);
+//        Cadastro cadastro = new Cadastro();
+//
+//        // Cadastra o Vendor
+//        cadastro.cadastrarVendor();
+//        Vendor vendor = cadastro.buscarUltimoVendorCriado();
+//
+//        // Cadastra o Restaurante
+//        cadastro.cadastrarRestaurante();
+//        Restaurante restaurante = cadastro.buscarUltimoRestauranteCriado();
+//
+//        // Adiciona Restaurante à lista do Vendor
+//        vendor.adicionarRestaurante(restaurante);
+//
+//        // Adicionar itens ao cardápio
+//        System.out.println("Quantos itens você deseja adicionar ao cardápio? ");
+//        int quantidadeItens = input.nextInt();
+//        // Limpar o buffer do scanner
+//        input.nextLine();
+//
+//        restaurante.pedeItensAdicionarLista(quantidadeItens);
+//
+//        SalvarDados.salvarVendor(vendor);
+//        SalvarDados.salvarRestaurante(restaurante);
+//        SalvarDados.salvarCardapioRestaurante(restaurante);
+//
+//        // Mostrar o cardápio do restaurante
+//        restaurante.mostraCardapio();
+//
+//        System.out.println("Você cadastrou seu restaurante, seu perfil junto e seu cardápio com sucesso");
+//        System.out.println(restaurante); // Área de teste para verificar se está tudo ok
+//    }
     // TODO: Fim da área de teste
 
 

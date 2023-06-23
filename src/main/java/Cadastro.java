@@ -38,7 +38,7 @@ public class Cadastro {
     }
     // Métodos
 
-//    public static void cadastrarPessoa() {//Método de entrada
+    //    public static void cadastrarPessoa() {//Método de entrada
 //        Scanner scanner = new Scanner(System.in);
 //        System.out.println("Que bom que quer criar uma conta!");
 //        System.out.println("E para qual funcionalidade teria essa conta?");
@@ -54,6 +54,71 @@ public class Cadastro {
 //            System.out.println("Não foi possível completar a ação, opção não existente!");
 //        }
 //    }
+    public static void primeiroCadastroVendor() {
+        Scanner input = new Scanner(System.in);
+        Cadastro cadastro = new Cadastro();
+
+        // Cadastra o Vendor
+        cadastrarVendor();
+        Vendor vendor = cadastro.buscarUltimoVendorCriado();
+
+        // Cadastra o Restaurante
+        cadastrarRestaurante();
+        Restaurante restaurante = cadastro.buscarUltimoRestauranteCriado();
+
+        // Adiciona Restaurante à lista do Vendor
+        vendor.adicionarRestaurante(restaurante);
+
+        // Adicionar itens ao cardápio
+        System.out.println("Quantos itens você deseja adicionar ao cardápio? ");
+        int quantidadeItens = input.nextInt();
+        // Limpar o buffer do scanner
+        input.nextLine();
+
+        // Pede itens
+        restaurante.pedeItensAdicionarLista(quantidadeItens);
+
+        // Salva Dados
+        SalvarDados.salvarVendor(vendor);
+        SalvarDados.salvarRestaurante(restaurante);
+        SalvarDados.salvarCardapioRestaurante(restaurante);
+
+        // Mostrar o cardápio do restaurante
+        restaurante.mostraCardapio();
+
+        System.out.println("Você cadastrou seu restaurante, seu perfil junto e seu cardápio com sucesso");
+
+        // TODO remover area de teste?
+        System.out.println(restaurante); // Área de teste para verificar se está tudo ok
+    }
+    public static void cadastrarApenasRestauranteCardapio(Vendor vendorInserido){
+        Cadastro cadastro = new Cadastro();
+        Scanner input = new Scanner(System.in);
+
+        // como selecionar o vendor que o usuario inseriu o ID?
+        Vendor vendor = vendorInserido;
+        cadastrarRestaurante();
+        Restaurante restaurante = cadastro.buscarUltimoRestauranteCriado();
+        vendor.adicionarRestaurante(restaurante);
+
+        // Adicionar itens ao cardápio
+        System.out.println("Quantos itens você deseja adicionar ao cardápio? ");
+        int quantidadeItens = input.nextInt();
+        // Limpar o buffer do scanner
+        input.nextLine();
+
+        // Pede itens
+        restaurante.pedeItensAdicionarLista(quantidadeItens);
+
+        // Salva Dados
+        SalvarDados.salvarVendor(vendor);
+        SalvarDados.salvarRestaurante(restaurante);
+        SalvarDados.salvarCardapioRestaurante(restaurante);
+
+        // Mostrar o cardápio do restaurante
+        restaurante.mostraCardapio();
+
+    }
 
     public static void cadastrarCliente() {
         Scanner scan = new Scanner(System.in);
@@ -159,7 +224,7 @@ public class Cadastro {
         restaurantes.add(restaurante);
     }
 
-        //TODO PRECISA ISSO, VICTOR?
+    //TODO PRECISA ISSO, VICTOR?
     public Restaurante buscarUltimoRestauranteCriado() {
         if (!restaurantes.isEmpty()) {
             for (int i = restaurantes.size() - 1; i >= 0; i--) {
@@ -204,7 +269,7 @@ public class Cadastro {
         return LocalDate.parse(dataRecebida, formatador);
     }
 
-    public static LocalDate pedirDataNascimentoMostrarErro(){
+    public static LocalDate pedirDataNascimentoMostrarErro() {
         Scanner input = new Scanner(System.in);
 
         String dataNascimento;
@@ -222,7 +287,7 @@ public class Cadastro {
             } catch (DateTimeParseException e) {
                 System.out.println("Formato de data inválido. Certifique-se de usar o formato dd/mm/aaaa.");
             }
-        }while (true);
+        } while (true);
     }
 
     public static int procurarCadastro(int id, List<String> filenames) {
@@ -232,11 +297,11 @@ public class Cadastro {
             try (Scanner fileScanner = new Scanner(new File(filename))) {
                 while (fileScanner.hasNextLine()) {
                     String line = fileScanner.nextLine();
-                    if (line.startsWith("Seu ID:")  && line.contains(String.valueOf(id))){
+                    if (line.startsWith("Seu ID:") && line.contains(String.valueOf(id))) {
                         //é cliente
                         validacao = 1;
                         return validacao;
-                    } else if(line.startsWith("ID Dono:") &&(line.contains(String.valueOf(id)))){
+                    } else if (line.startsWith("ID Dono:") && (line.contains(String.valueOf(id)))) {
                         //é dono de restaurante
                         validacao = 2;
                         return validacao;

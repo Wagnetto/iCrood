@@ -1,8 +1,8 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 class LerDados {
 
@@ -16,7 +16,8 @@ class LerDados {
             for (Restaurante restaurante : restaurantes) {
                 System.out.println(restaurante);
             }
-        }}
+        }
+    }
 
     public static List<Restaurante> lerRestaurantesDoArquivo() {
         List<Restaurante> restaurantes = new ArrayList<>();
@@ -102,6 +103,45 @@ class LerDados {
 
         public void setProprietario(String proprietario) {
             this.proprietario = proprietario;
+        }
+        public Vendor getVendorFromDataFile(String filename) {
+            try (Scanner fileScanner = new Scanner(new File(filename))) {
+                String nome = null;
+                String cpf = null;
+                LocalDate dataNascimento = null;
+                String endereco = null;
+                String telefone = null;
+                String email = null;
+                double saldo = 0.0;
+
+                while (fileScanner.hasNextLine()) {
+                    String line = fileScanner.nextLine();
+
+                    if (line.startsWith("Nome:")) {
+                        nome = line.substring(line.indexOf(":") + 1).trim();
+                    } else if (line.startsWith("CPF:")) {
+                        cpf = line.substring(line.indexOf(":") + 1).trim();
+                    } else if (line.startsWith("Data de Nascimento:")) {
+                        String dataStr = line.substring(line.indexOf(":") + 1).trim();
+                        dataNascimento = LocalDate.parse(dataStr);
+                    } else if (line.startsWith("Endereço:")) {
+                        endereco = line.substring(line.indexOf(":") + 1).trim();
+                    } else if (line.startsWith("Telefone:")) {
+                        telefone = line.substring(line.indexOf(":") + 1).trim();
+                    } else if (line.startsWith("E-mail:")) {
+                        email = line.substring(line.indexOf(":") + 1).trim();
+                    } else if (line.startsWith("Saldo:")) {
+                        String saldoStr = line.substring(line.indexOf(":") + 1).trim();
+                        saldo = Double.parseDouble(saldoStr);
+                    } else if (line.startsWith("ID Dono:")) {
+                        int idDono = Integer.parseInt(line.substring(line.indexOf(":") + 1).trim());
+                        return new Vendor(nome, cpf, dataNascimento, endereco, telefone, email, saldo, idDono, null);
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                System.err.println("Arquivo não encontrado: " + e.getMessage());
+            }
+            return null; // Retorna null se não for possível ler as informações do arquivo
         }
 
 //        @Override
