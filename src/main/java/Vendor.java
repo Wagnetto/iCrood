@@ -1,3 +1,4 @@
+import java.awt.geom.RectangularShape;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -37,7 +38,8 @@ public class Vendor extends User {
             System.out.println("Cadastre seu restaurante: ");
             Cadastro.cadastrarRestaurante();
             // TODO não salva restaurante e nem cria pratos
-            //SalvarDados.salvarRestaurante(restaurante);
+            // todo reparado
+            SalvarDados.salvarRestaurante(SalvarDados.restaurante);
         } else {
             System.out.println("Entrada Inválida. ");
             possuiRestaurante();
